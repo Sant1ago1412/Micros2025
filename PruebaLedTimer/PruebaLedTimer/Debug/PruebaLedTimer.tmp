@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\Debug\PruebaLedTimer.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>PruebaLedTimer.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>PruebaLedTimer.map</FILE>
+  <FILE>PruebaLedTimer.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <timeLedOn><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>19</LINE></timeLedOn>
+  <time100ms><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>20</LINE></time100ms>
+  <timeLedOff><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>21</LINE></timeLedOff>
+  <timercycle><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>22</LINE></timercycle>
+  <start><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>86</LINE></start>
+  <TIMER0_OVF><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>33</LINE></TIMER0_OVF>
+  <OUT_TIMER0_OVF><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>51</LINE></OUT_TIMER0_OVF>
+  <ini_timer0><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>58</LINE></ini_timer0>
+  <ini_ports><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>78</LINE></ini_ports>
+  <loop><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>125</LINE></loop>
+  <OnOff><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>148</LINE></OnOff>
+  <doLed><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>139</LINE></doLed>
+  <CycleReset><FILE>C:\Users\Baccon\Documents\Micros\PruebaLedTimer\PruebaLedTimer\main.asm</FILE><LINE>184</LINE></CycleReset>
+ </LABELS>
+</ASSEMBLER_INFO>

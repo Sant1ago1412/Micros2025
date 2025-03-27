@@ -1,0 +1,42 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\Debug\Test2025.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Test2025.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Test2025.map</FILE>
+  <FILE>Test2025.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <timeLed><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>37</LINE></timeLed>
+  <timeLedOn><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>38</LINE></timeLedOn>
+  <timeLedff><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>39</LINE></timeLedff>
+  <timer10ms><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>40</LINE></timer10ms>
+  <start><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>121</LINE></start>
+  <TIMER0_OVF><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>53</LINE></TIMER0_OVF>
+  <OUT_TIMER_OVF><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>65</LINE></OUT_TIMER_OVF>
+  <ini_timer0><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>71</LINE></ini_timer0>
+  <ini_ports><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>83</LINE></ini_ports>
+  <delay1ms><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>93</LINE></delay1ms>
+  <delayloop><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>98</LINE></delayloop>
+  <Timer900><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>109</LINE></Timer900>
+  <Timer100><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>115</LINE></Timer100>
+  <loop><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>149</LINE></loop>
+  <doLed><FILE>C:\Users\Baccon\Documents\Micros\Test2025\Test2025\main.asm</FILE><LINE>180</LINE></doLed>
+ </LABELS>
+</ASSEMBLER_INFO>

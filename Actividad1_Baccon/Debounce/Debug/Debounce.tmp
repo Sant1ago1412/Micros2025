@@ -1,0 +1,41 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\Debug\Debounce.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Debounce.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Debounce.map</FILE>
+  <FILE>Debounce.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <timeLedOn><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>26</LINE></timeLedOn>
+  <time100ms><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>27</LINE></time100ms>
+  <timeLedOff><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>28</LINE></timeLedOff>
+  <timercycle><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>29</LINE></timercycle>
+  <dbSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>30</LINE></dbSW0>
+  <start><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>48</LINE></start>
+  <ini_ports><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>40</LINE></ini_ports>
+  <loop><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>54</LINE></loop>
+  <doSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>62</LINE></doSW0>
+  <SW0Pressed0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>86</LINE></SW0Pressed0>
+  <testLowSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>70</LINE></testLowSW0>
+  <doSW0db1><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>76</LINE></doSW0db1>
+  <doSW0db0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>74</LINE></doSW0db0>
+  <outDoSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Debounce\main.asm</FILE><LINE>82</LINE></outDoSW0>
+ </LABELS>
+</ASSEMBLER_INFO>

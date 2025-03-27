@@ -1,0 +1,43 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Baccon\Documents\Micros\Act1\Act1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\Debug\Act1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Act1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Act1.map</FILE>
+  <FILE>Act1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <timeLed><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>29</LINE></timeLed>
+  <timeLedOn><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>30</LINE></timeLedOn>
+  <timeSW03s><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>31</LINE></timeSW03s>
+  <dbSW0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>32</LINE></dbSW0>
+  <time10ms><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>33</LINE></time10ms>
+  <start><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>184</LINE></start>
+  <doSW0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>159</LINE></doSW0>
+  <testLowSW0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>167</LINE></testLowSW0>
+  <doSW0db1><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>173</LINE></doSW0db1>
+  <doSW0db0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>171</LINE></doSW0db0>
+  <outDoSW0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>179</LINE></outDoSW0>
+  <loop><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>214</LINE></loop>
+  <SW0Pressed1><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>252</LINE></SW0Pressed1>
+  <SW0Pressed0><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>246</LINE></SW0Pressed0>
+  <changeTimeToggle><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>266</LINE></changeTimeToggle>
+  <setLedOnTime><FILE>C:\Users\Baccon\Documents\Micros\Act1\Act1\main.asm</FILE><LINE>276</LINE></setLedOnTime>
+ </LABELS>
+</ASSEMBLER_INFO>
