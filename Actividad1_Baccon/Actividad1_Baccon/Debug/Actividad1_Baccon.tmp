@@ -44,30 +44,30 @@
   <ini_ports><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>137</LINE></ini_ports>
   <ini_USART0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>145</LINE></ini_USART0>
   <loop><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>200</LINE></loop>
-  <doSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>276</LINE></doSW0>
-  <SW0Pressed0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>305</LINE></SW0Pressed0>
-  <doNewStateSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>343</LINE></doNewStateSW0>
-  <switchState><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>357</LINE></switchState>
-  <doLed><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>224</LINE></doLed>
-  <OnOff><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>233</LINE></OnOff>
-  <CycleReset><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>269</LINE></CycleReset>
-  <testLowSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>286</LINE></testLowSW0>
-  <doSW0db1><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>294</LINE></doSW0db1>
-  <doSW0db0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>291</LINE></doSW0db0>
-  <outDoSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>301</LINE></outDoSW0>
-  <PutConstTextOnBufTX><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>312</LINE></PutConstTextOnBufTX>
-  <nextByteText><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>319</LINE></nextByteText>
-  <outPutConstText><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>333</LINE></outPutConstText>
-  <State0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>394</LINE></State0>
-  <State1><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>406</LINE></State1>
-  <State2><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>418</LINE></State2>
-  <State3><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>430</LINE></State3>
-  <State4><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>442</LINE></State4>
-  <State5><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>454</LINE></State5>
-  <State6><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>466</LINE></State6>
-  <State7><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>478</LINE></State7>
-  <State8><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>490</LINE></State8>
-  <State9><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>502</LINE></State9>
-  <State10><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>514</LINE></State10>
+  <OnOff><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>230</LINE></OnOff>
+  <doSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>273</LINE></doSW0>
+  <doNewStateSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>333</LINE></doNewStateSW0>
+  <doLed><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>221</LINE></doLed>
+  <CycleReset><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>266</LINE></CycleReset>
+  <testLowSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>283</LINE></testLowSW0>
+  <doSW0db1><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>291</LINE></doSW0db1>
+  <doSW0db0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>288</LINE></doSW0db0>
+  <outDoSW0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>298</LINE></outDoSW0>
+  <PutConstTextOnBufTX><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>302</LINE></PutConstTextOnBufTX>
+  <nextByteText><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>309</LINE></nextByteText>
+  <outPutConstText><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>323</LINE></outPutConstText>
+  <switchState><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>349</LINE></switchState>
+  <State0><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>386</LINE></State0>
+  <State1><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>399</LINE></State1>
+  <State2><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>406</LINE></State2>
+  <State3><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>413</LINE></State3>
+  <State4><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>420</LINE></State4>
+  <State5><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>427</LINE></State5>
+  <State6><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>434</LINE></State6>
+  <State7><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>441</LINE></State7>
+  <State8><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>448</LINE></State8>
+  <State9><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>455</LINE></State9>
+  <State10><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>462</LINE></State10>
+  <LoadState><FILE>C:\Users\Baccon\Documents\Micros\Actividad1_Baccon\Actividad1_Baccon\main.asm</FILE><LINE>469</LINE></LoadState>
  </LABELS>
 </ASSEMBLER_INFO>

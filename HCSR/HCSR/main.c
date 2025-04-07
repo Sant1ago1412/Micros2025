@@ -122,7 +122,6 @@ ISR(TIMER1_CAPT_vect){
 	if(TCCR1B & _BV(ICES1)){
 		timehc.startEcho = ICR1;
 		TCCR1B &= ~_BV(ICES1);
-		PORTB |= (1<<Led2);
 		//rising
 	}else{
 		//falling
@@ -187,8 +186,7 @@ void Measure(){
 				OCR1A = TCNT1 + 19;//hago una interrupcion a 20 ciclos que son 10us
 				ECHOREADY = FALSE;
 				TIMSK1 |= (1<<OCIE1A);
-				PORTB |= (1<<Led1);
-				TCCR1B |= _BV(ICES1);
+				TCCR1B |= (1<<ICES1);
 			
 			}
 		
@@ -214,6 +212,7 @@ void Measure(){
 			}
 			
 			timehc.distance = timehc.distance/116;
+			//lo divido por el doble de lo que seria
 			
 			Converse.ui16[0] = timehc.distance;
 			DatoSerie.bufferTx[DatoSerie.indexWriteTx++]= Converse.ui8[1];
@@ -222,8 +221,6 @@ void Measure(){
 			
 			DatoSerie.bufferTx[DatoSerie.indexWriteTx++]= 32;
 			meas_state=MEAS_IDLE;
-			PORTB &= ~(1<<Led1);
-			PORTB &= ~(1<<Led2);
 		
 		break;
 		

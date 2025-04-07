@@ -11,7 +11,7 @@
 .equ	SW0 = PB4
 .equ	ms100=100	;tiempo que el led debe quedar encendido
 .equ	ms900=1000	;tiempo inicial que el led debe quedar encendido
-.equ	STATEIDLE = 1
+//.equ	STATEIDLE = 1
 .equ	STATEUNO = 100
 .equ	STATEDOS = 200
 .equ	STATETRES = 300
@@ -200,24 +200,21 @@ start:
 loop:
 
 	;para saber si hubo una interrupcion se levanta una bandera en gpior0 en ea posicion is10ms
-/*	in		r16,GPIOR0
+	/*in		r16,GPIOR0
 	ldi		r17,(1<<IS10MS)
 	and		r16,r17;hago esto para modificar las demas banderas y me queda solo en 1 is10ms
 	cp		r16,r17
-	breq	OnOff	*/
+*/
+	sbic	GPIOR0,IS10MS
+	breq	OnOff	
 
 	call	doSW0
-/*	sbis	GPIOR0, ISNEWSTATESW0
-	rjmp	SW0Pressed1*/
-	cbi		GPIOR0, ISNEWSTATESW0
-	sbis	GPIOR0, LastStateSW0
-	rjmp	SW0Pressed0
-;	sbi		PORTB, LEDBUILTIN
+	
 	sbic	GPIOR0, ISNEWSTATESW0
 	call	doNewStateSW0
 	;si es igual significa que hubo una interrupcion, va a scock para sumar 1 hata llegar a 5
 	//aca se puede usar sbic para saltear el t100ms
-	call	switchState
+//	call	switchState
 
 	jmp loop
 
@@ -302,13 +299,6 @@ outDoSW0:
 	sts	dbSW0, r16
 	ret
 
-SW0Pressed0:
-	
-	sbis	GPIOR0, LastStateSW0
-	cbi		PORTB, LEDBUILTIN
-	sbic	GPIOR0, LastStateSW0
-	sbi		PORTB, LEDBUILTIN
-
 PutConstTextOnBufTX:
 	push	r16
 	push	r17
@@ -346,13 +336,15 @@ doNewStateSW0:
 	sbic	GPIOR0, LASTSTATESW0
 	ret
 
-	
 	lds		r16,stateCounter
 	inc		r16
 	sts		stateCounter,r16
+	
+	cpi		r16,10
+	brne	switchState
 
+	rjmp	State0
 
-	ret
 
 switchState:
 	
@@ -393,129 +385,89 @@ switchState:
 
 State0:
 	
-	ldi		r16,low(STATEUNO)
-	ldi		r17,high(STATEUNO)
-
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
+	ldi		r16,low(ms100)
+	ldi		r17,high(ms100)
+	ldi		r18,low(ms900)
+	ldi		r19,high(ms900)
+	sts		timeledOff+0,r18
+	sts		timeledOff+1,r19
 	sts		timeledOn+0,r16
 	sts		timeledOn+1,r17
 
-	jmp loop
+	rjmp loop
 
 State1:
 	
 	ldi		r16,low(STATEUNO)
 	ldi		r17,high(STATEUNO)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State2:
 	
 	ldi		r16,low(STATEDOS)
 	ldi		r17,high(STATEDOS)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State3:
 	
 	ldi		r16,low(STATETRES)
 	ldi		r17,high(STATETRES)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State4:
 	
 	ldi		r16,low(STATECUATRO)
 	ldi		r17,high(STATECUATRO)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State5:
 	
 	ldi		r16,low(STATECINCO)
 	ldi		r17,high(STATECINCO)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State6:
 	
 	ldi		r16,low(STATESEIS)
 	ldi		r17,high(STATESEIS)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State7:
 	
 	ldi		r16,low(STATESIETE)
 	ldi		r17,high(STATESIETE)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State8:
 	
 	ldi		r16,low(STATEOCHO)
 	ldi		r17,high(STATEOCHO)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State9:
 	
 	ldi		r16,low(STATENUEVE)
 	ldi		r17,high(STATENUEVE)
 
-	sts		timeledOff+0,r16
-	sts		timeledOff+1,r17
-	sts		timeledOn+0,r16
-	sts		timeledOn+1,r17
-
-	jmp loop
+	rjmp		LoadState
 
 State10:
 	
 	ldi		r16,low(STATEDIEZ)
 	ldi		r17,high(STATEDIEZ)
 
+	rjmp		LoadState
+
+LoadState:
+	
 	sts		timeledOff+0,r16
 	sts		timeledOff+1,r17
 	sts		timeledOn+0,r16
