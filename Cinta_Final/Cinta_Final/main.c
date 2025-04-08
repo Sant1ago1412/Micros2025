@@ -58,7 +58,7 @@ typedef struct{
 /************************************************************************/
 #define SV0				PD7
 #define SV1				PB4
-#define SV2				PB3
+#define SV2				PB3|
 
 /************************************************************************/
 /*							Pin Declaration IR's                        */
@@ -111,6 +111,8 @@ void ini_ports(){
 	
 	DDRB &= ~(1<<ECHO);
 	DDRD &= ~((1<<IR0) | (1<<IR1) | (1<<IR2) | (1<<IR3));
+	PORTB = (1<<ECHO);
+	PORTD = ((1<<IR0) | (1<<IR1) | (1<<IR2) | (1<<IR3));
 }
 
 void ini_timer1(){
