@@ -108,10 +108,10 @@ void task_HCSR()
 			}
 			
 			if(mySensor->lastDistanceUs > 11764) //2 metros
-			mySensor->lastDistanceUs = 0xFFFF;
+				mySensor->lastDistanceUs = 0xFFFF;
 			
 			if (mySensor->OnReadyMeasure != NULL)
-			mySensor->OnReadyMeasure(mySensor->lastDistanceUs);
+				mySensor->OnReadyMeasure(mySensor->lastDistanceUs);
 
 		}
 

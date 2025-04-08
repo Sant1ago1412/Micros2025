@@ -31,29 +31,53 @@ typedef union{
 	uint8_t byte;
 }flags;
 
+typedef enum Tamano{
+	SmallBox,
+	MediumBox,
+	LargeBox
+}s_boxSize;
+
+typedef enum State{
+	isOn,
+	Push,
+	isOut
+}s_boxState;
+
 typedef struct{
 	
-	enum sizeBox{
-		SmallBox,
-		MediumBox,
-		LargeBox
-	}boxSize;
-	enum State{
-		isOn,
-		Push,
-		isOut,
-	}boxState;
-	
-	uint16_t  Numbox;
+	s_boxSize  boxSize;
+	s_boxState boxState;
 	
 }s_boxType;
+
+typedef enum {
+	IR_RISING = 0,
+	IR_UP,
+	IR_FALLING,
+	IR_DOWN
+}IRState;
+
+typedef struct{
+	IRState state;
+	uint8_t stateConfirmed;
+	uint8_t last_sample;
+}IRDebounce;
+
 /* END typedef ---------------------------------------------------------------*/
 
 
 /* define --------------------------------------------------------------------*/
+
+#define bufferBox		15
+#define Cm6				348
+#define Cm8				464
+#define Cm10			580
+#define Cm18			1100
+
 #define	TRUE			1
 #define FALSE			0
-#define IS10MS				flag0.bits.bit0
+#define IS10MS			flag0.bits.bit0
+#define MEASURINGBOX	flag0.bits.bit1
 
 /*------PIN DECLARATION------*/
 #define LED_BI			PB5
@@ -87,12 +111,21 @@ void ini_timer1();
 void ini_timer0();
 void sensorMeasure();
 void every10ms();
+void addBox(uint16_t distance);
+void IR_Init(IRDebounce *ir);
+void IR_Update(IRDebounce *ir, uint8_t sample);
+uint8_t IR_GetState( IRDebounce *ir);
 /* END Function prototypes ---------------------------------------------------*/
 
 
 /* Global variables ----------------------------------------------------------*/
 flags flag0;
 uint8_t	count100ms	= 10;
+uint8_t count40ms = 4;
+uint8_t raw_input;
+s_boxType Cajita[bufferBox];
+uint16_t Numbox;
+IRDebounce ir_sensor;
 /* END Global variables ------------------------------------------------------*/
 
 
@@ -111,15 +144,21 @@ ISR(TIMER1_COMPA_vect){
 }
 
 ISR(TIMER1_COMPB_vect){
+	
 	on_timer1_compb_hcsr();
+	
 }
 
 ISR(TIMER1_CAPT_vect){
+	
 	on_timer1_capt_hcsr();
+	
 }
 
 ISR(TIMER0_OVF_vect){
+	
 	writeServo();
+	
 }
 /* END Function ISR ----------------------------------------------------------*/
 
@@ -177,26 +216,115 @@ void ini_timer0(){
 	
 }
 
+void IR_Init(IRDebounce *ir) {
+	ir->state = IR_UP;
+	ir->last_sample = 1;
+	ir->stateConfirmed = 0;
+}
+
+void IR_Update(IRDebounce *ir, uint8_t sample) {
+	switch (ir->state) {
+		case IR_RISING:
+		if (sample == 1 && ir->last_sample == 1){
+			ir->state = IR_UP;
+			ir->stateConfirmed = 0x01;
+			}else{
+			ir->state = IR_DOWN;
+		}
+		break;
+
+		case IR_UP:
+		if (sample == 0){
+			ir->state = IR_FALLING;
+			}else{
+			ir->state = IR_UP;
+		}
+		break;
+
+		case IR_FALLING:
+		if (sample == 0 && ir->last_sample == 0){
+			ir->state = IR_DOWN;
+			ir->stateConfirmed = 0x10;
+			
+			}else{
+			ir->state = IR_UP;
+		}
+		break;
+
+		case IR_DOWN:
+		if (sample == 1){
+			ir->state = IR_RISING;
+			}else{
+			ir->state = IR_DOWN;
+		}
+		break;
+		default:
+		ir->state = IR_UP;
+		break;
+	}
+
+	ir->last_sample = sample;
+}
+
+uint8_t IR_GetState( IRDebounce *ir) {
+	return ir->stateConfirmed;
+}
+
 void every10ms(){
 	
 	if (!count100ms){		//Si pasaron 100ms
 		on_reset_hcsr();
 		count100ms = 10;
 	}
-	count100ms--;
+	
+	if (!count40ms){
+		IR_Update(&ir_sensor, raw_input);
+	}
 	
 	IS10MS = FALSE;
+	count100ms--;
+	count40ms--;
 }
 
 void sensorMeasure(uint16_t distance){
 	
-	if(distance < 1176)			//20cm
-	PORTB |= (1 << LED_BI);
-	else
-	PORTB &= ~(1 << LED_BI);
+	if(distance < 1100){
+		MEASURINGBOX=TRUE;	
+	}			//20cm
 	
+	if(MEASURINGBOX){
+		addBox(distance);
+	}else
+		return;
+	
+		
 }
 
+void addBox(uint16_t distance){
+	
+	//dar margen por ej a la caja de 6cm , decir que es veradero cuando sean enrtre 5 y 8cm
+	if (distance>Cm6 && distance<Cm8){ //caja mas chica
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=SmallBox;
+	}
+	
+	if (distance>Cm8 && distance<Cm10){ //caja mediana
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=MediumBox;
+	}
+	
+	if (distance>Cm10 && distance<Cm18){ //caja grande
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=LargeBox;
+	}
+	
+	Numbox++;
+	
+	if(Numbox==16){ //reinicio el buffer
+		Numbox=0;
+	}
+	MEASURINGBOX=FALSE;
+}
 /* END Function prototypes user code ------------------------------------------*/
 
 int main(){
@@ -217,11 +345,13 @@ int main(){
 	ini_timer1();
 	ini_timer0();
 	
+	IR_Init(&ir_sensor);
+	
 	addServo(&PORTD,SV0);
 	addServo(&PORTD,SV1);
 	addServo(&PORTD,SV2);
-	HCSR_1 = HCSR04_AddNew(WritePin_HCSR, 16);
-	HCSR04_AttachOnReadyMeasure(HCSR_1, sensorMeasure);	
+	HCSR_1 = HCSR04_AddNew(&WritePin_HCSR, 16);
+	HCSR04_AttachOnReadyMeasure(HCSR_1, &sensorMeasure);	
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
