@@ -34,12 +34,12 @@ typedef struct{
 		SmallBox,
 		MediumBox,
 		LargeBox
-	};
+	}boxSize;
 	enum State{
 		isOn,
 		Push,
 		isOut,
-	};
+	}boxState;
 	
 	uint16_t  Numbox;
 	
@@ -104,14 +104,26 @@ void ini_ports(){
 	/*								OUTPUTS                                 */
 	/************************************************************************/
 	DDRB = ((1 << LED_BI)| (1 << SV1) | (1 << SV2) | (1<<TRIGGER));
-	DDRD = (1 << SV0) 
+	DDRD = (1 << SV0);
 	/************************************************************************/
 	/*								INTPUTS                                 */
 	/************************************************************************/
 	
 	DDRB &= ~(1<<ECHO);
 	DDRD &= ~((1<<IR0) | (1<<IR1) | (1<<IR2) | (1<<IR3));
-	PORTB
+}
+
+void ini_timer1(){
+	
+	TCCR1A = 0x00;
+	//configuro el Prescaler 8 (f = 16MHz / 8 = 2MHz ? 1 tick = 0.5 µs)
+	TCCR1B = 0xC2;
+	// CONFIGURACION DE LA CANCELACION DE RUIDO
+	TCNT1 = 0x00;
+	TIMSK1 = (1<<OCIE1B);
+	OCR1B = 19999;
+	TIFR1 = TIFR1;
+	
 }
 /* END Function prototypes user code ------------------------------------------*/
 
