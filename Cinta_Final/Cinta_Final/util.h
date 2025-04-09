@@ -109,18 +109,20 @@ typedef enum {
 	IR_DOWN
 } IRState;
 
-typedef struct {
-	IRState state;
-	uint8_t stateConfirmed;
-	uint8_t last_sample;
-} IRDebounce;
-
 typedef enum Tamano{
-	SmallBox=0,
+	SmallBox=1,
 	MediumBox,
 	LargeBox,
 	NotSelected
 }s_boxSize;
+
+typedef struct {
+	IRState state;
+	uint8_t stateConfirmed;
+	uint8_t last_sample;
+	s_boxSize irType;
+} IRDebounce;
+
 
 typedef enum State{
 	isOn=0,

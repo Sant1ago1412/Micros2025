@@ -38,14 +38,15 @@
 #define FALSE			0
 #define IS10MS			flag0.bits.bit0
 #define MEASURINGBOX	flag0.bits.bit1
-#define DETECTECBOX		flag0.bits.bit2
+#define DETECTEDBOX		flag0.bits.bit2
 
 #define RXBUFSIZE           256
 #define TXBUFSIZE           256
 
 /*------PIN DECLARATION------*/
 #define LED_BI			PB5
-
+#define LED_1			PB2
+#define LED_2			PD6
 /************************************************************************/
 /*							Pin Declaration Servos                      */
 /************************************************************************/
@@ -91,6 +92,7 @@ uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
 
 void newBox(uint16_t distance);
 void addBox(uint16_t distance);
+void kickBox();
 /* END Function prototypes ---------------------------------------------------*/
 
 
@@ -103,7 +105,6 @@ flags flag0;
  _uWord		myWord;
  
  uint8_t raw_input[bufferIrn];
- uint8_t state1;
 uint8_t	count100ms	= 10;
 uint8_t count40ms = 4;
 
@@ -165,8 +166,8 @@ void ini_ports(){
 	/************************************************************************/
 	/*								OUTPUTS                                 */
 	/************************************************************************/
-	DDRB = ((1 << LED_BI)| (1 << SV1) | (1 << SV2) | (1<<TRIGGER));
-	DDRD = (1 << SV0);
+	DDRB = ((1 << LED_BI)| (1 << SV1) | (1 << SV2) | (1<<TRIGGER) | (1<<LED_1));
+	DDRD = (1 << SV0)|(1<<LED_2);
 	
 	/************************************************************************/
 	/*								INPUTS                                  */
@@ -332,7 +333,6 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 		case FIRMWARE:
 		break;
 		case LEDSTATUS:
-		myWord.ui16[0] = state1;
 		putHeaderOnTx(dataTx, LEDSTATUS, 3);
 		putByteOnTx(dataTx, myWord.ui8[0] );
 		putByteOnTx(dataTx, myWord.ui8[1] );
@@ -486,15 +486,18 @@ void addBox(uint16_t distance){
 	if (distance>boxSizeconfig.smallboxC && distance<boxSizeconfig.smallboxF){ //caja chica
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=SmallBox;
+		PORTB ^= (1<<LED_1);
 	}
 	if (distance>boxSizeconfig.mediumboxC && distance<boxSizeconfig.mediumboxF){ //caja mediana
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=MediumBox;
+		PORTB ^= (1<<LED_BI);
 	}
 	
 	if (distance>boxSizeconfig.largeboxC && distance<boxSizeconfig.largeboxF){ //caja grande
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=LargeBox;
+		PORTB ^= (1<<LED_2);
 	}else
 		Cajita->boxSize=NotSelected;
 	
@@ -502,18 +505,54 @@ void addBox(uint16_t distance){
 	
 	if(Numbox>=bufferBox) //reinicio el buffer
 		Numbox=0;
+		
+	//si el ir deja de detectar pongo el measuring box en false para reiniciar la medicion
+	if(IR_GetState(&ir_sensor[0]) == 1)
+		MEASURINGBOX=FALSE;
 	
-	MEASURINGBOX=FALSE;
 	
 }
 
 void newBox(uint16_t distance){
-	if(IR_GetState(&ir_sensor[0]) == 0x01){
-		if(distance<18)
+	
+	if((IR_GetState(&ir_sensor[0]) == 0x00) && !MEASURINGBOX){
+		if(distance<Cm18){
 			MEASURINGBOX=TRUE;
+			addBox(distance);
+		}
+		PORTB ^=(1<<LED_BI);
 	}
 }
 
+void kickBox(){
+	
+	uint8_t needKick;
+	static uint8_t read1=0;
+	static uint8_t read2=0;
+	static uint8_t read3=0;
+	
+	for(needKick=1;needKick<4;needKick++){
+		if (IR_GetState(&ir_sensor[needKick])==0){ //si esta negado esta en 1 , es decir hay caja 
+			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
+				servo_Angle(0,90);
+				Cajita[read1].boxState=isOut;
+				read1++;
+			}	
+			if(ir_sensor[needKick].irType == Cajita[read2].boxSize){
+				servo_Angle(0,90);
+				Cajita[read1].boxState=isOut;
+				read2++;
+			}	
+			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
+				servo_Angle(0,90);
+				Cajita[read1].boxState=isOut;
+				read3++;
+			}
+		}
+	}
+	
+	
+}
 /* END Function prototypes user code ------------------------------------------*/
 
 int main(){
@@ -558,6 +597,10 @@ int main(){
 	boxSizeconfig.mediumboxC=Cm11;
 	boxSizeconfig.largeboxF=Cm11;
 	boxSizeconfig.largeboxC=Cm9;
+	
+	ir_sensor[1].irType = SmallBox;
+	ir_sensor[2].irType = MediumBox;
+	ir_sensor[3].irType = LargeBox;
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
