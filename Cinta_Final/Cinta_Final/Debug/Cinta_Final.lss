@@ -1230,7 +1230,7 @@ Disassembly of section .text:
  9d2:	cc 34       	cpi	r28, 0x4C	; 76
  9d4:	84 e0       	ldi	r24, 0x04	; 4
  9d6:	d8 07       	cpc	r29, r24
- 9d8:	40 f4       	brcc	.+16     	; 0x9ea <newBox+0x32>
+ 9d8:	60 f4       	brcc	.+24     	; 0x9f2 <newBox+0x3a>
  9da:	80 91 43 02 	lds	r24, 0x0243	; 0x800243 <flag0>
  9de:	82 60       	ori	r24, 0x02	; 2
  9e0:	80 93 43 02 	sts	0x0243, r24	; 0x800243 <flag0>

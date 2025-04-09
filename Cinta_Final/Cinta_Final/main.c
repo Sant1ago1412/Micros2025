@@ -519,8 +519,8 @@ void newBox(uint16_t distance){
 		if(distance<Cm18){
 			MEASURINGBOX=TRUE;
 			addBox(distance);
+			PORTB ^=(1<<LED_BI);
 		}
-		PORTB ^=(1<<LED_BI);
 	}
 }
 
@@ -540,12 +540,12 @@ void kickBox(){
 			}	
 			if(ir_sensor[needKick].irType == Cajita[read2].boxSize){
 				servo_Angle(0,90);
-				Cajita[read1].boxState=isOut;
+				Cajita[read2].boxState=isOut;
 				read2++;
 			}	
 			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
 				servo_Angle(0,90);
-				Cajita[read1].boxState=isOut;
+				Cajita[read3].boxState=isOut;
 				read3++;
 			}
 		}

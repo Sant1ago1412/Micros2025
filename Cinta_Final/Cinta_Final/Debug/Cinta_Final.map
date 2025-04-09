@@ -41,7 +41,7 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text.kickBox  0x00000000      0x108 main.o
+ .text.kickBox  0x00000000      0x104 main.o
  .bss.read3.2096
                 0x00000000        0x1 main.o
  .bss.read2.2095
