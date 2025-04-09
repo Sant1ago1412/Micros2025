@@ -91,7 +91,6 @@ uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
 
 void newBox(uint16_t distance);
 void addBox(uint16_t distance);
-
 /* END Function prototypes ---------------------------------------------------*/
 
 
@@ -355,18 +354,23 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 		break;
 		case GETDISTANCE:
 		//myWord.ui16[0]	= timehc.distance;
-		putHeaderOnTx(dataTx, GETDISTANCE, 3);
-		putByteOnTx(dataTx, myWord.ui8[0]);
-		putByteOnTx(dataTx, myWord.ui8[1]);
-		putByteOnTx(dataTx, dataTx->chk);
+			putHeaderOnTx(dataTx, GETDISTANCE, 3);
+			putByteOnTx(dataTx, myWord.ui8[0]);
+			putByteOnTx(dataTx, myWord.ui8[1]);
+			putByteOnTx(dataTx, dataTx->chk);
 		break;
 		case GETSPEED:
 		break;
 		case STARTSTOP:
 		break;
-		case GETDATACAR:
-		
+		case NEWBOX:
+			myWord.ui16[0]=Cajita[Numbox].boxSize;
+			putHeaderOnTx(dataTx, NEWBOX, 3);
+			putByteOnTx(dataTx, myWord.ui8[0]);
+			putByteOnTx(dataTx, myWord.ui8[1]);
+			putByteOnTx(dataTx, dataTx->chk);
 		break;
+
 		default:
 		putHeaderOnTx(dataTx, (_eCmd)dataRx->buff[dataRx->indexData], 2);
 		putByteOnTx(dataTx,UNKNOWN );
@@ -483,7 +487,6 @@ void addBox(uint16_t distance){
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=SmallBox;
 	}
-	
 	if (distance>boxSizeconfig.mediumboxC && distance<boxSizeconfig.mediumboxF){ //caja mediana
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=MediumBox;
@@ -492,7 +495,8 @@ void addBox(uint16_t distance){
 	if (distance>boxSizeconfig.largeboxC && distance<boxSizeconfig.largeboxF){ //caja grande
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=LargeBox;
-	}
+	}else
+		Cajita->boxSize=NotSelected;
 	
 	Numbox++;
 	
@@ -500,17 +504,14 @@ void addBox(uint16_t distance){
 		Numbox=0;
 	
 	MEASURINGBOX=FALSE;
+	
 }
 
 void newBox(uint16_t distance){
-	
-	if(IR_GetState(&ir_sensor[0])==0x01){
-		if(distance < Cm18){
+	if(IR_GetState(&ir_sensor[0]) == 0x01){
+		if(distance<18)
 			MEASURINGBOX=TRUE;
-		}
-		PORTB = (1<<LED_BI);
 	}
-	PORTB = (0<<LED_BI);
 }
 
 /* END Function prototypes user code ------------------------------------------*/

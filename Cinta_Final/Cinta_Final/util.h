@@ -76,7 +76,7 @@ typedef enum{
     SETBLACKCOLOR = 0xA6,
     SETWHITECOLOR = 0xA7,
     STARTSTOP = 0xDE,
-    GETDATACAR=0xAA,
+    NEWBOX=0xAA,
     MOTORTEST = 0xA1,
     SERVOANGLE = 0xA2,
     CONFIGSERVO = 0xA5,
@@ -116,13 +116,14 @@ typedef struct {
 } IRDebounce;
 
 typedef enum Tamano{
-	SmallBox,
+	SmallBox=0,
 	MediumBox,
-	LargeBox
+	LargeBox,
+	NotSelected
 }s_boxSize;
 
 typedef enum State{
-	isOn,
+	isOn=0,
 	Push,
 	isOut
 }s_boxState;
