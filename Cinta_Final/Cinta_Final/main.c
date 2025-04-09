@@ -464,6 +464,7 @@ void every10ms(){
 		}
 		count40ms = 4;
 		newBox(globalDistance);
+		kickBox();
 	}
 	
 	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
@@ -532,26 +533,25 @@ void kickBox(){
 	static uint8_t read3=0;
 	
 	for(needKick=1;needKick<4;needKick++){
+		
 		if (IR_GetState(&ir_sensor[needKick])==0){ //si esta negado esta en 1 , es decir hay caja 
 			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
 				servo_Angle(0,90);
 				Cajita[read1].boxState=isOut;
 				read1++;
-			}	
+			}
 			if(ir_sensor[needKick].irType == Cajita[read2].boxSize){
-				servo_Angle(0,90);
+				servo_Angle(1,90);
 				Cajita[read2].boxState=isOut;
 				read2++;
 			}	
 			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
-				servo_Angle(0,90);
+				servo_Angle(2,90);
 				Cajita[read3].boxState=isOut;
 				read3++;
 			}
 		}
 	}
-	
-	
 }
 /* END Function prototypes user code ------------------------------------------*/
 
@@ -601,6 +601,8 @@ int main(){
 	ir_sensor[1].irType = SmallBox;
 	ir_sensor[2].irType = MediumBox;
 	ir_sensor[3].irType = LargeBox;
+	
+	Cajita[0].boxSize = SmallBox;
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
