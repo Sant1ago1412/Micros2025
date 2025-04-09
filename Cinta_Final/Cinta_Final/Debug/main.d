@@ -13,7 +13,7 @@ main.d main.o: .././main.c \
  e:\micro\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  e:\micro\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  e:\micro\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- .././Servos.h .././HCSRforATMega328.h .././HCSR04.h
+ .././Servos.h .././HCSRforATMega328.h .././HCSR04.h .././util.h
 
 e:\micro\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -48,3 +48,5 @@ e:\micro\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.
 .././HCSRforATMega328.h:
 
 .././HCSR04.h:
+
+.././util.h:

@@ -1,8 +1,7 @@
-//
+/************************************************************************/
 /*					HCSR04 Library (.c) - ATMEGA328P
 					Ingenieria en Mecatronica - UNER					*/
-//
-
+/************************************************************************/
 #include "HCSR04.h"
 #include <stdlib.h>
 
@@ -41,7 +40,6 @@ unsigned int HCSR04_AddNew(void (*WritePin_HCSR04)(uint8_t value), uint32_t tick
 	mySensor->lastDistanceUs = 0;
 	mySensor->usTimeRise = 0;
 	mySensor->usTimeFall = 0;
-	mySensor->OnReadyMeasure = NULL;	
 	mySensor->WritePin(0);		
 	
 	return (unsigned int)mySensor;
@@ -110,16 +108,8 @@ void task_HCSR()
 			if(mySensor->lastDistanceUs > 11764) //2 metros
 				mySensor->lastDistanceUs = 0xFFFF;
 			
-			if (mySensor->OnReadyMeasure != NULL)
-				mySensor->OnReadyMeasure(mySensor->lastDistanceUs);
-
+			sensorMeasure(mySensor->lastDistanceUs);
 		}
 
 	}
-}
-
-void HCSR04_AttachOnReadyMeasure(unsigned int handleHCSR04, void (*OnReadyMeasure)(uint16_t distance))
-{
-	mySensor = (_sHCSR04Handle *)handleHCSR04;
-	mySensor->OnReadyMeasure = OnReadyMeasure;
 }

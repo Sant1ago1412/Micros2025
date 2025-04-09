@@ -12,56 +12,11 @@
 #include "Servos.h"
 #include "HCSRforATMega328.h"
 #include "HCSR04.h"
+#include "util.h"
 /* END Includes --------------------------------------------------------------*/
 
 
 /* typedef -------------------------------------------------------------------*/
-
-typedef union{
-	struct{
-		uint8_t bit0: 1;
-		uint8_t bit1: 1;
-		uint8_t bit2: 1;
-		uint8_t bit3: 1;
-		uint8_t bit4: 1;
-		uint8_t bit5: 1;
-		uint8_t bit6: 1;
-		uint8_t bit7: 1;
-	}bits;
-	uint8_t byte;
-}flags;
-
-typedef enum Tamano{
-	SmallBox,
-	MediumBox,
-	LargeBox
-}s_boxSize;
-
-typedef enum State{
-	isOn,
-	Push,
-	isOut
-}s_boxState;
-
-typedef struct{
-	
-	s_boxSize  boxSize;
-	s_boxState boxState;
-	
-}s_boxType;
-
-typedef enum {
-	IR_RISING = 0,
-	IR_UP,
-	IR_FALLING,
-	IR_DOWN
-}IRState;
-
-typedef struct{
-	IRState state;
-	uint8_t stateConfirmed;
-	uint8_t last_sample;
-}IRDebounce;
 
 /* END typedef ---------------------------------------------------------------*/
 
@@ -69,15 +24,24 @@ typedef struct{
 /* define --------------------------------------------------------------------*/
 
 #define bufferBox		15
+#define bufferIrn		4
 #define Cm6				348
 #define Cm8				464
-#define Cm10			580
+#define Cm9				522
+#define Cm11			638
+#define Cm12			696
+#define Cm13			754
+#define Cm15			870
 #define Cm18			1100
 
 #define	TRUE			1
 #define FALSE			0
 #define IS10MS			flag0.bits.bit0
 #define MEASURINGBOX	flag0.bits.bit1
+#define DETECTECBOX		flag0.bits.bit2
+
+#define RXBUFSIZE           256
+#define TXBUFSIZE           256
 
 /*------PIN DECLARATION------*/
 #define LED_BI			PB5
@@ -106,26 +70,54 @@ typedef struct{
 
 
 /* Function prototypes -------------------------------------------------------*/
+
 void ini_ports();
 void ini_timer1();
 void ini_timer0();
-void sensorMeasure();
+void ini_USART(uint8_t ubrr);
+
+void sensorMeasure(uint16_t distance);
 void every10ms();
-void addBox(uint16_t distance);
+
 void IR_Init(IRDebounce *ir);
 void IR_Update(IRDebounce *ir, uint8_t sample);
 uint8_t IR_GetState( IRDebounce *ir);
+
+void serialTask(_sRx *dataRx, _sTx *dataTx);
+void decodeCommand(_sRx *dataRx, _sTx *dataTx);
+void decodeHeader(_sRx *dataRx);
+uint8_t putHeaderOnTx(_sTx  *dataTx, _eCmd ID, uint8_t frameLength);
+uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
+
+void newBox(uint16_t distance);
+void addBox(uint16_t distance);
+
 /* END Function prototypes ---------------------------------------------------*/
 
 
 /* Global variables ----------------------------------------------------------*/
+
 flags flag0;
+
+ _sRx		dataRx;
+ _sTx		dataTx;
+ _uWord		myWord;
+ 
+ uint8_t raw_input[bufferIrn];
+ uint8_t state1;
 uint8_t	count100ms	= 10;
 uint8_t count40ms = 4;
-uint8_t raw_input;
+
 s_boxType Cajita[bufferBox];
 uint16_t Numbox;
-IRDebounce ir_sensor;
+IRDebounce ir_sensor[bufferIrn];
+
+volatile uint8_t buffRx[RXBUFSIZE];
+uint8_t buffTx[TXBUFSIZE];
+
+uint16_t globalDistance=0;
+
+s_sizeConfig boxSizeconfig;
 /* END Global variables ------------------------------------------------------*/
 
 
@@ -139,7 +131,7 @@ ISR(TIMER1_COMPA_vect){
 	
 	/*		Con el OCR1B en 20000 , cuento cada 10ms		*/
 	IS10MS=TRUE;
-	OCR1B += 20000;
+	OCR1A += 19999;
 	
 }
 
@@ -159,6 +151,11 @@ ISR(TIMER0_OVF_vect){
 	
 	writeServo();
 	
+}
+
+ISR(USART_RX_vect){
+	dataRx.buff[dataRx.indexW++] = UDR0;
+	dataRx.indexW &= dataRx.mask;
 }
 /* END Function ISR ----------------------------------------------------------*/
 
@@ -195,10 +192,11 @@ void ini_timer1(){
 	/*	Activo la interrupcion por comparador b	*/
 	TIMSK1 = (1<<OCIE1A);
 	/* Le doy un valor al comparador B	*/
-	OCR1B = 19999;
+	OCR1A = 19999;
 	TIFR1 = TIFR1;
 	
 }
+
 
 /************************************************************************/
 /*			Timer 0 funcional a generar el pwm de los servos			*/
@@ -216,10 +214,21 @@ void ini_timer0(){
 	
 }
 
+void ini_USART(uint8_t ubrr){
+	UBRR0H = 0;
+	UBRR0L = ubrr;
+	UCSR0A = 0xFE; //inicializo todas las banderas excepto el multiprocesor
+	UCSR0B =   0x98; // (1<<RXCIE0) | (1<<RXEN0)|(1<<TXEN0); //Activo las banderas de interrupcion de recepcion y la habilitacion del rx y tx
+	UCSR0C =  0x06; // (0<<UCSZ02) | (1<<UCSZ01) | (1<<UCSZ00); //se setea como asincrono, paridad desactivada, 1 stop bit, 8 data bits
+	
+}
+
 void IR_Init(IRDebounce *ir) {
-	ir->state = IR_UP;
-	ir->last_sample = 1;
-	ir->stateConfirmed = 0;
+	for(int globalIndex = 0;globalIndex<bufferIrn;globalIndex++){
+		ir[globalIndex].state = IR_UP;
+		ir[globalIndex].last_sample = 1;
+		ir[globalIndex].stateConfirmed = 0;
+	}
 }
 
 void IR_Update(IRDebounce *ir, uint8_t sample) {
@@ -244,7 +253,7 @@ void IR_Update(IRDebounce *ir, uint8_t sample) {
 		case IR_FALLING:
 		if (sample == 0 && ir->last_sample == 0){
 			ir->state = IR_DOWN;
-			ir->stateConfirmed = 0x10;
+			ir->stateConfirmed = 0x00;
 			
 			}else{
 			ir->state = IR_UP;
@@ -270,16 +279,193 @@ uint8_t IR_GetState( IRDebounce *ir) {
 	return ir->stateConfirmed;
 }
 
+void serialTask(_sRx* dataRx, _sTx* dataTx){
+	if(dataRx->isComannd){
+		dataRx->isComannd=FALSE;
+		decodeCommand(dataRx,dataTx);
+	}
+	if(dataRx->indexR!=dataRx->indexW){
+		
+		decodeHeader(dataRx);
+	}
+	if (dataTx->indexR!= dataTx->indexW) {
+		if (UCSR0A & (1 << UDRE0)) { // Si el buffer de transmisión está vacío
+			UDR0 = dataTx->buff[dataTx->indexR++]; // Enviar el dato
+			dataTx->indexR &= dataTx->mask;
+		}
+	}
+}
+
+uint8_t putHeaderOnTx(_sTx  *dataTx, _eCmd ID, uint8_t frameLength){
+	dataTx->chk = 0;
+	dataTx->buff[dataTx->indexW++]='U';
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]='N';
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]='E';
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]='R';
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]=frameLength+1;
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]=':';
+	dataTx->indexW &= dataTx->mask;
+	dataTx->buff[dataTx->indexW++]=ID;
+	dataTx->indexW &= dataTx->mask;
+	dataTx->chk ^= (frameLength+1);
+	dataTx->chk ^= ('U' ^'N' ^'E' ^'R' ^ID ^':') ;
+	return  dataTx->chk;
+}
+uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte)
+{
+	dataTx->buff[dataTx->indexW++]=byte;
+	dataTx->indexW &= dataTx->mask;
+	dataTx->chk ^= byte;
+	return dataTx->chk;
+}
+void decodeCommand(_sRx *dataRx, _sTx *dataTx){
+	switch(dataRx->buff[dataRx->indexData]){
+		case ALIVE:
+		putHeaderOnTx(dataTx, ALIVE, 2);
+		putByteOnTx(dataTx, ACK );
+		putByteOnTx(dataTx, dataTx->chk);
+		break;
+		case FIRMWARE:
+		break;
+		case LEDSTATUS:
+		myWord.ui16[0] = state1;
+		putHeaderOnTx(dataTx, LEDSTATUS, 3);
+		putByteOnTx(dataTx, myWord.ui8[0] );
+		putByteOnTx(dataTx, myWord.ui8[1] );
+		putByteOnTx(dataTx, dataTx->chk);
+		break;
+		case BUTTONSTATUS:
+		break;
+		case ANALOGSENSORS:
+		break;
+		case SETBLACKCOLOR:
+		break;
+		case SETWHITECOLOR:
+		break;
+		case MOTORTEST:
+		break;
+		case SERVOANGLE:
+		break;
+		case CONFIGSERVO:
+		break;
+		case GETDISTANCE:
+		//myWord.ui16[0]	= timehc.distance;
+		putHeaderOnTx(dataTx, GETDISTANCE, 3);
+		putByteOnTx(dataTx, myWord.ui8[0]);
+		putByteOnTx(dataTx, myWord.ui8[1]);
+		putByteOnTx(dataTx, dataTx->chk);
+		break;
+		case GETSPEED:
+		break;
+		case STARTSTOP:
+		break;
+		case GETDATACAR:
+		
+		break;
+		default:
+		putHeaderOnTx(dataTx, (_eCmd)dataRx->buff[dataRx->indexData], 2);
+		putByteOnTx(dataTx,UNKNOWN );
+		putByteOnTx(dataTx, dataTx->chk);
+		break;
+		
+	}
+}
+void decodeHeader(_sRx *dataRx){
+	uint8_t auxIndex=dataRx->indexW;
+	while(dataRx->indexR != auxIndex){
+		switch(dataRx->header)
+		{
+			case HEADER_U:
+			if(dataRx->buff[dataRx->indexR] == 'U'){
+				dataRx->header = HEADER_N;
+			}
+			break;
+			case HEADER_N:
+			if(dataRx->buff[dataRx->indexR] == 'N'){
+				dataRx->header = HEADER_E;
+				}else{
+				if(dataRx->buff[dataRx->indexR] != 'U'){
+					dataRx->header = HEADER_U;
+					dataRx->indexR--;
+				}
+			}
+			break;
+			case HEADER_E:
+			if(dataRx->buff[dataRx->indexR] == 'E'){
+				dataRx->header = HEADER_R;
+				}else{
+				dataRx->header = HEADER_U;
+				dataRx->indexR--;
+			}
+			break;
+			case HEADER_R:
+			if(dataRx->buff[dataRx->indexR] == 'R'){
+				dataRx->header = NBYTES;
+				}else{
+				dataRx->header = HEADER_U;
+				dataRx->indexR--;
+			}
+			break;
+			case NBYTES:
+			dataRx->nBytes=dataRx->buff[dataRx->indexR];
+			dataRx->header = TOKEN;
+			break;
+			case TOKEN:
+			if(dataRx->buff[dataRx->indexR] == ':'){
+				dataRx->header = PAYLOAD;
+				dataRx->indexData = dataRx->indexR+1;
+				dataRx->indexData &= dataRx->mask;
+				dataRx->chk = 0;
+				dataRx->chk ^= ('U' ^'N' ^'E' ^'R' ^dataRx->nBytes ^':') ;
+				}else{
+				dataRx->header = HEADER_U;
+				dataRx->indexR--;
+			}
+			break;
+			case PAYLOAD:
+			dataRx->nBytes--;
+			if(dataRx->nBytes>0){
+				dataRx->chk ^= dataRx->buff[dataRx->indexR];
+				}else{
+				dataRx->header = HEADER_U;
+				if(dataRx->buff[dataRx->indexR] == dataRx->chk)
+				dataRx->isComannd = TRUE;
+			}
+			break;
+			default:
+			dataRx->header = HEADER_U;
+			break;
+		}
+		dataRx->indexR++;
+		dataRx->indexR &= dataRx->mask;
+	}
+}
+
 void every10ms(){
 	
 	if (!count100ms){		//Si pasaron 100ms
 		on_reset_hcsr();
+		//state1 = IR_GetState(&ir_sensor[0]);
 		count100ms = 10;
 	}
 	
 	if (!count40ms){
-		IR_Update(&ir_sensor, raw_input);
+		for(int i=0;i<4;i++){
+			IR_Update(&ir_sensor[i], raw_input[i]);
+		}
+		count40ms = 4;
+		newBox(globalDistance);
 	}
+	
+	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
+	raw_input[1] = (PIND & (1<<IR1)) ? 1 : 0;
+	raw_input[2] = (PIND & (1<<IR2)) ? 1 : 0;
+	raw_input[3] = (PIND & (1<<IR3)) ? 1 : 0;
 	
 	IS10MS = FALSE;
 	count100ms--;
@@ -287,44 +473,46 @@ void every10ms(){
 }
 
 void sensorMeasure(uint16_t distance){
-	
-	if(distance < 1100){
-		MEASURINGBOX=TRUE;	
-	}			//20cm
-	
-	if(MEASURINGBOX){
-		addBox(distance);
-	}else
-		return;
-	
-		
+	globalDistance=distance;
 }
 
 void addBox(uint16_t distance){
 	
 	//dar margen por ej a la caja de 6cm , decir que es veradero cuando sean enrtre 5 y 8cm
-	if (distance>Cm6 && distance<Cm8){ //caja mas chica
+	if (distance>boxSizeconfig.smallboxC && distance<boxSizeconfig.smallboxF){ //caja chica
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=SmallBox;
 	}
 	
-	if (distance>Cm8 && distance<Cm10){ //caja mediana
+	if (distance>boxSizeconfig.mediumboxC && distance<boxSizeconfig.mediumboxF){ //caja mediana
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=MediumBox;
 	}
 	
-	if (distance>Cm10 && distance<Cm18){ //caja grande
+	if (distance>boxSizeconfig.largeboxC && distance<boxSizeconfig.largeboxF){ //caja grande
 		Cajita[Numbox].boxState=isOn;
 		Cajita[Numbox].boxSize=LargeBox;
 	}
 	
 	Numbox++;
 	
-	if(Numbox==16){ //reinicio el buffer
+	if(Numbox>=bufferBox) //reinicio el buffer
 		Numbox=0;
-	}
+	
 	MEASURINGBOX=FALSE;
 }
+
+void newBox(uint16_t distance){
+	
+	if(IR_GetState(&ir_sensor[0])==0x01){
+		if(distance < Cm18){
+			MEASURINGBOX=TRUE;
+		}
+		PORTB = (1<<LED_BI);
+	}
+	PORTB = (0<<LED_BI);
+}
+
 /* END Function prototypes user code ------------------------------------------*/
 
 int main(){
@@ -336,22 +524,39 @@ int main(){
 	/* END Local variables -------------------------------------------------------*/
 
 
-
-
 	/* User code Init ------------------------------------------------------------*/
 	flag0.byte = 0;
 	
 	ini_ports();
 	ini_timer1();
 	ini_timer0();
+	ini_USART(16);
 	
-	IR_Init(&ir_sensor);
+	IR_Init(&ir_sensor[0]);
 	
 	addServo(&PORTD,SV0);
-	addServo(&PORTD,SV1);
-	addServo(&PORTD,SV2);
+	addServo(&PORTB,SV1);
+	addServo(&PORTB,SV2);
+	
 	HCSR_1 = HCSR04_AddNew(&WritePin_HCSR, 16);
-	HCSR04_AttachOnReadyMeasure(HCSR_1, &sensorMeasure);	
+	
+	dataRx.buff = (uint8_t *)buffRx;
+	dataRx.indexR = 0;
+	dataRx.indexW = 0;
+	dataRx.header = HEADER_U;
+	dataRx.mask = RXBUFSIZE - 1;
+	
+	dataTx.buff = buffTx;
+	dataTx.indexR = 0;
+	dataTx.indexW = 0;
+	dataTx.mask = TXBUFSIZE -1;
+	
+	boxSizeconfig.smallboxF=Cm15;
+	boxSizeconfig.smallboxC=Cm13;
+	boxSizeconfig.mediumboxF=Cm13;
+	boxSizeconfig.mediumboxC=Cm11;
+	boxSizeconfig.largeboxF=Cm11;
+	boxSizeconfig.largeboxC=Cm9;
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
@@ -359,6 +564,7 @@ int main(){
 	while (1){
 		/* User Code loop ------------------------------------------------------------*/
 		task_HCSR();
+		serialTask(&dataRx,&dataTx);
 		if (IS10MS)
 			every10ms();
 		/* END User Code loop --------------------------------------------------------*/

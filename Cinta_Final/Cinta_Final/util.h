@@ -114,4 +114,33 @@ typedef struct {
 	uint8_t stateConfirmed;
 	uint8_t last_sample;
 } IRDebounce;
+
+typedef enum Tamano{
+	SmallBox,
+	MediumBox,
+	LargeBox
+}s_boxSize;
+
+typedef enum State{
+	isOn,
+	Push,
+	isOut
+}s_boxState;
+
+typedef struct boxAtributte{
+	
+	s_boxSize  boxSize;
+	s_boxState boxState;
+	
+}s_boxType;
+
+typedef struct boxSize{
+	uint16_t smallboxF;
+	uint16_t smallboxC;
+	uint16_t mediumboxF;
+	uint16_t mediumboxC;
+	uint16_t largeboxF;
+	uint16_t largeboxC;
+}s_sizeConfig;
+
 #endif
