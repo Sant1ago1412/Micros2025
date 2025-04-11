@@ -45,8 +45,7 @@
 
 /*------PIN DECLARATION------*/
 #define LED_BI			PB5
-#define LED_1			PB2
-#define LED_2			PD6
+
 /************************************************************************/
 /*							Pin Declaration Servos                      */
 /************************************************************************/
@@ -93,6 +92,7 @@ uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
 void newBox(uint16_t distance);
 void addBox(uint16_t distance);
 void kickBox();
+void servoreset();
 /* END Function prototypes ---------------------------------------------------*/
 
 
@@ -105,9 +105,11 @@ flags flag0;
  _uWord		myWord;
  
  uint8_t raw_input[bufferIrn];
+ uint8_t state1;
 uint8_t	count100ms	= 10;
 uint8_t count40ms = 4;
-
+uint8_t count200ms = 20;
+uint8_t boxToTx;
 s_boxType Cajita[bufferBox];
 uint16_t Numbox;
 IRDebounce ir_sensor[bufferIrn];
@@ -166,8 +168,8 @@ void ini_ports(){
 	/************************************************************************/
 	/*								OUTPUTS                                 */
 	/************************************************************************/
-	DDRB = ((1 << LED_BI)| (1 << SV1) | (1 << SV2) | (1<<TRIGGER) | (1<<LED_1));
-	DDRD = (1 << SV0)|(1<<LED_2);
+	DDRB = ((1 << LED_BI)| (1 << SV1) | (1 << SV2) | (1<<TRIGGER));
+	DDRD = (1 << SV0);
 	
 	/************************************************************************/
 	/*								INPUTS                                  */
@@ -225,8 +227,8 @@ void ini_USART(uint8_t ubrr){
 
 void IR_Init(IRDebounce *ir) {
 	for(int globalIndex = 0;globalIndex<bufferIrn;globalIndex++){
-		ir[globalIndex].state = IR_UP;
-		ir[globalIndex].last_sample = 1;
+		ir[globalIndex].state = IR_RISING;
+		ir[globalIndex].last_sample = 0;
 		ir[globalIndex].stateConfirmed = 0;
 	}
 }
@@ -254,7 +256,6 @@ void IR_Update(IRDebounce *ir, uint8_t sample) {
 		if (sample == 0 && ir->last_sample == 0){
 			ir->state = IR_DOWN;
 			ir->stateConfirmed = 0x00;
-			
 			}else{
 			ir->state = IR_UP;
 		}
@@ -333,6 +334,7 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 		case FIRMWARE:
 		break;
 		case LEDSTATUS:
+		myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
 		putHeaderOnTx(dataTx, LEDSTATUS, 3);
 		putByteOnTx(dataTx, myWord.ui8[0] );
 		putByteOnTx(dataTx, myWord.ui8[1] );
@@ -353,7 +355,7 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 		case CONFIGSERVO:
 		break;
 		case GETDISTANCE:
-		//myWord.ui16[0]	= timehc.distance;
+			myWord.ui16[0]	= globalDistance;
 			putHeaderOnTx(dataTx, GETDISTANCE, 3);
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
@@ -364,11 +366,20 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 		case STARTSTOP:
 		break;
 		case NEWBOX:
-			myWord.ui16[0]=Cajita[Numbox].boxSize;
-			putHeaderOnTx(dataTx, NEWBOX, 3);
+			myWord.ui8[0]=boxToTx;
+			putHeaderOnTx(dataTx, NEWBOX, 8);
+			putByteOnTx(dataTx, myWord.ui8[0]);
+			myWord.ui16[0]	= globalDistance;
+			putByteOnTx(dataTx, myWord.ui8[0]);
+			putByteOnTx(dataTx, myWord.ui8[1]);
+			myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
+			putByteOnTx(dataTx, myWord.ui8[0]);
+			putByteOnTx(dataTx, myWord.ui8[1]);
+			myWord.ui16[0] = Numbox;
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
 			putByteOnTx(dataTx, dataTx->chk);
+			
 		break;
 
 		default:
@@ -454,7 +465,6 @@ void every10ms(){
 	
 	if (!count100ms){		//Si pasaron 100ms
 		on_reset_hcsr();
-		//state1 = IR_GetState(&ir_sensor[0]);
 		count100ms = 10;
 	}
 	
@@ -463,10 +473,12 @@ void every10ms(){
 			IR_Update(&ir_sensor[i], raw_input[i]);
 		}
 		count40ms = 4;
-		newBox(globalDistance);
+		//newBox(globalDistance);
 		kickBox();
 	}
-	
+	if (!count200ms){
+			servoreset();
+	}
 	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
 	raw_input[1] = (PIND & (1<<IR1)) ? 1 : 0;
 	raw_input[2] = (PIND & (1<<IR2)) ? 1 : 0;
@@ -475,6 +487,7 @@ void every10ms(){
 	IS10MS = FALSE;
 	count100ms--;
 	count40ms--;
+	count200ms--;
 }
 
 void sensorMeasure(uint16_t distance){
@@ -483,75 +496,114 @@ void sensorMeasure(uint16_t distance){
 
 void addBox(uint16_t distance){
 	
-	//dar margen por ej a la caja de 6cm , decir que es veradero cuando sean enrtre 5 y 8cm
-	if (distance>boxSizeconfig.smallboxC && distance<boxSizeconfig.smallboxF){ //caja chica
-		Cajita[Numbox].boxState=isOn;
-		Cajita[Numbox].boxSize=SmallBox;
-		PORTB ^= (1<<LED_1);
-	}
-	if (distance>boxSizeconfig.mediumboxC && distance<boxSizeconfig.mediumboxF){ //caja mediana
-		Cajita[Numbox].boxState=isOn;
-		Cajita[Numbox].boxSize=MediumBox;
-		PORTB ^= (1<<LED_BI);
-	}
+		////dar margen por ej a la caja de 6cm , decir que es veradero cuando sean enrtre 5 y 8cm
+		//if (globalDistance>190 && globalDistance<464){ //caja chica
+			//Cajita[Numbox].boxState=isOn;
+			//Cajita[Numbox].boxSize=SmallBox;
+			//boxToTx = 0x03;
+			//}else if (globalDistance>638 && globalDistance<754){ //caja mediana
+				//Cajita[Numbox].boxState=isOn;
+				//Cajita[Numbox].boxSize=MediumBox;
+				//boxToTx = 0x01;
+					//}else if (globalDistance>754 && globalDistance<870){ //caja grande
+						//Cajita[Numbox].boxState=isOn;
+						//Cajita[Numbox].boxSize=LargeBox;
+						//boxToTx = 0x02;
+						//}else{
+							//Cajita->boxSize=NotSelected;
+							//boxToTx = 0x04;
+							////MEASURINGBOX=FALSE;
+							//return;
+						//}
+		if (globalDistance > 290 && globalDistance < 377) { //5-6,5
+			Cajita[Numbox].boxState=isOn;
+			Cajita[Numbox].boxSize=SmallBox;
+			boxToTx = 0x03;
+		}
+		else if (globalDistance >= 378 && globalDistance < 493) { //7 -8,5
+			Cajita[Numbox].boxState=isOn;
+			Cajita[Numbox].boxSize=MediumBox;
+			boxToTx = 0x01;
+		}
+		else if (globalDistance >= 493 && globalDistance < 638) { //9-11
+			Cajita[Numbox].boxState=isOn;
+			Cajita[Numbox].boxSize=LargeBox;
+			boxToTx = 0x02;
+		}
+		else if (globalDistance < 290 && globalDistance > 638){
+			Cajita->boxSize=NotSelected;
+		}
+		Numbox++;
 	
-	if (distance>boxSizeconfig.largeboxC && distance<boxSizeconfig.largeboxF){ //caja grande
-		Cajita[Numbox].boxState=isOn;
-		Cajita[Numbox].boxSize=LargeBox;
-		PORTB ^= (1<<LED_2);
-	}else
-		Cajita->boxSize=NotSelected;
+		if(Numbox>=bufferBox) //reinicio el buffer
+			Numbox=0;
 	
-	Numbox++;
-	
-	if(Numbox>=bufferBox) //reinicio el buffer
-		Numbox=0;
-		
 	//si el ir deja de detectar pongo el measuring box en false para reiniciar la medicion
-	if(IR_GetState(&ir_sensor[0]) == 1)
-		MEASURINGBOX=FALSE;
-	
+	//if(IR_GetState(&ir_sensor[0]) == 1 && MEASURINGBOX){
+		//MEASURINGBOX=FALSE;
+	//}
 	
 }
 
 void newBox(uint16_t distance){
-	
-	if((IR_GetState(&ir_sensor[0]) == 0x00) && !MEASURINGBOX){
-		if(distance<Cm18){
+	if(distance<Cm18){
+		if((IR_GetState(&ir_sensor[0]) == 0) && !MEASURINGBOX){
 			MEASURINGBOX=TRUE;
 			addBox(distance);
 			PORTB ^=(1<<LED_BI);
 		}
+		if ((IR_GetState(&ir_sensor[0]) == 1)) //si IR no mide
+				MEASURINGBOX=FALSE;
+
 	}
 }
 
 void kickBox(){
 	
-	uint8_t needKick;
 	static uint8_t read1=0;
 	static uint8_t read2=0;
 	static uint8_t read3=0;
 	
-	for(needKick=1;needKick<4;needKick++){
-		
-		if (IR_GetState(&ir_sensor[needKick])==0){ //si esta negado esta en 1 , es decir hay caja 
-			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
-				servo_Angle(0,90);
-				Cajita[read1].boxState=isOut;
-				read1++;
-			}
-			if(ir_sensor[needKick].irType == Cajita[read2].boxSize){
-				servo_Angle(1,90);
-				Cajita[read2].boxState=isOut;
-				read2++;
-			}	
-			if(ir_sensor[needKick].irType == Cajita[read1].boxSize){
-				servo_Angle(2,90);
-				Cajita[read3].boxState=isOut;
-				read3++;
-			}
+	Cajita[read1].boxSize = SmallBox;
+	Cajita[read2].boxSize = MediumBox;
+	Cajita[read3].boxSize = LargeBox;
+	
+	if (IR_GetState(&ir_sensor[1])==0){
+		if(ir_sensor[1].irType == Cajita[read1].boxSize){
+			servo_Angle(0,90);
+			Cajita[read1].boxState=Push;
 		}
+		read1++;
 	}
+	if (IR_GetState(&ir_sensor[2])==0){
+		if(ir_sensor[2].irType == Cajita[read2].boxSize){
+			servo_Angle(1,90);
+			Cajita[read2].boxState=Push;
+		}
+		read2++;
+	}
+	if (IR_GetState(&ir_sensor[3])==0){
+		if(ir_sensor[3].irType == Cajita[read3].boxSize){
+			servo_Angle(2,90);
+			Cajita[read3].boxState=Push;
+		}
+		read3++;
+	}
+	
+	if(){
+	}
+	if(read1>=bufferBox)
+		read1=0;
+	if(read2>=bufferBox)
+		read2=0;
+	if(read3>=bufferBox)
+		read3=0;
+	
+}
+void servoreset(){
+	servo_Angle(0,0);
+	servo_Angle(1,0);
+	servo_Angle(2,0);
 }
 /* END Function prototypes user code ------------------------------------------*/
 
@@ -577,8 +629,12 @@ int main(){
 	addServo(&PORTD,SV0);
 	addServo(&PORTB,SV1);
 	addServo(&PORTB,SV2);
-	
+	servo_Angle(0,0);
+	servo_Angle(1,0);
+	servo_Angle(2,0);
 	HCSR_1 = HCSR04_AddNew(&WritePin_HCSR, 16);
+	
+	Numbox = 0;
 	
 	dataRx.buff = (uint8_t *)buffRx;
 	dataRx.indexR = 0;
@@ -601,8 +657,6 @@ int main(){
 	ir_sensor[1].irType = SmallBox;
 	ir_sensor[2].irType = MediumBox;
 	ir_sensor[3].irType = LargeBox;
-	
-	Cajita[0].boxSize = SmallBox;
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
