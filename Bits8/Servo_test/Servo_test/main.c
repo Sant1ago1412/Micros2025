@@ -100,7 +100,27 @@ void initialize_timer0(){
 void every10ms(){
 	if (!count40ms){								// If 1000 ms have passed
 		PORTB ^= (1 << LED_HB);
-		count40ms = 4;
+		count40ms = 100;
+		switch (servotest){
+			
+			case 0:
+			servo_Angle(0,90);
+			servo_Angle(1,0);
+			servo_Angle(2,180);
+			break;
+			
+			case 1:
+			servo_Angle(1,90);
+			servo_Angle(2,0);
+			servo_Angle(0,180);
+			break;
+			case 2:
+			servo_Angle(2,90);
+			servo_Angle(0,0);
+			servo_Angle(1,180);
+			break;
+			
+		}
 	}
 
 	count40ms--;
