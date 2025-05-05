@@ -39,7 +39,7 @@ typedef struct{
     uint8_t bufferTx[256];   //!< Buffer circular de transmisión
 }_sDato ;
 
-typedef enum{
+typedef enum Comands{
     ALIVE=0xF0,
     FIRMWARE=0xF1,
     LEDS=0x10,
@@ -56,7 +56,7 @@ typedef enum{
     STARTCONFIG=0xEE,
 } _eEstadoMEFcmd;
 
-typedef enum{
+typedef enum ProtocolState{
     START,
     HEADER_1,
     HEADER_2,

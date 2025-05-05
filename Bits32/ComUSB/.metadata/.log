@@ -754,3 +754,87 @@ java.lang.NullPointerException: Cannot invoke "org.eclipse.ui.IWorkbenchWindow.g
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:668)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:605)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1481)
+!SESSION 2025-05-05 16:48:38.855 -----------------------------------------------
+eclipse.buildId=Version 1.18.1
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-05-05 16:48:42.876
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-05-05 16:48:42.877
+!MESSAGE Log4j2 initialized with config file C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\ComUSB\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-05-05 16:48:52.314
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.jobs 2 2 2025-05-05 16:48:58.696
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.internal.Workbench$39 RUNNING
+	 at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	 at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1027)
+	 at org.eclipse.osgi.internal.loader.ModuleClassLoader.defineClass(ModuleClassLoader.java:293)
+	 at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.defineClass(ClasspathManager.java:774)
+	 at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findClassImpl(ClasspathManager.java:691)
+	 at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClassImpl(ClasspathManager.java:657)
+	 at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClassImpl(ClasspathManager.java:637)
+	 at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:616)
+	 at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:348)
+	 at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:414)
+	 at org.eclipse.osgi.internal.loader.BundleLoader.findClass0(BundleLoader.java:520)
+	 at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:434)
+	 at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:174)
+	 at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	 at org.glassfish.jaxb.runtime.AccessorFactoryImpl.createFieldAccessor(AccessorFactoryImpl.java:39)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeClassInfoImpl.createFieldSeed(RuntimeClassInfoImpl.java:242)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeClassInfoImpl.createFieldSeed(RuntimeClassInfoImpl.java:56)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ClassInfoImpl.findFieldProperties(ClassInfoImpl.java:394)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ClassInfoImpl.getProperties(ClassInfoImpl.java:297)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeClassInfoImpl.getProperties(RuntimeClassInfoImpl.java:159)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ModelBuilder.getClassInfo(ModelBuilder.java:219)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeModelBuilder.getClassInfo(RuntimeModelBuilder.java:72)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeModelBuilder.getClassInfo(RuntimeModelBuilder.java:52)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ModelBuilder.getClassInfo(ModelBuilder.java:185)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeModelBuilder.getClassInfo(RuntimeModelBuilder.java:67)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.RuntimeModelBuilder.getClassInfo(RuntimeModelBuilder.java:52)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ModelBuilder.getTypeInfo(ModelBuilder.java:332)
+	 at org.glassfish.jaxb.runtime.v2.model.impl.ModelBuilder.getTypeInfo(ModelBuilder.java:347)
+	 at org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl.getTypeInfoSet(JAXBContextImpl.java:415)
+	 at org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl.<init>(JAXBContextImpl.java:255)
+	 at org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl$JAXBContextBuilder.build(JAXBContextImpl.java:1115)
+	 at org.glassfish.jaxb.runtime.v2.ContextFactory.createContext(ContextFactory.java:144)
+	 at org.glassfish.jaxb.runtime.v2.JAXBContextFactory.createContext(JAXBContextFactory.java:44)
+	 at jakarta.xml.bind.ContextFinder.find(ContextFinder.java:368)
+	 at jakarta.xml.bind.JAXBContext.newInstance(JAXBContext.java:605)
+	 at jakarta.xml.bind.JAXBContext.newInstance(JAXBContext.java:546)
+	 at com.st.microxplorer.mcu.rtos.api.SupportedApi.loadFromStream(SupportedApi.java:101)
+	 at com.st.microxplorer.mcu.rtos.api.SupportedApi.load(SupportedApi.java:75)
+	 at com.st.microxplorer.mcu.rtos.RtosManager.<init>(RtosManager.java:534)
+	 at com.st.microxplorer.mcu.Mcu.getRtosManager(Mcu.java:7526)
+	 at com.st.microxplorer.mcu.Mcu.propertyChange(Mcu.java:1766)
+	 at java.desktop/java.beans.PropertyChangeSupport.fire(PropertyChangeSupport.java:343)
+	 at java.desktop/java.beans.PropertyChangeSupport.firePropertyChange(PropertyChangeSupport.java:335)
+	 at com.st.microxplorer.util.MXPropertyChangeSupport.refreshing(MXPropertyChangeSupport.java:72)
+	 at com.st.microxplorer.mcu.Mcu.refreshingMcu(Mcu.java:6081)
+	 at com.st.microxplorer.mxsystem.MxSystem.refreshing(MxSystem.java:921)
+	 at com.st.microxplorer.plugins.pinoutconfig.PinoutConfigView.<init>(PinoutConfigView.java:203)
+	 at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	 at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	 at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	 at com.st.microxplorer.plugin.PluginManage.loadPluginJar(PluginManage.java:352)
+	 at com.st.microxplorer.plugin.PluginManage.PluginSearch(PluginManage.java:224)
+	 at com.st.microxplorer.plugin.PluginManage.PluginDiscovery(PluginManage.java:67)
+	 at com.st.microxplorer.maingui.MainPanel.initialization(MainPanel.java:329)
+	 at com.st.microxplorer.maingui.AppletMainFrameCubeIde.init(AppletMainFrameCubeIde.java:242)
+	 at com.st.stm32cube.common.mx.core.CubeMxInstance.<init>(CubeMxInstance.java:117)
+	 at com.st.stm32cube.common.mx.core.CubeMxInstance.getInstance(CubeMxInstance.java:91)
+	 at com.st.stm32cube.common.mx.userauth.UserAuthAdapter.<init>(UserAuthAdapter.java:25)
+	 at com.st.stm32cube.common.mx.userauth.UserAuthProvider.getUserAuthAdapter(UserAuthProvider.java:16)
+	 at com.st.stm32cube.common.ecosystemintegration.ui.core.MCUEcoSystemIntegrationUiHelper.getUserAuth(MCUEcoSystemIntegrationUiHelper.java:100)
+	 at com.st.stm32cube.ide.mcu.userauth.UserAuthStartup.earlyStartup(UserAuthStartup.java:32)
+	 at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:79)
+	 at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:55)
+	 at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	 at org.eclipse.ui.internal.Workbench$39.run(Workbench.java:2733)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

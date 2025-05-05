@@ -1312,3 +1312,63 @@
 2025-05-05 16:46:38,689 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 2025-05-05 16:46:38,690 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
 2025-05-05 16:46:38,742 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
+2025-05-05 16:48:43,065 [INFO] Activator:176 - 
+
+
+2025-05-05 16:48:43,068 [INFO] Activator:177 - !SESSION log4j initialized
+2025-05-05 16:48:47,369 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2025-05-05 16:48:52,831 [INFO] ApplicationProperties:184 - Using Application install path: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515
+2025-05-05 16:48:52,843 [INFO] DbMcusXml:78 - Set database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/mcu/
+2025-05-05 16:48:52,843 [INFO] ApiDb:274 - Set plugin database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/boardmanager/
+2025-05-05 16:48:52,844 [WARN] ApiDb:259 - Overriding images path with different value:  => E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/mcufinder/images/
+2025-05-05 16:48:52,848 [INFO] ApiDb:250 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:52,849 [INFO] DbMcusAds:125 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:52,850 [INFO] CrossReferenceDbSqlite:203 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/cs/
+2025-05-05 16:48:52,938 [INFO] RulesReader:64 - Compatibility file has been processed (302 Rules)
+2025-05-05 16:48:52,995 [INFO] DbMcusXml:78 - Set database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/mcu/
+2025-05-05 16:48:52,995 [INFO] ApiDb:274 - Set plugin database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/boardmanager/
+2025-05-05 16:48:52,996 [INFO] ApiDb:261 - Set plugin images path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/mcufinder/images/
+2025-05-05 16:48:52,996 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:52,996 [INFO] ApiDb:250 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:52,996 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:52,996 [INFO] DbMcusAds:125 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:52,996 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:52,996 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:52,996 [INFO] CrossReferenceDbSqlite:203 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/cs/
+2025-05-05 16:48:53,046 [INFO] MainPanel:272 - HeapMemory: 268435456
+2025-05-05 16:48:53,109 [INFO] DbMcusXml:78 - Set database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/mcu/
+2025-05-05 16:48:53,109 [INFO] ApiDb:274 - Set plugin database path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/boardmanager/
+2025-05-05 16:48:53,110 [INFO] ApiDb:261 - Set plugin images path to: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\/plugins/mcufinder/images/
+2025-05-05 16:48:53,110 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:53,110 [INFO] ApiDb:250 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:53,110 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:53,110 [INFO] DbMcusAds:125 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/
+2025-05-05 16:48:53,110 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:53,110 [WARN] DbFile:41 - Overriding database path with different value: C:\Users\santi\.stmcufinder\plugins\mcufinder/ => C:\Users\santi\.stmcufinder\plugins\mcufinder
+2025-05-05 16:48:53,110 [INFO] CrossReferenceDbSqlite:203 - Set database path to: C:\Users\santi\.stmcufinder\plugins\mcufinder//mcu/cs/
+2025-05-05 16:48:53,141 [INFO] ApplicationProperties:184 - Using Application install path: E:\stm\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515
+2025-05-05 16:48:53,143 [INFO] PluginManage:196 - Search for loadable plugins [exclusion list=, ]
+2025-05-05 16:48:53,144 [INFO] PluginManage:310 - Check plugin analytics
+2025-05-05 16:48:57,898 [INFO] AnalyticsPlugin:253 - Accepted Software Licenses: STM32CubeMX.6.14.1
+2025-05-05 16:48:57,899 [INFO] AnalyticsPlugin:255 - Accepted CMSIS Pack Licenses: 
+2025-05-05 16:48:57,899 [INFO] AnalyticsPlugin:257 - Accepted Firmware Licenses: 
+2025-05-05 16:48:57,903 [INFO] PluginManage:359 - Loaded plugin analytics (category:tool,tabindex:-1)
+2025-05-05 16:48:57,903 [INFO] PluginManage:310 - Check plugin cadmodel
+2025-05-05 16:48:57,907 [INFO] CADModel:105 - Init CAD model plugin
+2025-05-05 16:48:57,908 [INFO] PluginManage:359 - Loaded plugin cadmodel (category:power,tabindex:5)
+2025-05-05 16:48:57,908 [INFO] PluginManage:310 - Check plugin clock
+2025-05-05 16:48:57,923 [INFO] PluginManage:359 - Loaded plugin clock (category:base,tabindex:2)
+2025-05-05 16:48:57,923 [INFO] PluginManage:310 - Check plugin ddr
+2025-05-05 16:48:57,927 [INFO] PluginManage:359 - Loaded plugin ddr (category:tool,tabindex:6)
+2025-05-05 16:48:57,929 [INFO] PluginManage:310 - Check plugin filemanager
+2025-05-05 16:48:58,266 [INFO] PluginManage:359 - Loaded plugin filemanager (category:base,tabindex:10)
+2025-05-05 16:48:58,266 [INFO] PluginManage:310 - Check plugin ipmanager
+2025-05-05 16:48:58,276 [INFO] PluginManage:359 - Loaded plugin ipmanager (category:base,tabindex:5)
+2025-05-05 16:48:58,276 [INFO] PluginManage:310 - Check plugin lpbam
+2025-05-05 16:48:58,296 [INFO] PluginManage:359 - Loaded plugin lpbam (category:base,tabindex:0)
+2025-05-05 16:48:58,297 [INFO] PluginManage:310 - Check plugin memorymap
+2025-05-05 16:48:58,315 [INFO] PluginManage:359 - Loaded plugin memorymap (category:base,tabindex:4)
+2025-05-05 16:48:58,315 [INFO] PluginManage:310 - Check plugin pinoutandconfiguration
+2025-05-05 16:48:58,357 [INFO] PluginManage:359 - Loaded plugin pinoutandconfiguration (category:base,tabindex:1)
+2025-05-05 16:48:58,357 [INFO] PluginManage:310 - Check plugin pinoutconfig
+2025-05-05 16:48:58,577 [WARN] SupportedApi:132 - Cannot load RTOS API schema: s4s-elt-must-match.1: The content of 'definitions' must match (annotation?, (simpleType | complexType)?, (unique | key | keyref)*)). A problem was found starting at: attribute.
