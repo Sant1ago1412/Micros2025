@@ -27,7 +27,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef struct{
+typedef struct ComStruct{
     uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
     uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
     uint8_t cheksumRx;       //!< Cheksumm RX
@@ -82,7 +82,6 @@ typedef enum ProtocolState{
 /* USER CODE BEGIN PV */
 _sDato datosComSerie, datosComWifi;
 _eProtocolo estadoProtocolo;
-uint8_t pepe[1];
 
 /* USER CODE END PV */
 
@@ -96,7 +95,7 @@ void DecodeHeader(_sDato *);
 void decodeData(_sDato *);
 void SendInfo(uint8_t bufferAux[], uint8_t bytes);
 void comunicationsTask(_sDato *datosCom);
-int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t *Len);
+//uint8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -120,7 +119,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  pepe[0]=0xF0;
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -142,7 +141,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  comunicationsTask(&datosComSerie);
-
 	  HAL_Delay(1000);             // Espera 1 segundo
     /* USER CODE BEGIN 3 */
   }
@@ -372,14 +370,33 @@ void decodeData(_sDato *datosCom){
 }
 
 void comunicationsTask(_sDato *datosCom){
-//    if(datosCom->indexReadRx!=datosCom->indexWriteRx ){ //para recibir data
-            DecodeHeader(datosCom);
-//            HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-//    }
-//      if(datosCom->indexReadTx!=datosCom->indexWriteTx){ //para transmitir
-    	  SendInfo(pepe, 2);
-//      }
+	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
+		DecodeHeader(datosCom);
+	}
 }
+
+//uint8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len){
+//
+//	uint8_t vector[4] = {10, 20, 30, 40};
+//	uint16_t i;
+//
+//	if(datosComSerie.indexWriteRx!=datosComSerie.indexReadRx){
+//		for (i = 0; i < *Len; i++) {
+//			datosComSerie.bufferRx[datosComSerie.indexWriteRx++] = Buf[i];
+//			if (datosComSerie.indexWriteRx >= sizeof(datosComSerie.bufferRx)) {
+//				datosComSerie.indexWriteRx = 0; // Circular
+//
+//			}
+//			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+//			CDC_Transmit_FS(vector, 4);
+//		}
+//		datosComSerie.indexReadRx=datosComSerie.indexWriteRx;
+//	}
+//
+//
+//
+//    return (USBD_OK);
+//}
 //void aliveAutoTask(){
 //    static uint32_t alive=0;
 //    if(miWifi.isWifiReady()){
