@@ -95,7 +95,8 @@ void DecodeHeader(_sDato *);
 void decodeData(_sDato *);
 void SendInfo(uint8_t bufferAux[], uint8_t bytes);
 void comunicationsTask(_sDato *datosCom);
-//uint8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len);
+void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
+void Converse(uint8_t *buf, uint16_t length);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -119,7 +120,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  CDC_AttachRxData(Converse);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -374,40 +375,18 @@ void comunicationsTask(_sDato *datosCom){
 		DecodeHeader(datosCom);
 	}
 }
+void Converse(uint8_t *buf, uint16_t length) {
 
-//uint8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len){
-//
-//	uint8_t vector[4] = {10, 20, 30, 40};
-//	uint16_t i;
-//
-//	if(datosComSerie.indexWriteRx!=datosComSerie.indexReadRx){
-//		for (i = 0; i < *Len; i++) {
-//			datosComSerie.bufferRx[datosComSerie.indexWriteRx++] = Buf[i];
-//			if (datosComSerie.indexWriteRx >= sizeof(datosComSerie.bufferRx)) {
-//				datosComSerie.indexWriteRx = 0; // Circular
-//
-//			}
-//			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-//			CDC_Transmit_FS(vector, 4);
-//		}
-//		datosComSerie.indexReadRx=datosComSerie.indexWriteRx;
-//	}
-//
-//
-//
-//    return (USBD_OK);
-//}
-//void aliveAutoTask(){
-//    static uint32_t alive=0;
-//    if(miWifi.isWifiReady()){
-//        if((myTimer.read_ms()-alive)>=5000){
-//            alive=myTimer.read_ms();
-//            datosComWifi.bufferRx[datosComWifi.indexWriteRx+2]=ALIVE; //le sumo 2 para irme a la posicion del ID
-//            datosComWifi.indexStart=datosComWifi.indexWriteRx;
-//            decodeData(&datosComWifi);
-//        }
-//    }
-//}
+  // Copia los datos recibidos al bufferRx de tu estructura
+  if (length <= sizeof(datosComSerie.bufferRx)) {
+    memcpy(datosComSerie.bufferRx, buf, length);
+    datosComSerie.indexWriteRx += length; // Actualiza el índice de escritura
+    if (datosComSerie.indexWriteRx >= sizeof(datosComSerie.bufferRx)) {
+        datosComSerie.indexWriteRx -= sizeof(datosComSerie.bufferRx); // Manejo del buffer circular
+    }
+  }
+
+}
 
 /* USER CODE END 4 */
 
