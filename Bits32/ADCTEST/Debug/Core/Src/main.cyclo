@@ -8,4 +8,4 @@
 ../Core/Src/main.c:431:6:decodeData	4
 ../Core/Src/main.c:477:6:comunicationsTask	2
 ../Core/Src/main.c:484:6:datafromUSB	2
-../Core/Src/main.c:500:6:Error_Handler	1
+../Core/Src/main.c:501:6:Error_Handler	1

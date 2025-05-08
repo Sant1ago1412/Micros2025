@@ -5366,31 +5366,31 @@ LOAD C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x0001a53d       0x1c ./USB_DEVICE/App/usbd_desc.o
  .debug_macro   0x0001a559      0x373 ./USB_DEVICE/Target/usbd_conf.o
 
-.debug_line     0x00000000    0x14cf3
- .debug_line    0x00000000      0xdc5 ./Core/Src/main.o
- .debug_line    0x00000dc5      0x7df ./Core/Src/stm32f1xx_hal_msp.o
- .debug_line    0x000015a4      0x823 ./Core/Src/stm32f1xx_it.o
- .debug_line    0x00001dc7      0x7db ./Core/Src/system_stm32f1xx.o
- .debug_line    0x000025a2       0x78 ./Core/Startup/startup_stm32f103c8tx.o
- .debug_line    0x0000261a      0xa0c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_line    0x00003026     0x1031 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
- .debug_line    0x00004057      0xbd6 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_line    0x00004c2d      0xa69 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_line    0x00005696     0x1391 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.o
- .debug_line    0x00006a27      0x7d6 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.o
- .debug_line    0x000071fd      0xec5 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_line    0x000080c2      0x976 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
- .debug_line    0x00008a38     0x34fa ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
- .debug_line    0x0000bf32     0x18d0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
- .debug_line    0x0000d802     0x117c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.o
- .debug_line    0x0000e97e      0xd65 ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o
- .debug_line    0x0000f6e3      0xdba ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
- .debug_line    0x0001049d     0x1004 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
- .debug_line    0x000114a1      0xa70 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
- .debug_line    0x00011f11      0xa40 ./USB_DEVICE/App/usb_device.o
- .debug_line    0x00012951      0xa9d ./USB_DEVICE/App/usbd_cdc_if.o
- .debug_line    0x000133ee      0xae9 ./USB_DEVICE/App/usbd_desc.o
- .debug_line    0x00013ed7      0xe1c ./USB_DEVICE/Target/usbd_conf.o
+.debug_line     0x00000000    0x14cf5
+ .debug_line    0x00000000      0xdc7 ./Core/Src/main.o
+ .debug_line    0x00000dc7      0x7df ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_line    0x000015a6      0x823 ./Core/Src/stm32f1xx_it.o
+ .debug_line    0x00001dc9      0x7db ./Core/Src/system_stm32f1xx.o
+ .debug_line    0x000025a4       0x78 ./Core/Startup/startup_stm32f103c8tx.o
+ .debug_line    0x0000261c      0xa0c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_line    0x00003028     0x1031 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
+ .debug_line    0x00004059      0xbd6 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_line    0x00004c2f      0xa69 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_line    0x00005698     0x1391 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.o
+ .debug_line    0x00006a29      0x7d6 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.o
+ .debug_line    0x000071ff      0xec5 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_line    0x000080c4      0x976 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
+ .debug_line    0x00008a3a     0x34fa ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+ .debug_line    0x0000bf34     0x18d0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+ .debug_line    0x0000d804     0x117c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.o
+ .debug_line    0x0000e980      0xd65 ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o
+ .debug_line    0x0000f6e5      0xdba ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
+ .debug_line    0x0001049f     0x1004 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
+ .debug_line    0x000114a3      0xa70 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
+ .debug_line    0x00011f13      0xa40 ./USB_DEVICE/App/usb_device.o
+ .debug_line    0x00012953      0xa9d ./USB_DEVICE/App/usbd_cdc_if.o
+ .debug_line    0x000133f0      0xae9 ./USB_DEVICE/App/usbd_desc.o
+ .debug_line    0x00013ed9      0xe1c ./USB_DEVICE/Target/usbd_conf.o
 
 .debug_str      0x00000000    0x91d24
  .debug_str     0x00000000    0x91d24 ./Core/Src/main.o

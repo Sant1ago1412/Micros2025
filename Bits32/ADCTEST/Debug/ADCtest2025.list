@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  0001a8cc  00000000  00000000  00021008  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00014cf3  00000000  00000000  0003b8d4  2**0
+ 17 .debug_line   00014cf5  00000000  00000000  0003b8d4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00091d24  00000000  00000000  000505c7  2**0
+ 18 .debug_str    00091d24  00000000  00000000  000505c9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000e22eb  2**0
+ 19 .comment      00000043  00000000  00000000  000e22ed  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00004590  00000000  00000000  000e2330  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1172,8 +1172,9 @@ void datafromUSB(uint8_t *buf, uint16_t length) {
  80007a2:	887b      	ldrh	r3, [r7, #2]
  80007a4:	429a      	cmp	r2, r3
  80007a6:	d3e8      	bcc.n	800077a <datafromUSB+0x12>
-	}
-HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+  }
+
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
  80007a8:	f44f 5100 	mov.w	r1, #8192	@ 0x2000
  80007ac:	4804      	ldr	r0, [pc, #16]	@ (80007c0 <datafromUSB+0x58>)
  80007ae:	f000 fe3d 	bl	800142c <HAL_GPIO_TogglePin>
