@@ -559,6 +559,7 @@ void comunicationsTask(_sDato *datosCom){
 		DecodeHeader(datosCom);
 	}
 }
+
 void Converse(uint8_t *buf, uint16_t length) {
 
   // Copia los datos recibidos al bufferRx de tu estructura

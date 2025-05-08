@@ -125,7 +125,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  CDC_AttachRxData(datafromUSB);
+  CDC_AttachRxData(&datafromUSB);
   datosComSerie.indexReadRx = 0;
   datosComSerie.indexWriteRx =0;
   /* USER CODE END Init */
@@ -486,8 +486,8 @@ void datafromUSB(uint8_t *buf, uint16_t length) {
   uint16_t i;
 
   for (i = 0; i < length; i++) {
-		datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
-		datosComSerie.indexWriteRx++;
+	datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
+	datosComSerie.indexWriteRx++;
   }
 
   HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
