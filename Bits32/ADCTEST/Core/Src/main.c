@@ -488,8 +488,9 @@ void datafromUSB(uint8_t *buf, uint16_t length) {
   for (i = 0; i < length; i++) {
 		datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
 		datosComSerie.indexWriteRx++;
-	}
-HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+  }
+
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 }
 /* USER CODE END 4 */
 
