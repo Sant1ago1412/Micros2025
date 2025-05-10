@@ -83,3 +83,4 @@ RCC.VCOInputMFreq_Value=1000000
 RCC.VCOOutputFreq_Value=192000000
 RCC.VcooutputI2S=96000000
 board=custom
+isbadioc=false
