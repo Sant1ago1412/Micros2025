@@ -27,7 +27,44 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+typedef struct ComStruct{
+    uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
+    uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
+    uint8_t cheksumRx;       //!< Cheksumm RX
+    uint8_t indexWriteRx;    //!< Indice de escritura del buffer circular de recepción
+    uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
+    uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
+    uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
+    uint8_t bufferRx[256];   //!< Buffer circular de recepción
+    uint8_t bufferTx[256];   //!< Buffer circular de transmisión
+}_sDato ;
 
+typedef enum Comands{
+    ALIVE=0xF0,
+    FIRMWARE=0xF1,
+    LEDS=0x10,
+    PULSADORES=0x12,
+    IRVALUE=0xA0,
+    TESTMOTOR=0xA1,
+    SERVO=0xA2,
+    DISTANCIA=0xA3,
+    SPEED=0xA4,
+    SERVOCONFIG=0xA5,
+    NEGROIR=0xA6,
+    BLANCOIR=0xA7,
+    PANEO=0xA8,
+    STARTCONFIG=0xEE,
+} _eEstadoMEFcmd;
+
+typedef enum ProtocolState{
+    START,
+    HEADER_1,
+    HEADER_2,
+    HEADER_3,
+    NBYTES=4,
+    TOKEN,
+    PAYLOAD
+}_eProtocolo;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -41,18 +78,30 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+
 TIM_HandleTypeDef htim11;
 
 /* USER CODE BEGIN PV */
 uint8_t is10ms=0;
+_sDato datosComSerie, datosComWifi;
+_eProtocolo estadoProtocolo;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM11_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
+void DecodeHeader(_sDato *);
+void decodeData(_sDato *);
+void SendInfo(uint8_t bufferAux[], uint8_t bytes);
+void comunicationsTask(_sDato *datosCom);
+void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
+void datafromUSB(uint8_t *buf, uint16_t length);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -80,6 +129,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   uint8_t counter;
+  CDC_AttachRxData(&datafromUSB);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -93,6 +143,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM11_Init();
   MX_USB_DEVICE_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim11);
   /* USER CODE END 2 */
@@ -104,11 +155,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  comunicationsTask(&datosComSerie);
 	  if(is10ms){
 		  is10ms=0;
 		  counter++;
 		  if(counter>10){
 			  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+
 			  counter=0;
 		  }
 	  }
@@ -159,6 +212,121 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.ScanConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 8;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_0;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = 2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = 3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = 4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = 5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_5;
+  sConfig.Rank = 6;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_6;
+  sConfig.Rank = 7;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_7;
+  sConfig.Rank = 8;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -225,7 +393,167 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void DecodeHeader(_sDato *datosCom){
 
+    static uint8_t nBytes=0;
+
+    uint8_t indexWriteRxCopy=datosCom->indexWriteRx;
+
+    while (datosCom->indexReadRx!=indexWriteRxCopy)
+    {
+        switch (estadoProtocolo) {
+            case START:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='U'){
+                    estadoProtocolo=HEADER_1;
+                    datosCom->cheksumRx=0;
+                }
+                break;
+            case HEADER_1:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='N')
+                   estadoProtocolo=HEADER_2;
+                else{
+                    datosCom->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case HEADER_2:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='E')
+                    estadoProtocolo=HEADER_3;
+                else{
+                    datosCom->indexReadRx--;
+                   estadoProtocolo=START;
+                }
+                break;
+        case HEADER_3:
+            if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
+                estadoProtocolo=NBYTES;
+            else{
+                datosCom->indexReadRx--;
+               estadoProtocolo=START;
+            }
+            break;
+            case NBYTES:
+                datosCom->indexStart=datosCom->indexReadRx;
+                nBytes=datosCom->bufferRx[datosCom->indexReadRx++];
+               estadoProtocolo=TOKEN;
+                break;
+            case TOKEN:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]==':'){
+                   estadoProtocolo=PAYLOAD;
+                    datosCom->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
+                }
+                else{
+                    datosCom->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case PAYLOAD:
+                if (nBytes>1){
+                    datosCom->cheksumRx ^= datosCom->bufferRx[datosCom->indexReadRx++];
+                }
+                nBytes--;
+                if(nBytes<=0){
+                    estadoProtocolo=START;
+                    if(datosCom->cheksumRx == datosCom->bufferRx[datosCom->indexReadRx]){
+                        decodeData(datosCom);
+                    }
+                }
+
+                break;
+            default:
+                estadoProtocolo=START;
+                break;
+        }
+    }
+}
+
+void SendInfo(uint8_t bufferAux[], uint8_t bytes){
+    uint8_t bufAux[20], indiceAux=0,cks=0;
+    #define NBYTES  4
+    bufAux[indiceAux++]='U';
+    bufAux[indiceAux++]='N';
+    bufAux[indiceAux++]='E';
+    bufAux[indiceAux++]='R';
+    bufAux[indiceAux++]=0;
+    bufAux[indiceAux++]=':';
+    for(uint8_t i=0; i<bytes-1; i++){
+        bufAux[indiceAux++] = bufferAux[i];
+    }
+    bufAux[NBYTES] = bytes;
+        cks=0;
+    for(uint8_t i=0 ;i<indiceAux;i++){
+        cks^= bufAux[i];
+        datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=bufAux[i];
+    }
+     datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=cks;
+
+     CDC_Transmit_FS((uint8_t*)datosComSerie.bufferTx, sizeof(bufAux));
+}
+
+void decodeData(_sDato *datosCom){
+
+    uint8_t bufAux[20], indiceAux=0,cks=0;
+
+    bufAux[indiceAux++]='U';
+    bufAux[indiceAux++]='N';
+    bufAux[indiceAux++]='E';
+    bufAux[indiceAux++]='R';
+    bufAux[indiceAux++]=0;
+    bufAux[indiceAux++]=':';
+
+    switch (datosCom->bufferRx[datosCom->indexStart+2])//ID EN LA POSICION 2
+    {
+    case ALIVE:
+
+        bufAux[indiceAux++]=ALIVE;
+        bufAux[indiceAux++]=0x0D;
+        bufAux[NBYTES]=0x03;
+
+    break;
+    case FIRMWARE:
+
+        bufAux[indiceAux++]=FIRMWARE;
+        bufAux[indiceAux++]=0xF1;
+        bufAux[NBYTES]=0x03;
+
+    break;
+
+    default:
+
+        bufAux[indiceAux++]=0xFF;
+        bufAux[NBYTES]=0x02;
+
+        break;
+    }
+    cks=0;
+    for(uint8_t i=0 ;i<indiceAux;i++){
+
+        cks^= bufAux[i];
+        datosCom->bufferTx[datosCom->indexWriteTx++]=bufAux[i];
+
+    }
+
+     datosCom->bufferTx[datosCom->indexWriteTx++]=cks;
+}
+
+void comunicationsTask(_sDato *datosCom){
+
+	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
+		DecodeHeader(datosCom);
+	}
+}
+
+void datafromUSB(uint8_t *buf, uint16_t length) {
+
+  uint16_t i;
+
+  for (i = 0; i < length; i++) {
+	datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
+	datosComSerie.indexWriteRx++;
+  }
+
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+}
 /* USER CODE END 4 */
 
 /**
