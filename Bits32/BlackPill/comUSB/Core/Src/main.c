@@ -86,6 +86,7 @@ TIM_HandleTypeDef htim11;
 uint8_t is10ms=0;
 _sDato datosComSerie, datosComWifi;
 _eProtocolo estadoProtocolo;
+uint8_t bufaux[2];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -130,6 +131,8 @@ int main(void)
   /* USER CODE BEGIN Init */
   uint8_t counter;
   CDC_AttachRxData(&datafromUSB);
+  bufaux[0]= 'a';
+  bufaux[1]= 'b';
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -161,7 +164,7 @@ int main(void)
 		  counter++;
 		  if(counter>10){
 			  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-
+			  SendInfo(bufaux, 2);
 			  counter=0;
 		  }
 	  }
