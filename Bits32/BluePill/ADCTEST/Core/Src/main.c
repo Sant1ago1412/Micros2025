@@ -19,7 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usb_device.h"
-#include "string.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -66,11 +65,41 @@ typedef enum ProtocolState{
     TOKEN,
     PAYLOAD
 }_eProtocolo;
+
+typedef union{
+    uint8_t     u8[4];
+    int8_t      i8[4];
+    uint16_t    u16[2];
+    int16_t     i16[2];
+    uint32_t    u32;
+    int32_t     i32;
+}_work;
+
+typedef union {
+    struct{
+        uint8_t bit7:1;
+        uint8_t bit6:1;
+        uint8_t bit5:1;
+        uint8_t bit4:1;
+        uint8_t bit3:1;
+        uint8_t bit2:1;
+        uint8_t bit1:1;
+        uint8_t bit0:1;
+    }individualFlags;
+    uint8_t allFlags;
+}_bFlags;
+
+enum{
+	FALSE,
+	TRUE
+};
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define NUM_CHANNELS 8
+#define IS10MS myFlags.individualFlags.bit1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -86,6 +115,9 @@ TIM_HandleTypeDef htim2;
 /* USER CODE BEGIN PV */
 _sDato datosComSerie, datosComWifi;
 _eProtocolo estadoProtocolo;
+uint16_t adcBuffer[NUM_CHANNELS];
+_bFlags myFlags;
+_work casts;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,11 +133,23 @@ void SendInfo(uint8_t bufferAux[], uint8_t bytes);
 void comunicationsTask(_sDato *datosCom);
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
 void datafromUSB(uint8_t *buf, uint16_t length);
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
+	uint8_t u=0;
+	for(u=0;u>NUM_CHANNELS;u++){
+		casts.u16[0]=adcBuffer[u];
+		CDC_Transmit_FS(casts.u8, 2);
+	}
 
+}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	IS10MS=TRUE;
+}
 /* USER CODE END 0 */
 
 /**
@@ -116,7 +160,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	uint8_t counter=0;
+	uint8_t DMAcounter=0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -128,6 +173,7 @@ int main(void)
   CDC_AttachRxData(&datafromUSB);
   datosComSerie.indexReadRx = 0;
   datosComSerie.indexWriteRx =0;
+  myFlags.allFlags=0;
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -143,7 +189,9 @@ int main(void)
   MX_TIM2_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_ADC_Start(&hadc1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -153,8 +201,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	comunicationsTask(&datosComSerie);
-	HAL_Delay(1000);
+	if(IS10MS){
+		if(counter>10){
+			counter=0;
+		}
+		if(DMAcounter>100){
+			HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, 8);
+			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			DMAcounter=0;
+		}
+		IS10MS=!IS10MS;
+		counter++;
+		DMAcounter++;
+	}
   }
   /* USER CODE END 3 */
 }
@@ -178,7 +237,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -193,13 +252,13 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
-  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -227,12 +286,12 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.NbrOfConversion = 8;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
     Error_Handler();
@@ -242,7 +301,70 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = ADC_REGULAR_RANK_3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = ADC_REGULAR_RANK_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_5;
+  sConfig.Rank = ADC_REGULAR_RANK_6;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_6;
+  sConfig.Rank = ADC_REGULAR_RANK_7;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_7;
+  sConfig.Rank = ADC_REGULAR_RANK_8;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -274,7 +396,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 71;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 65535;
+  htim2.Init.Period = 9999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -492,6 +614,7 @@ void datafromUSB(uint8_t *buf, uint16_t length) {
 
   HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 }
+
 /* USER CODE END 4 */
 
 /**
