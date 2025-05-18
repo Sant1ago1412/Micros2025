@@ -42,17 +42,7 @@ typedef struct ComStruct{
 typedef enum Comands{
     ALIVE=0xF0,
     FIRMWARE=0xF1,
-    LEDS=0x10,
-    PULSADORES=0x12,
-    IRVALUE=0xA0,
-    TESTMOTOR=0xA1,
-    SERVO=0xA2,
-    DISTANCIA=0xA3,
-    SPEED=0xA4,
-    SERVOCONFIG=0xA5,
-    NEGROIR=0xA6,
-    BLANCOIR=0xA7,
-    PANEO=0xA8,
+	TEXT = 0xF2,
     STARTCONFIG=0xEE,
 } _eEstadoMEFcmd;
 
@@ -109,6 +99,7 @@ enum{
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 TIM_HandleTypeDef htim2;
 
@@ -123,13 +114,14 @@ _work casts;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
 void DecodeHeader(_sDato *);
 void decodeData(_sDato *);
-void SendInfo(uint8_t bufferAux[], uint8_t bytes);
+void SendInfo(uint8_t* bufferAux, uint8_t bytes,_eEstadoMEFcmd cmd);
 void comunicationsTask(_sDato *datosCom);
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
 void datafromUSB(uint8_t *buf, uint16_t length);
@@ -140,12 +132,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-	uint8_t u=0;
-	for(u=0;u>NUM_CHANNELS;u++){
-		casts.u16[0]=adcBuffer[u];
-		CDC_Transmit_FS(casts.u8, 2);
-	}
 
+	uint8_t u=0;
+	char palabra[18];
+
+	for(u=0;u<NUM_CHANNELS;u++){
+
+//		casts.u16[0]=adcBuffer[u];
+		sprintf(&palabra[0],"Channel %d:%i\n",u,adcBuffer[u]);
+//		memcpy(datosComSerie.bufferTx,palabra,sizeof(palabra));
+//		datosComSerie.indexWriteTx  += sizeof(palabra);
+		SendInfo((uint8_t*)&palabra, 18 ,TEXT);
+	}
+	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	IS10MS=TRUE;
@@ -185,13 +184,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_ADC_Start(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
+//  HAL_ADC_Start(&hadc1);
+//  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -201,13 +201,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+
 	if(IS10MS){
 		if(counter>10){
+			comunicationsTask(&datosComSerie);
 			counter=0;
 		}
 		if(DMAcounter>100){
-			HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, 8);
-			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
 			DMAcounter=0;
 		}
 		IS10MS=!IS10MS;
@@ -421,6 +423,22 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -527,27 +545,34 @@ void DecodeHeader(_sDato *datosCom){
     }
 }
 
-void SendInfo(uint8_t bufferAux[], uint8_t bytes){
-    uint8_t bufAux[20], indiceAux=0,cks=0;
-    #define NBYTES  4
+void SendInfo(uint8_t bufferAux[], uint8_t bytes,_eEstadoMEFcmd cmd){
+
+    uint8_t bufAux[30], indiceAux=0,cks=0,num_bytes=0;
+
     bufAux[indiceAux++]='U';
     bufAux[indiceAux++]='N';
     bufAux[indiceAux++]='E';
     bufAux[indiceAux++]='R';
+
+    num_bytes = indiceAux; //aca guardo la ubicacion de la cantidad de bytes a enviar
+
     bufAux[indiceAux++]=0;
     bufAux[indiceAux++]=':';
-    for(uint8_t i=0; i<bytes-1; i++){
+    bufAux[indiceAux++] = cmd;
+
+    for(uint8_t i=0; i<bytes-1; i++)
         bufAux[indiceAux++] = bufferAux[i];
-    }
-    bufAux[NBYTES] = bytes;
-        cks=0;
+
+    if(cmd==TEXT)
+		bufAux[num_bytes] = bytes; // aca le doy el numero de bytes que voy a pasar
+
+    cks=0;
     for(uint8_t i=0 ;i<indiceAux;i++){
         cks^= bufAux[i];
         datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=bufAux[i];
     }
      datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=cks;
 
-     CDC_Transmit_FS((uint8_t*)datosComSerie.bufferTx, sizeof(bufAux));
 }
 
 void decodeData(_sDato *datosCom){
@@ -600,6 +625,12 @@ void comunicationsTask(_sDato *datosCom){
 
 	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
 		DecodeHeader(datosCom);
+		datosComSerie.indexReadRx=datosComSerie.indexWriteRx;
+	}
+
+	if(datosCom->indexReadTx!=datosCom->indexWriteTx ){
+		CDC_Transmit_FS(&datosComSerie.bufferTx[0], sizeof(datosComSerie.bufferTx));
+		datosComSerie.indexReadTx=datosComSerie.indexWriteTx;
 	}
 }
 
@@ -612,7 +643,6 @@ void datafromUSB(uint8_t *buf, uint16_t length) {
 	datosComSerie.indexWriteRx++;
   }
 
-  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 }
 
 /* USER CODE END 4 */

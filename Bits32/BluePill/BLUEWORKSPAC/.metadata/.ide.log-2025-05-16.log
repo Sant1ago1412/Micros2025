@@ -1,0 +1,84 @@
+2025-05-18 02:23:17,236 [INFO] WebApp:194 - Connection lost
+2025-05-18 02:23:31,073 [INFO] WebApp:191 - Connection restablished
+2025-05-18 02:23:31,331 [INFO] WebApp:194 - Connection lost
+2025-05-18 02:23:31,441 [INFO] WebApp:191 - Connection restablished
+2025-05-18 02:23:34,400 [INFO] WebApp:194 - Connection lost
+2025-05-18 02:23:34,506 [INFO] WebApp:191 - Connection restablished
+2025-05-18 02:25:06,878 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 364293440 Bytes (542113792)
+2025-05-18 02:25:10,602 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 402042176 Bytes (542113792)
+2025-05-18 02:25:12,882 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 313437544 Bytes (542113792)
+2025-05-18 02:25:13,425 [INFO] ProjectBuilder:2382 - IP not ready for code generation: ADC1
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_OTG_FS
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_DEVICE
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-05-18 02:25:15,511 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-05-18 02:25:15,513 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-05-18 02:25:15,513 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-05-18 02:25:15,514 [INFO] CodeGenerator:882 - code generatio: config db path: E:\STM\ID\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.1.202504091515\\db\
+2025-05-18 02:25:15,600 [WARN] IP:2250 - DEVICE_SERIAL0_CDC_FS not found: check if there is a RefParameter without a condition.
+2025-05-18 02:25:15,600 [WARN] IP:2250 - DEVICE_SERIAL1_CDC_FS not found: check if there is a RefParameter without a condition.
+2025-05-18 02:25:15,600 [WARN] IP:2250 - DEVICE_SERIAL2_CDC_FS not found: check if there is a RefParameter without a condition.
+2025-05-18 02:25:15,840 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\license.tmp_save
+2025-05-18 02:25:16,419 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\license.tmp
+2025-05-18 02:25:16,553 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\gpio.tmp_save
+2025-05-18 02:25:16,735 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\gpio.tmp
+2025-05-18 02:25:16,830 [WARN] IPConfigManager:3217 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-05-18 02:25:16,846 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_vars.tmp_save
+2025-05-18 02:25:16,981 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_vars.tmp
+2025-05-18 02:25:17,042 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_inc.tmp_save
+2025-05-18 02:25:17,151 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_inc.tmp
+2025-05-18 02:25:17,163 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_HalInit.tmp_save
+2025-05-18 02:25:17,286 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_HalInit.tmp
+2025-05-18 02:25:17,296 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_Msp.tmp_save
+2025-05-18 02:25:17,427 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\usb_otg_fs_Msp.tmp
+2025-05-18 02:25:17,805 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-05-18 02:25:17,852 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-05-18 02:25:17,897 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usb_device.c_save
+2025-05-18 02:25:18,016 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usb_device.c
+2025-05-18 02:25:18,027 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usb_device.h_save
+2025-05-18 02:25:18,131 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usb_device.h
+2025-05-18 02:25:18,143 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\Target\usbd_conf.h_save
+2025-05-18 02:25:18,236 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\Target\usbd_conf.h
+2025-05-18 02:25:18,248 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\Target\usbd_conf.c_save
+2025-05-18 02:25:18,382 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\Target\usbd_conf.c
+2025-05-18 02:25:18,406 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_desc.h_save
+2025-05-18 02:25:18,682 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_desc.h
+2025-05-18 02:25:18,694 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_desc.c_save
+2025-05-18 02:25:18,828 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_desc.c
+2025-05-18 02:25:18,861 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_cdc_if.h_save
+2025-05-18 02:25:19,055 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_cdc_if.h
+2025-05-18 02:25:19,075 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_cdc_if.c_save
+2025-05-18 02:25:19,185 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\USB_DEVICE\App\usbd_cdc_if.c
+2025-05-18 02:25:19,222 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\stm32f4xx_it.c_save
+2025-05-18 02:25:19,353 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\stm32f4xx_it.c
+2025-05-18 02:25:19,365 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\stm32f4xx_it.h_save
+2025-05-18 02:25:19,469 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\stm32f4xx_it.h
+2025-05-18 02:25:19,513 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\stm32f4xx_hal_msp.c_save
+2025-05-18 02:25:19,686 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\stm32f4xx_hal_msp.c
+2025-05-18 02:25:19,696 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\system.tmp_save
+2025-05-18 02:25:19,819 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\MXTmpFiles\system.tmp
+2025-05-18 02:25:19,850 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-05-18 02:25:19,932 [INFO] CodeEngine:343 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\stm32f4xx_hal_conf.h
+2025-05-18 02:25:19,995 [INFO] ApiDbMcu:508 - Load IP Config File for ADC1
+2025-05-18 02:25:20,011 [INFO] ApiDbMcu:508 - Load IP Config File for TIM9
+2025-05-18 02:25:20,032 [INFO] ApiDbMcu:508 - Load IP Config File for TIM10
+2025-05-18 02:25:20,046 [INFO] ApiDbMcu:508 - Load IP Config File for TIM11
+2025-05-18 02:25:20,051 [INFO] ApiDbMcu:508 - Load IP Config File for RCC
+2025-05-18 02:25:20,056 [WARN] IPConfigManager:3790 - IP not found : TIM
+2025-05-18 02:25:20,058 [WARN] CodeGenerator:4198 - IP not found : null
+2025-05-18 02:25:20,076 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\main.h_save
+2025-05-18 02:25:20,256 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Inc\main.h
+2025-05-18 02:25:20,269 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\main.c_save
+2025-05-18 02:25:20,496 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\comUSB\Core\Src\main.c
+2025-05-18 02:25:21,005 [INFO] ProjectBuilder:3324 - Time for Copy HAL[1] : 283mS.
+2025-05-18 02:25:21,034 [INFO] ProjectBuilder:4912 - Project Generator version: 4.6.0.1-B1
+2025-05-18 02:25:21,143 [INFO] ConfigFileManager:1590 - The Die is : DIE431
+2025-05-18 02:25:21,213 [INFO] ApiDbMcu:508 - Load IP Config File for FATFS
+2025-05-18 02:25:21,246 [INFO] ApiDbMcu:508 - Load IP Config File for FREERTOS
+2025-05-18 02:25:21,257 [INFO] ApiDbMcu:508 - Load IP Config File for LIBJPEG
+2025-05-18 02:25:21,296 [INFO] ApiDbMcu:508 - Load IP Config File for MBEDTLS
+2025-05-18 02:25:21,355 [INFO] ApiDbMcu:508 - Load IP Config File for USB_HOST
