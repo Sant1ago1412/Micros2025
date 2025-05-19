@@ -1,5 +1,1 @@
-2025-05-19 01:06:09,901 [INFO] WebAppUi:294 - Path where cad_preferences.json is located C:\Users\santi/.stm32cubeide/
-2025-05-19 01:06:09,997 [INFO] WebAppUi:295 - Updating consent from JSON file
-2025-05-19 01:06:10,481 [INFO] WebApp:403 - JxBrowser engine has been closed 
-2025-05-19 01:06:10,482 [INFO] WebAppUi:493 - JxBrowser engine has been closed 
-2025-05-19 01:06:10,482 [INFO] WebAppUi:530 - Close the Jxbrowser engine manually
+2025-05-19 01:06:23,906 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
