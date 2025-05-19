@@ -14,12 +14,13 @@ typedef struct ComStruct{
     uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
     uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
     uint8_t cheksumRx;       //!< Cheksumm RX
-    uint8_t indexWriteRx;    //!< Indice de escritura del buffer circular de recepción
+    volatile uint8_t indexWriteRx;    //!< Indice de escritura del buffer circular de recepción
     uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
     uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
     uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
     uint8_t bufferRx[256];   //!< Buffer circular de recepción
     uint8_t bufferTx[256];   //!< Buffer circular de transmisión
+    uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
 }_sDato ;
 
 typedef enum Comands{
@@ -34,7 +35,7 @@ typedef enum ProtocolState{
     HEADER_1,
     HEADER_2,
     HEADER_3,
-    NBYTES=4,
+    NBYTES,
     TOKEN,
     PAYLOAD
 }_eProtocolo;
@@ -42,7 +43,8 @@ typedef enum ProtocolState{
 extern _sDato datosComSerie;
 extern _eProtocolo estadoProtocolo;
 
-void SendInfo(uint8_t bufferAux[], uint8_t bytes,_eEstadoMEFcmd cmd);
+
+void SendInfo(uint8_t bufferAux[], uint8_t bytes);
 void decodeData(_sDato *datosCom);
 void DecodeHeader(_sDato *datosCom);
 void datafromUSB(uint8_t *buf, uint16_t length) ;

@@ -1,0 +1,174 @@
+/*
+ * UnerProtocol.c
+ *
+ *  Created on: May 18, 2025
+ *      Author: santi
+ */
+
+#include "UnerProtocol.h"
+
+
+void SendInfo(uint8_t bufferAux[],uint8_t bytes){
+
+    uint8_t bufAux[30], indiceAux=0,cks=0,num_bytes=0,i=0;
+
+    bufAux[indiceAux++]='U';
+    bufAux[indiceAux++]='N';
+    bufAux[indiceAux++]='E';
+    bufAux[indiceAux++]='R';
+
+    bufAux[indiceAux++]=bytes;
+    bufAux[indiceAux++]=':';
+
+    for(i=0; i<bytes-1; i++)
+        bufAux[indiceAux++] = bufferAux[i];
+
+    cks=0;
+    for(i=0 ;i<indiceAux;i++){
+        cks^= bufAux[i];
+        datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=bufAux[i];
+    }
+     datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=cks;
+
+}
+
+void DecodeHeader(_sDato *datosCom){
+
+    static uint8_t nBytes=0;
+
+    uint8_t indexWriteRxCopy=datosCom->indexWriteRx;
+
+    while (datosCom->indexReadRx!=indexWriteRxCopy)
+    {
+        switch (estadoProtocolo) {
+            case START:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='U'){
+                    estadoProtocolo=HEADER_1;
+                    datosCom->cheksumRx=0;
+                }
+                break;
+            case HEADER_1:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='N')
+                   estadoProtocolo=HEADER_2;
+                else{
+                    datosCom->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case HEADER_2:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]=='E')
+                    estadoProtocolo=HEADER_3;
+                else{
+                    datosCom->indexReadRx--;
+                   estadoProtocolo=START;
+                }
+                break;
+			case HEADER_3:
+				if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
+					estadoProtocolo=NBYTES;
+				else{
+					datosCom->indexReadRx--;
+				    estadoProtocolo=START;
+				}
+            break;
+            case NBYTES:
+                datosCom->indexStart=datosCom->indexReadRx;
+                nBytes=datosCom->bufferRx[datosCom->indexReadRx++];
+                estadoProtocolo=TOKEN;
+                break;
+            case TOKEN:
+                if (datosCom->bufferRx[datosCom->indexReadRx++]==':'){
+                   estadoProtocolo=PAYLOAD;
+                    datosCom->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
+                }
+                else{
+                    datosCom->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case PAYLOAD:
+                if (nBytes>1){
+                    datosCom->cheksumRx ^= datosCom->bufferRx[datosCom->indexReadRx++];
+                }
+                nBytes--;
+                if(nBytes<=0){
+                    estadoProtocolo=START;
+                    if(datosCom->cheksumRx == datosCom->bufferRx[datosCom->indexReadRx]){
+                        decodeData(datosCom);
+                    }
+                }
+
+                break;
+            default:
+                estadoProtocolo=START;
+                break;
+        }
+    }
+}
+
+
+
+void decodeData(_sDato *datosCom){
+
+    uint8_t bufAux[20], indiceAux=0,cks=0;
+
+    bufAux[indiceAux++]='U';
+    bufAux[indiceAux++]='N';
+    bufAux[indiceAux++]='E';
+    bufAux[indiceAux++]='R';
+    bufAux[indiceAux++]=0;
+    bufAux[indiceAux++]=':';
+
+    switch (datosCom->bufferRx[datosCom->indexStart+2])//ID EN LA POSICION 2
+    {
+    case ALIVE:
+
+        bufAux[indiceAux++]=ALIVE;
+        bufAux[indiceAux++]=0x0D;
+        bufAux[NBYTES]=0x03;
+
+    break;
+    case FIRMWARE:
+
+        bufAux[indiceAux++]=FIRMWARE;
+        bufAux[indiceAux++]=0xF1;
+        bufAux[NBYTES]=0x03;
+
+    break;
+
+    case TEXT:
+
+           bufAux[indiceAux++]=FIRMWARE;
+           bufAux[indiceAux++]=0xF1;
+           bufAux[NBYTES]=0x03;
+
+    break;
+
+    default:
+
+        bufAux[indiceAux++]=0xFF;
+        bufAux[NBYTES]=0x02;
+
+        break;
+    }
+    cks=0;
+    for(uint8_t i=0 ;i<indiceAux;i++){
+
+        cks^= bufAux[i];
+        datosCom->bufferTx[datosCom->indexWriteTx++]=bufAux[i];
+
+    }
+
+     datosCom->bufferTx[datosCom->indexWriteTx++]=cks;
+}
+
+void datafromUSB(uint8_t *buf, uint16_t length) {
+
+  uint16_t i;
+
+  for (i = 0; i < length; i++) {
+	datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
+	datosComSerie.indexWriteRx++;
+  }
+
+}

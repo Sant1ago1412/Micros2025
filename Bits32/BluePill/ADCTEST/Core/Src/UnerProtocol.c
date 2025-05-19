@@ -8,33 +8,29 @@
 #include "UnerProtocol.h"
 
 
-void SendInfo(uint8_t bufferAux[], uint8_t bytes,_eEstadoMEFcmd cmd){
+void SendInfo(uint8_t bufferAux[],uint8_t bytes){
 
-    uint8_t bufAux[30], indiceAux=0,cks=0,num_bytes=0;
+    uint8_t bufAux[30], indiceAux=0,cks=0,i=0;
 
     bufAux[indiceAux++]='U';
     bufAux[indiceAux++]='N';
     bufAux[indiceAux++]='E';
     bufAux[indiceAux++]='R';
 
-    num_bytes = indiceAux; //aca guardo la ubicacion de la cantidad de bytes a enviar
-
-    bufAux[indiceAux++]=0;
+    bufAux[indiceAux++]=bytes;
     bufAux[indiceAux++]=':';
-    bufAux[indiceAux++] = cmd;
 
-    for(uint8_t i=0; i<bytes-1; i++)
+    for(i=0; i<bytes-1; i++)
         bufAux[indiceAux++] = bufferAux[i];
 
-    if(cmd==TEXT)
-		bufAux[num_bytes] = bytes; // aca le doy el numero de bytes que voy a pasar
-
     cks=0;
-    for(uint8_t i=0 ;i<indiceAux;i++){
+    for(i=0 ;i<indiceAux;i++){
         cks^= bufAux[i];
         datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=bufAux[i];
     }
      datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=cks;
+
+     datosComSerie.bytesTosend=indiceAux;
 
 }
 
@@ -69,18 +65,18 @@ void DecodeHeader(_sDato *datosCom){
                    estadoProtocolo=START;
                 }
                 break;
-        case HEADER_3:
-            if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
-                estadoProtocolo=NBYTES;
-            else{
-                datosCom->indexReadRx--;
-               estadoProtocolo=START;
-            }
+			case HEADER_3:
+				if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
+					estadoProtocolo=NBYTES;
+				else{
+					datosCom->indexReadRx--;
+				    estadoProtocolo=START;
+				}
             break;
             case NBYTES:
                 datosCom->indexStart=datosCom->indexReadRx;
                 nBytes=datosCom->bufferRx[datosCom->indexReadRx++];
-               estadoProtocolo=TOKEN;
+                estadoProtocolo=TOKEN;
                 break;
             case TOKEN:
                 if (datosCom->bufferRx[datosCom->indexReadRx++]==':'){
@@ -116,56 +112,40 @@ void DecodeHeader(_sDato *datosCom){
 
 void decodeData(_sDato *datosCom){
 
-    uint8_t bufAux[20], indiceAux=0,cks=0;
+    uint8_t bufAux[20], indiceAux=0,bytes=0;
 
-    bufAux[indiceAux++]='U';
-    bufAux[indiceAux++]='N';
-    bufAux[indiceAux++]='E';
-    bufAux[indiceAux++]='R';
-    bufAux[indiceAux++]=0;
-    bufAux[indiceAux++]=':';
-
-    switch (datosCom->bufferRx[datosCom->indexStart+2])//ID EN LA POSICION 2
+    switch (datosCom->bufferRx[datosCom->indexStart+2])//CMD EN LA POSICION 2
     {
     case ALIVE:
 
         bufAux[indiceAux++]=ALIVE;
-        bufAux[indiceAux++]=0x0D;
-        bufAux[NBYTES]=0x03;
+        bytes=0x02;//aca debo darle CMD+CKS+PAYLOAD
 
     break;
     case FIRMWARE:
 
-        bufAux[indiceAux++]=FIRMWARE;
-        bufAux[indiceAux++]=0xF1;
-        bufAux[NBYTES]=0x03;
+		bufAux[indiceAux++]=FIRMWARE;
+		bufAux[indiceAux++]=0x02;
+		bytes=0x03;
 
     break;
 
     case TEXT:
 
-           bufAux[indiceAux++]=FIRMWARE;
-           bufAux[indiceAux++]=0xF1;
-           bufAux[NBYTES]=0x03;
+		bufAux[indiceAux++]=TEXT;
+		bytes=0x03;
 
     break;
 
     default:
 
         bufAux[indiceAux++]=0xFF;
-        bufAux[NBYTES]=0x02;
+        bytes=0x02;
 
-        break;
-    }
-    cks=0;
-    for(uint8_t i=0 ;i<indiceAux;i++){
-
-        cks^= bufAux[i];
-        datosCom->bufferTx[datosCom->indexWriteTx++]=bufAux[i];
-
+    break;
     }
 
-     datosCom->bufferTx[datosCom->indexWriteTx++]=cks;
+    SendInfo(bufAux,bytes);
 }
 
 void datafromUSB(uint8_t *buf, uint16_t length) {
