@@ -170,11 +170,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+	comunicationsTask(&datosComSerie);
 
 	if(IS10MS){
 		if(counter>10){
-			comunicationsTask(&datosComSerie);
+
 			counter=0;
 		}
 		if(DMAcounter>100){
@@ -449,7 +449,7 @@ void comunicationsTask(_sDato *datosCom){
 	}
 
 	if(datosCom->indexReadTx!=datosCom->indexWriteTx ){
-		CDC_Transmit_FS(&datosComSerie.bufferTx[0], datosComSerie.bytesTosend);
+		CDC_Transmit_FS(&datosComSerie.bufferTx[datosComSerie.indexReadTx], datosComSerie.bytesTosend);
 		datosComSerie.indexReadTx=datosComSerie.indexWriteTx;
 	}
 }

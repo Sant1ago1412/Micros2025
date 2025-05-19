@@ -125,15 +125,14 @@ void decodeData(_sDato *datosCom){
     case FIRMWARE:
 
 		bufAux[indiceAux++]=FIRMWARE;
-		bufAux[indiceAux++]=0x02;
-		bytes=0x03;
+		bytes=0x02;
 
     break;
 
     case TEXT:
 
 		bufAux[indiceAux++]=TEXT;
-		bytes=0x03;
+//		bytes=;
 
     break;
 
