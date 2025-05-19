@@ -23,38 +23,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "UnerProtocol.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef struct ComStruct{
-    uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
-    uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
-    uint8_t cheksumRx;       //!< Cheksumm RX
-    uint8_t indexWriteRx;    //!< Indice de escritura del buffer circular de recepción
-    uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
-    uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
-    uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
-    uint8_t bufferRx[256];   //!< Buffer circular de recepción
-    uint8_t bufferTx[256];   //!< Buffer circular de transmisión
-}_sDato ;
-
-typedef enum Comands{
-    ALIVE=0xF0,
-    FIRMWARE=0xF1,
-	TEXT = 0xF2,
-    STARTCONFIG=0xEE,
-} _eEstadoMEFcmd;
-
-typedef enum ProtocolState{
-    START,
-    HEADER_1,
-    HEADER_2,
-    HEADER_3,
-    NBYTES=4,
-    TOKEN,
-    PAYLOAD
-}_eProtocolo;
 
 typedef union{
     uint8_t     u8[4];
@@ -104,7 +78,7 @@ DMA_HandleTypeDef hdma_adc1;
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-_sDato datosComSerie, datosComWifi;
+_sDato datosComSerie;
 _eProtocolo estadoProtocolo;
 uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
@@ -119,12 +93,8 @@ static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
-void DecodeHeader(_sDato *);
-void decodeData(_sDato *);
-void SendInfo(uint8_t* bufferAux, uint8_t bytes,_eEstadoMEFcmd cmd);
 void comunicationsTask(_sDato *datosCom);
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
-void datafromUSB(uint8_t *buf, uint16_t length);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
@@ -471,155 +441,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void DecodeHeader(_sDato *datosCom){
-
-    static uint8_t nBytes=0;
-
-    uint8_t indexWriteRxCopy=datosCom->indexWriteRx;
-
-    while (datosCom->indexReadRx!=indexWriteRxCopy)
-    {
-        switch (estadoProtocolo) {
-            case START:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='U'){
-                    estadoProtocolo=HEADER_1;
-                    datosCom->cheksumRx=0;
-                }
-                break;
-            case HEADER_1:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='N')
-                   estadoProtocolo=HEADER_2;
-                else{
-                    datosCom->indexReadRx--;
-                    estadoProtocolo=START;
-                }
-                break;
-            case HEADER_2:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='E')
-                    estadoProtocolo=HEADER_3;
-                else{
-                    datosCom->indexReadRx--;
-                   estadoProtocolo=START;
-                }
-                break;
-        case HEADER_3:
-            if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
-                estadoProtocolo=NBYTES;
-            else{
-                datosCom->indexReadRx--;
-               estadoProtocolo=START;
-            }
-            break;
-            case NBYTES:
-                datosCom->indexStart=datosCom->indexReadRx;
-                nBytes=datosCom->bufferRx[datosCom->indexReadRx++];
-               estadoProtocolo=TOKEN;
-                break;
-            case TOKEN:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]==':'){
-                   estadoProtocolo=PAYLOAD;
-                    datosCom->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
-                }
-                else{
-                    datosCom->indexReadRx--;
-                    estadoProtocolo=START;
-                }
-                break;
-            case PAYLOAD:
-                if (nBytes>1){
-                    datosCom->cheksumRx ^= datosCom->bufferRx[datosCom->indexReadRx++];
-                }
-                nBytes--;
-                if(nBytes<=0){
-                    estadoProtocolo=START;
-                    if(datosCom->cheksumRx == datosCom->bufferRx[datosCom->indexReadRx]){
-                        decodeData(datosCom);
-                    }
-                }
-
-                break;
-            default:
-                estadoProtocolo=START;
-                break;
-        }
-    }
-}
-
-void SendInfo(uint8_t bufferAux[], uint8_t bytes,_eEstadoMEFcmd cmd){
-
-    uint8_t bufAux[30], indiceAux=0,cks=0,num_bytes=0;
-
-    bufAux[indiceAux++]='U';
-    bufAux[indiceAux++]='N';
-    bufAux[indiceAux++]='E';
-    bufAux[indiceAux++]='R';
-
-    num_bytes = indiceAux; //aca guardo la ubicacion de la cantidad de bytes a enviar
-
-    bufAux[indiceAux++]=0;
-    bufAux[indiceAux++]=':';
-    bufAux[indiceAux++] = cmd;
-
-    for(uint8_t i=0; i<bytes-1; i++)
-        bufAux[indiceAux++] = bufferAux[i];
-
-    if(cmd==TEXT)
-		bufAux[num_bytes] = bytes; // aca le doy el numero de bytes que voy a pasar
-
-    cks=0;
-    for(uint8_t i=0 ;i<indiceAux;i++){
-        cks^= bufAux[i];
-        datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=bufAux[i];
-    }
-     datosComSerie.bufferTx[datosComSerie.indexWriteTx++]=cks;
-
-}
-
-void decodeData(_sDato *datosCom){
-
-    uint8_t bufAux[20], indiceAux=0,cks=0;
-
-    bufAux[indiceAux++]='U';
-    bufAux[indiceAux++]='N';
-    bufAux[indiceAux++]='E';
-    bufAux[indiceAux++]='R';
-    bufAux[indiceAux++]=0;
-    bufAux[indiceAux++]=':';
-
-    switch (datosCom->bufferRx[datosCom->indexStart+2])//ID EN LA POSICION 2
-    {
-    case ALIVE:
-
-        bufAux[indiceAux++]=ALIVE;
-        bufAux[indiceAux++]=0x0D;
-        bufAux[NBYTES]=0x03;
-
-    break;
-    case FIRMWARE:
-
-        bufAux[indiceAux++]=FIRMWARE;
-        bufAux[indiceAux++]=0xF1;
-        bufAux[NBYTES]=0x03;
-
-    break;
-
-    default:
-
-        bufAux[indiceAux++]=0xFF;
-        bufAux[NBYTES]=0x02;
-
-        break;
-    }
-    cks=0;
-    for(uint8_t i=0 ;i<indiceAux;i++){
-
-        cks^= bufAux[i];
-        datosCom->bufferTx[datosCom->indexWriteTx++]=bufAux[i];
-
-    }
-
-     datosCom->bufferTx[datosCom->indexWriteTx++]=cks;
-}
 
 void comunicationsTask(_sDato *datosCom){
 
@@ -632,17 +453,6 @@ void comunicationsTask(_sDato *datosCom){
 		CDC_Transmit_FS(&datosComSerie.bufferTx[0], sizeof(datosComSerie.bufferTx));
 		datosComSerie.indexReadTx=datosComSerie.indexWriteTx;
 	}
-}
-
-void datafromUSB(uint8_t *buf, uint16_t length) {
-
-  uint16_t i;
-
-  for (i = 0; i < length; i++) {
-	datosComSerie.bufferRx[datosComSerie.indexWriteRx] = buf[i];
-	datosComSerie.indexWriteRx++;
-  }
-
 }
 
 /* USER CODE END 4 */

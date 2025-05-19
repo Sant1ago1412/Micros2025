@@ -1,23 +1,10 @@
-12:21:36 **** Incremental Build of configuration Debug for project ADCtest2025 ****
+01:06:03 **** Incremental Build of configuration Debug for project ADCtest2025 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "ADCtest2025.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ADCtest2025.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ADCtest2025.elf
- 
 arm-none-eabi-size  ADCtest2025.elf 
-arm-none-eabi-objdump -h -S ADCtest2025.elf  > "ADCtest2025.list"
-arm-none-eabi-objcopy  -O ihex ADCtest2025.elf  "ADCtest2025.hex"
-arm-none-eabi-objcopy  -O binary ADCtest2025.elf  "ADCtest2025.bin"
    text	   data	    bss	    dec	    hex	filename
-  40924	    468	   7188	  48580	   bdc4	ADCtest2025.elf
+  40956	    468	   7180	  48604	   bddc	ADCtest2025.elf
 Finished building: default.size.stdout
  
-Finished building: ADCtest2025.hex
-Finished building: ADCtest2025.bin
- 
- 
-Finished building: ADCtest2025.list
- 
 
-12:21:37 Build Finished. 0 errors, 0 warnings. (took 1s.144ms)
+01:06:03 Build Finished. 0 errors, 0 warnings. (took 567ms)
 

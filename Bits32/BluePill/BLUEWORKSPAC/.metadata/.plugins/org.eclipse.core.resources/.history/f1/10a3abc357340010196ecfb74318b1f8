@@ -1,0 +1,48 @@
+/*
+ * UnerProtocol.h
+ *
+ *  Created on: May 18, 2025
+ *      Author: santi
+ */
+
+#ifndef INC_UNERPROTOCOL_H_
+#define INC_UNERPROTOCOL_H_
+
+#include "stm32f1xx_hal.h"
+
+typedef struct ComStruct{
+    uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
+    uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
+    uint8_t cheksumRx;       //!< Cheksumm RX
+    uint8_t indexWriteRx;    //!< Indice de escritura del buffer circular de recepción
+    uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
+    uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
+    uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
+    uint8_t bufferRx[256];   //!< Buffer circular de recepción
+    uint8_t bufferTx[256];   //!< Buffer circular de transmisión
+}_sDato ;
+
+typedef enum Comands{
+    ALIVE=0xF0,
+    FIRMWARE=0xF1,
+	TEXT = 0xF2,
+    STARTCONFIG=0xEE,
+} _eEstadoMEFcmd;
+
+typedef enum ProtocolState{
+    START,
+    HEADER_1,
+    HEADER_2,
+    HEADER_3,
+    NBYTES=4,
+    TOKEN,
+    PAYLOAD
+}_eProtocolo;
+
+_sDato datosComSerie;
+_eProtocolo estadoProtocolo;
+
+void SendInfo(uint8_t bufferAux[], uint8_t bytes,_eEstadoMEFcmd cmd);
+
+
+#endif /* INC_UNERPROTOCOL_H_ */
