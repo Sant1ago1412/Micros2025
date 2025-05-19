@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
@@ -25,10 +26,12 @@ class Ui_MicrosCom
 {
 public:
     QWidget *centralwidget;
-    QComboBox *SerialPort;
-    QComboBox *Comand;
+    QGridLayout *gridLayout;
     QPlainTextEdit *plainTextEdit;
-    QPushButton *pushButton;
+    QComboBox *Comand;
+    QComboBox *SerialPort;
+    QPushButton *Connect;
+    QPushButton *SendButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -36,25 +39,40 @@ public:
     {
         if (MicrosCom->objectName().isEmpty())
             MicrosCom->setObjectName("MicrosCom");
-        MicrosCom->resize(800, 600);
+        MicrosCom->resize(488, 424);
         centralwidget = new QWidget(MicrosCom);
         centralwidget->setObjectName("centralwidget");
-        SerialPort = new QComboBox(centralwidget);
-        SerialPort->setObjectName("SerialPort");
-        SerialPort->setGeometry(QRect(20, 30, 72, 24));
-        Comand = new QComboBox(centralwidget);
-        Comand->setObjectName("Comand");
-        Comand->setGeometry(QRect(140, 30, 72, 24));
+        gridLayout = new QGridLayout(centralwidget);
+        gridLayout->setObjectName("gridLayout");
         plainTextEdit = new QPlainTextEdit(centralwidget);
         plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(33, 189, 251, 201));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(20, 70, 80, 24));
+
+        gridLayout->addWidget(plainTextEdit, 4, 0, 1, 2);
+
+        Comand = new QComboBox(centralwidget);
+        Comand->setObjectName("Comand");
+
+        gridLayout->addWidget(Comand, 1, 1, 1, 1);
+
+        SerialPort = new QComboBox(centralwidget);
+        SerialPort->setObjectName("SerialPort");
+
+        gridLayout->addWidget(SerialPort, 1, 0, 1, 1);
+
+        Connect = new QPushButton(centralwidget);
+        Connect->setObjectName("Connect");
+
+        gridLayout->addWidget(Connect, 2, 0, 1, 1);
+
+        SendButton = new QPushButton(centralwidget);
+        SendButton->setObjectName("SendButton");
+
+        gridLayout->addWidget(SendButton, 2, 1, 1, 1);
+
         MicrosCom->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MicrosCom);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 488, 21));
         MicrosCom->setMenuBar(menubar);
         statusbar = new QStatusBar(MicrosCom);
         statusbar->setObjectName("statusbar");
@@ -68,7 +86,8 @@ public:
     void retranslateUi(QMainWindow *MicrosCom)
     {
         MicrosCom->setWindowTitle(QCoreApplication::translate("MicrosCom", "MicrosCom", nullptr));
-        pushButton->setText(QCoreApplication::translate("MicrosCom", "PushButton", nullptr));
+        Connect->setText(QCoreApplication::translate("MicrosCom", "Connect", nullptr));
+        SendButton->setText(QCoreApplication::translate("MicrosCom", "SendCMD", nullptr));
     } // retranslateUi
 
 };

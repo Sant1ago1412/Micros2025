@@ -9,7 +9,7 @@ MicrosCom::MicrosCom(QWidget *parent)
 
     this->setWindowTitle("AUTO CP3");
 
-    setStyleSheet( "QInputDialog {background-color: rgb(0,85,0); font: bold italic large Comic Sans Ms; font: bold 40px;}");
+//    setStyleSheet( "QInputDialog {background-color: rgb(0,85,0); font: bold italic large Comic Sans Ms; font: bold 40px;}");
 
     QSerialPort1=new QSerialPort(this);
 
@@ -130,14 +130,14 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
     switch (rxBuf[0]) {
     case ALIVE:
 
-        if(rxBuf[1] == ACKNOWLEDGE)
-            ui->plainTextEdit->appendPlainText("I'M ALIVE");
+        ui->plainTextEdit->appendPlainText("I'M ALIVE");
         break;
 
     case UNKNOWNCOMANND:
 
         ui->plainTextEdit->appendPlainText("NO CMD");
         break;
+
     default:
 
         break;
@@ -148,17 +148,17 @@ void MicrosCom::OnQTimer1(){
 
 }
 
-void MicrosCom::on_pushButton_clicked()
+void MicrosCom::on_Connect_pressed()
 {
     if(QSerialPort1->isOpen()){
         QSerialPort1->close();
-        ui->pushButton->setText("OPEN");
+        ui->Connect->setText("OPEN");
     }
     else{
-        if(ui->comboBox->currentText() == "")
+        if(ui->SerialPort->currentText() == "")
             return;
 
-        QSerialPort1->setPortName(ui->comboBox->currentText());
+        QSerialPort1->setPortName(ui->SerialPort->currentText());
         QSerialPort1->setBaudRate(115200);
         QSerialPort1->setParity(QSerialPort::NoParity);
         QSerialPort1->setDataBits(QSerialPort::Data8);
@@ -166,9 +166,75 @@ void MicrosCom::on_pushButton_clicked()
         QSerialPort1->setFlowControl(QSerialPort::NoFlowControl);
 
         if(QSerialPort1->open(QSerialPort::ReadWrite)){
-            ui->pushButton->setText("CLOSE");
+            ui->Connect->setText("CLOSE");
         }
         else
             QMessageBox::information(this, "Serial PORT", "ERROR. Opening PORT");
     }
 }
+
+
+void MicrosCom::on_SendButton_pressed()
+{
+    uint8_t cmd,buf[24];
+    int n;
+
+    if(ui->Comand->currentText() == "")
+        return;
+
+    cmd = ui->Comand->currentData().toInt();
+    ui->plainTextEdit->appendPlainText("0x" + (QString("%1").arg(cmd, 2, 16, QChar('0'))).toUpper());
+
+    n = 0;
+    switch (cmd) {
+    case ALIVE://ALIVE   PC=>MBED 0xF0 ;  MBED=>PC 0xF0 0x0D
+        n = 1;
+        break;
+    case FIRMWARE://FIRMWARE   PC=>MBED 0xF1 ;  MBED=>PC 0xF1 FIRMWARE
+        n = 1;
+        break;
+        break;
+    default:
+        break;
+    }
+    if(n){
+        buf[0] = cmd;
+        SendCMD(buf, n);
+ //       SendCMDUDP(buf,n);
+    }
+}
+void MicrosCom::SendCMD(uint8_t *buf, uint8_t length){
+    uint8_t tx[24];
+    uint8_t cks, i;
+    QString strHex;
+
+    if(!QSerialPort1->isOpen())
+        return;
+
+    tx[0] = 'U';
+    tx[1] = 'N';
+    tx[2] = 'E';
+    tx[3] = 'R';
+    tx[4] = length + 1;
+    tx[5] = ':';
+
+    memcpy(&tx[6], buf, length);
+
+    cks = 0;
+    for (i=0; i<(length+6); i++) {
+        cks ^= tx[i];
+    }
+
+    tx[i] = cks;
+
+    strHex = "S--> 0x";
+    for (int i=0; i<length+7; i++) {
+        strHex = strHex + QString("%1").arg(tx[i], 2, 16, QChar('0')).toUpper();
+    }
+
+    ui->plainTextEdit->appendPlainText(strHex);
+
+    QSerialPort1->write((char *)tx, length+7);
+
+}
+

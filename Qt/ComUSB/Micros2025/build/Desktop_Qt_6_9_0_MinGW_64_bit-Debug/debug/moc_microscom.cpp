@@ -43,7 +43,9 @@ template <> constexpr inline auto MicrosCom::qt_create_metaobjectdata<qt_meta_ta
         "OnRxChar",
         "",
         "OnQTimer1",
-        "on_pushButton_clicked"
+        "on_pushButton_clicked",
+        "on_Connect_pressed",
+        "on_SendButton_pressed"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -53,6 +55,10 @@ template <> constexpr inline auto MicrosCom::qt_create_metaobjectdata<qt_meta_ta
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_clicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_Connect_pressed'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_SendButton_pressed'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -78,7 +84,8 @@ void MicrosCom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->OnRxChar(); break;
         case 1: _t->OnQTimer1(); break;
-        case 2: _t->on_pushButton_clicked(); break;
+        case 3: _t->on_Connect_pressed(); break;
+        case 4: _t->on_SendButton_pressed(); break;
         default: ;
         }
     }
@@ -104,14 +111,14 @@ int MicrosCom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

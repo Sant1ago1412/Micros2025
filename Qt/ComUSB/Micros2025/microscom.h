@@ -55,6 +55,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_Connect_pressed();
+
+    void on_SendButton_pressed();
+
 private:
     Ui::MicrosCom *ui;
     QTimer *QTimer1;
