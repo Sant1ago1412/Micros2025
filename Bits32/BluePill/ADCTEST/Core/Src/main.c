@@ -36,6 +36,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define NUM_CHANNELS 8
+#define RINGBUFFER 256
 #define IS10MS myFlags.individualFlags.bit1
 /* USER CODE END PD */
 
@@ -54,7 +55,6 @@ TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN PV */
 
 _sDato datosComSerie;
-_eProtocolo estadoProtocolo;
 uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
 
@@ -69,7 +69,6 @@ static void MX_TIM2_Init(void);
 static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
-void comunicationsTask(_sDato *datosCom);
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
@@ -114,9 +113,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  CDC_AttachRxData(&datafromUSB);
-  datosComSerie.indexReadRx = 0;
-  datosComSerie.indexWriteRx =0;
+  CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   /* USER CODE END Init */
 
@@ -143,6 +140,8 @@ int main(void)
   HAL_GPIO_WritePin(Engine1_GPIO_Port, Engine1_Pin, 0);
   HAL_GPIO_WritePin(Engine2_GPIO_Port, Engine2_Pin, 0);
 
+//  UP_initprotocol(&datosComSerie,(uint8_t*)RINGBUFFER);
+
 //  HAL_ADC_Start(&hadc1);
 //  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
   /* USER CODE END 2 */
@@ -154,12 +153,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	comunicationsTask(&datosComSerie);
+//	UP_comunicationsTask(&datosComSerie);
 
 	if(IS10MS){
 		if(counter>10){
-			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_2, 9999);
-			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_1, 9999);
+			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_2,ret_eng_Values());
+			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_1,ret_eng_Values());
 			HAL_GPIO_WritePin(Engine1_1_GPIO_Port, Engine1_1_Pin, 1);
 			HAL_GPIO_WritePin(Engine1_1_GPIO_Port, Engine1_1_Pin, 0);
 			counter=0;
@@ -501,26 +500,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-void comunicationsTask(_sDato *datosCom){
-
-	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
-		DecodeHeader(datosCom);
-		datosComSerie.indexReadRx=datosComSerie.indexWriteRx;
-	}
-
-	if(datosCom->indexReadTx!=datosCom->indexWriteTx ){
-
-		if(datosCom->indexWriteTx > datosCom->indexReadTx){
-				datosComSerie.bytesTosend = datosCom->indexWriteTx - datosCom->indexReadTx;
-		    }else{
-		    	datosComSerie.bytesTosend =  RINGBUFFER - datosCom->indexReadTx;
-		    }
-		    if(CDC_Transmit_FS(&datosComSerie.bufferTx[datosCom->indexReadTx], datosComSerie.bytesTosend) == USBD_OK){
-		    	datosCom->indexReadTx += datosComSerie.bytesTosend;
-		    }
-	}
-}
 
 /* USER CODE END 4 */
 

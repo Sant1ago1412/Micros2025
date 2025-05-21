@@ -1,4 +1,0 @@
-../Core/Src/UnerProtocol.c:12:6:SendInfo	56	static
-../Core/Src/UnerProtocol.c:38:6:DecodeHeader	24	static
-../Core/Src/UnerProtocol.c:114:6:decodeData	40	static
-../Core/Src/UnerProtocol.c:160:6:datafromUSB	24	static

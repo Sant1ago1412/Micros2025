@@ -8,7 +8,6 @@
 #ifndef INC_UNERPROTOCOL_H_
 #define INC_UNERPROTOCOL_H_
 
-#define	RINGBUFFER	256
 #include "Utilities.h"
 
 typedef struct ComStruct{
@@ -19,8 +18,8 @@ typedef struct ComStruct{
     uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
     uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
     uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
-    uint8_t bufferRx[RINGBUFFER];   //!< Buffer circular de recepción
-    uint8_t bufferTx[RINGBUFFER];   //!< Buffer circular de transmisión
+    uint8_t *bufferRx;   //!< Buffer circular de recepción
+    uint8_t *bufferTx;   //!< Buffer circular de transmisión
     uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
 }_sDato ;
 
@@ -42,12 +41,12 @@ typedef enum ProtocolState{
     PAYLOAD
 }_eProtocolo;
 
-extern _sDato datosComSerie;
-extern _eProtocolo estadoProtocolo;
-
-void SendInfo(uint8_t bufferAux[], uint8_t bytes);
-void decodeData(_sDato *datosCom);
-void DecodeHeader(_sDato *datosCom);
-void datafromUSB(uint8_t *buf, uint16_t length) ;
+int16_t ret_eng_Values();
+void UP_initprotocol(_sDato *datosCom,uint8_t *ringbuff);
+void UP_sendInfo(uint8_t bufferAux[], uint8_t bytes);
+void UP_decodeData(_sDato *datosCom);
+void UP_decodeHeader(_sDato *datosCom);
+void UP_datafromUSB(_sDato *datosCom, uint8_t *buf, uint16_t length) ;
+void UP_comunicationsTask(_sDato *datosCom);
 
 #endif /* INC_UNERPROTOCOL_H_ */
