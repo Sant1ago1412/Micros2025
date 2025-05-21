@@ -8,7 +8,9 @@
 #ifndef INC_UNERPROTOCOL_H_
 #define INC_UNERPROTOCOL_H_
 
+#define	RINGBUFFER	256
 #include "stm32f1xx_hal.h"
+#include "Utilities.h"
 
 typedef struct ComStruct{
     uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
@@ -18,8 +20,8 @@ typedef struct ComStruct{
     uint8_t indexReadRx;     //!< Indice de lectura del buffer circular de recepción
     uint8_t indexWriteTx;    //!< Indice de escritura del buffer circular de transmisión
     uint8_t indexReadTx;     //!< Indice de lectura del buffer circular de transmisión
-    uint8_t bufferRx[256];   //!< Buffer circular de recepción
-    uint8_t bufferTx[256];   //!< Buffer circular de transmisión
+    uint8_t bufferRx[RINGBUFFER];   //!< Buffer circular de recepción
+    uint8_t bufferTx[RINGBUFFER];   //!< Buffer circular de transmisión
     uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
 }_sDato ;
 
@@ -27,6 +29,7 @@ typedef enum Comands{
     ALIVE=0xF0,
     FIRMWARE=0xF1,
 	TEXT = 0xF2,
+	ENGINES = 0,
     STARTCONFIG=0xEE,
 } _eEstadoMEFcmd;
 
@@ -42,6 +45,7 @@ typedef enum ProtocolState{
 
 extern _sDato datosComSerie;
 extern _eProtocolo estadoProtocolo;
+_work casts;
 
 
 void SendInfo(uint8_t bufferAux[], uint8_t bytes);

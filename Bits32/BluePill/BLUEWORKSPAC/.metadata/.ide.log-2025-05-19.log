@@ -1,0 +1,108 @@
+2025-05-20 00:01:40,294 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-05-20 00:03:01,783 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 453966360 Bytes (678428672)
+2025-05-20 00:03:04,116 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 567286672 Bytes (678428672)
+2025-05-20 00:03:06,314 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 239868528 Bytes (678428672)
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: DMA
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8F1
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8F1
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_DEVICE
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB
+2025-05-20 00:03:07,096 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-05-20 00:03:07,097 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-05-20 00:03:07,097 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-05-20 00:03:07,097 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-05-20 00:03:07,099 [INFO] CodeGenerator:882 - code generatio: config db path: C:/Users/santi/.stm32cubemx/databases/DB.6.0.140/db/
+2025-05-20 00:03:07,107 [INFO] Argument:325 - Argument : hdmavalue: null
+2025-05-20 00:03:07,107 [INFO] Argument:327 - 	 sub Args: 
+2025-05-20 00:03:07,107 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Channel1
+2025-05-20 00:03:07,108 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Channel1
+2025-05-20 00:03:07,108 [INFO] Argument:325 - Argument : Initvalue: null
+2025-05-20 00:03:07,108 [INFO] Argument:327 - 	 sub Args: 
+2025-05-20 00:03:07,108 [INFO] Argument:325 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-05-20 00:03:07,108 [INFO] Argument:335 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-05-20 00:03:07,108 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-05-20 00:03:07,108 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-05-20 00:03:07,108 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-05-20 00:03:07,108 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-05-20 00:03:07,108 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-05-20 00:03:07,108 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : Modevalue: DMA_NORMAL
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : Modevalue: DMA_NORMAL
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : Lockvalue: null
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : Lockvalue: null
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : Statevalue: null
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : Statevalue: null
+2025-05-20 00:03:07,109 [INFO] Argument:325 - Argument : Parentvalue: null
+2025-05-20 00:03:07,109 [INFO] Argument:335 - Argument : Parentvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2025-05-20 00:03:07,110 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2025-05-20 00:03:07,205 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\license.tmp_save
+2025-05-20 00:03:07,433 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\license.tmp
+2025-05-20 00:03:07,481 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\gpio.tmp_save
+2025-05-20 00:03:07,609 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\gpio.tmp
+2025-05-20 00:03:07,683 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_vars.tmp_save
+2025-05-20 00:03:07,785 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_vars.tmp
+2025-05-20 00:03:07,793 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_inc.tmp_save
+2025-05-20 00:03:07,874 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_inc.tmp
+2025-05-20 00:03:07,883 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_HalInit.tmp_save
+2025-05-20 00:03:07,984 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_HalInit.tmp
+2025-05-20 00:03:07,994 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_Msp.tmp_save
+2025-05-20 00:03:08,101 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\usb_Msp.tmp
+2025-05-20 00:03:08,267 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-05-20 00:03:08,286 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\dma.tmp_save
+2025-05-20 00:03:08,367 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\dma.tmp
+2025-05-20 00:03:08,376 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\dma_GV.tmp_save
+2025-05-20 00:03:08,450 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\dma_GV.tmp
+2025-05-20 00:03:08,468 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-05-20 00:03:08,480 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usb_device.c_save
+2025-05-20 00:03:08,569 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usb_device.c
+2025-05-20 00:03:08,581 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usb_device.h_save
+2025-05-20 00:03:08,669 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usb_device.h
+2025-05-20 00:03:08,681 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\Target\usbd_conf.h_save
+2025-05-20 00:03:08,767 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\Target\usbd_conf.h
+2025-05-20 00:03:08,783 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\Target\usbd_conf.c_save
+2025-05-20 00:03:08,900 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\Target\usbd_conf.c
+2025-05-20 00:03:08,914 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_desc.h_save
+2025-05-20 00:03:09,011 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_desc.h
+2025-05-20 00:03:09,029 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_desc.c_save
+2025-05-20 00:03:09,135 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_desc.c
+2025-05-20 00:03:09,149 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_cdc_if.h_save
+2025-05-20 00:03:09,283 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_cdc_if.h
+2025-05-20 00:03:09,300 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_cdc_if.c_save
+2025-05-20 00:03:09,436 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\USB_DEVICE\App\usbd_cdc_if.c
+2025-05-20 00:03:09,466 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\stm32f1xx_it.c_save
+2025-05-20 00:03:09,959 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\stm32f1xx_it.c
+2025-05-20 00:03:09,978 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\stm32f1xx_it.h_save
+2025-05-20 00:03:10,086 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\stm32f1xx_it.h
+2025-05-20 00:03:10,120 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\stm32f1xx_hal_msp.c_save
+2025-05-20 00:03:10,276 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\stm32f1xx_hal_msp.c
+2025-05-20 00:03:10,287 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\system.tmp_save
+2025-05-20 00:03:10,392 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\MXTmpFiles\system.tmp
+2025-05-20 00:03:10,414 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\stm32f1xx_hal_conf.h_save
+2025-05-20 00:03:10,510 [INFO] CodeEngine:343 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\stm32f1xx_hal_conf.h
+2025-05-20 00:03:10,544 [WARN] IPConfigManager:3790 - IP not found : TIM
+2025-05-20 00:03:10,544 [WARN] CodeGenerator:4198 - IP not found : null
+2025-05-20 00:03:10,559 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\main.h_save
+2025-05-20 00:03:10,671 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Inc\main.h
+2025-05-20 00:03:10,689 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\main.c_save
+2025-05-20 00:03:10,858 [INFO] CodeEngine:287 - Generated code: C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BluePill\ADCTEST\Core\Src\main.c
+2025-05-20 00:03:11,427 [INFO] ProjectBuilder:3324 - Time for Copy HAL[1] : 332mS.
+2025-05-20 00:03:11,439 [INFO] ProjectBuilder:4912 - Project Generator version: 4.6.0.1-B1
+2025-05-20 00:03:11,526 [INFO] ConfigFileManager:1590 - The Die is : DIE410
+2025-05-20 00:03:14,649 [INFO] ProjectBuilder:5191 - Time for Generating toolchain IDE Files: 3210mS.
+2025-05-20 00:03:14,655 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 5mS.
+2025-05-20 00:03:14,670 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-05-20 00:52:38,448 [INFO] WebApp:403 - JxBrowser engine has been closed 
+2025-05-20 00:52:38,448 [INFO] WebAppUi:493 - JxBrowser engine has been closed 
+2025-05-20 00:52:38,448 [INFO] WebAppUi:530 - Close the Jxbrowser engine manually

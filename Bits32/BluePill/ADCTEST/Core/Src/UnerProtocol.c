@@ -136,6 +136,14 @@ void decodeData(_sDato *datosCom){
 
     break;
 
+    case ENGINES:
+    	bufAux[indiceAux++]=ENGINES;
+    	casts.u8[0]=datosCom->bufferRx[datosCom->indexStart+3];
+    	casts.u8[1]=datosCom->bufferRx[datosCom->indexStart+4];
+
+//    	ptrSpeed = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
+
+    break;
     default:
 
         bufAux[indiceAux++]=0xFF;
