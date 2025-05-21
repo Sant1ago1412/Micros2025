@@ -8,7 +8,7 @@
 #ifndef INC_UTILITIES_H_
 #define INC_UTILITIES_H_
 
-#include "stm32f1xx_hal.h"
+#include "stdint.h"
 
 typedef union{
     uint8_t     u8[4];

@@ -61,6 +61,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED_Pin GPIO_PIN_13
 #define LED_GPIO_Port GPIOC
+#define Engine1_1_Pin GPIO_PIN_4
+#define Engine1_1_GPIO_Port GPIOB
+#define Engine1_2_Pin GPIO_PIN_5
+#define Engine1_2_GPIO_Port GPIOB
 #define Engine2_Pin GPIO_PIN_6
 #define Engine2_GPIO_Port GPIOB
 #define Engine1_Pin GPIO_PIN_7

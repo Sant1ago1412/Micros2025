@@ -7,6 +7,7 @@
 
 #include "UnerProtocol.h"
 
+_work casts;
 
 void SendInfo(uint8_t bufferAux[],uint8_t bytes){
 
@@ -138,6 +139,7 @@ void decodeData(_sDato *datosCom){
 
     case ENGINES:
     	bufAux[indiceAux++]=ENGINES;
+
     	casts.u8[0]=datosCom->bufferRx[datosCom->indexStart+3];
     	casts.u8[1]=datosCom->bufferRx[datosCom->indexStart+4];
 

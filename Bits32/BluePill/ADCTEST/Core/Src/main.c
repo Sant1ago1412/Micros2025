@@ -24,7 +24,6 @@
 /* USER CODE BEGIN Includes */
 
 #include "UnerProtocol.h"
-#include "Utilities.h"
 
 /* USER CODE END Includes */
 
@@ -58,7 +57,6 @@ _sDato datosComSerie;
 _eProtocolo estadoProtocolo;
 uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
-int16_t ptrSpeed;
 
 /* USER CODE END PV */
 
@@ -160,8 +158,10 @@ int main(void)
 
 	if(IS10MS){
 		if(counter>10){
-			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_2, speed);
-			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_1, speed);
+			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_2, 9999);
+			__HAL_TIM_SET_COMPARE(&htim4,TIM_CHANNEL_1, 9999);
+			HAL_GPIO_WritePin(Engine1_1_GPIO_Port, Engine1_1_Pin, 1);
+			HAL_GPIO_WritePin(Engine1_1_GPIO_Port, Engine1_1_Pin, 0);
 			counter=0;
 		}
 		if(DMAcounter>100){
@@ -478,12 +478,22 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, Engine1_1_Pin|Engine1_2_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : LED_Pin */
   GPIO_InitStruct.Pin = LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Engine1_1_Pin Engine1_2_Pin */
+  GPIO_InitStruct.Pin = Engine1_1_Pin|Engine1_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

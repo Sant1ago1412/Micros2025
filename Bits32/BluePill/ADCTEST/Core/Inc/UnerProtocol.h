@@ -9,7 +9,6 @@
 #define INC_UNERPROTOCOL_H_
 
 #define	RINGBUFFER	256
-#include "stm32f1xx_hal.h"
 #include "Utilities.h"
 
 typedef struct ComStruct{
@@ -45,8 +44,6 @@ typedef enum ProtocolState{
 
 extern _sDato datosComSerie;
 extern _eProtocolo estadoProtocolo;
-_work casts;
-
 
 void SendInfo(uint8_t bufferAux[], uint8_t bytes);
 void decodeData(_sDato *datosCom);
