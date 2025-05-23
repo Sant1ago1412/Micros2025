@@ -1,23 +1,24 @@
 /*
- * UnerProtocol.c
+ * UnerProtocol->c
  *
  *  Created on: May 18, 2025
  *      Author: santi
  */
 
 #include "UnerProtocol.h"
-#include "stddef.h"
+#include "stdlib.h"
 
 _work casts;
 
 int16_t value=9999;
-_sDato datosCom1;
 _eProtocolo estadoProtocolo;
+_sDato *datosComLib;
 
-void UP_initprotocol(_sDato *datosCom,uint8_t *ringbuff){
+void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff){
 
-	datosCom1.bufferRx=ringbuff;
-	datosCom1.bufferTx=ringbuff;
+		datosCom->bufferRx = malloc(ringbuff);
+	    datosCom->bufferTx = malloc(ringbuff);
+	    datosComLib=datosCom;
 
 }
 
@@ -39,77 +40,77 @@ void UP_sendInfo(uint8_t bufferAux[],uint8_t bytes){
     cks=0;
     for(i=0 ;i<indiceAux;i++){
         cks^= bufAux[i];
-        datosCom1.bufferTx[datosCom1.indexWriteTx++]=bufAux[i];
+        datosComLib->bufferTx[datosComLib->indexWriteTx++]=bufAux[i];
     }
-     datosCom1.bufferTx[datosCom1.indexWriteTx++]=cks;
+     datosComLib->bufferTx[datosComLib->indexWriteTx++]=cks;
 
-     datosCom1.bytesTosend=indiceAux;
+     datosComLib->bytesTosend=indiceAux;
 
 }
 
-void UP_decodeHeader(_sDato *datosCom){
+void UP_decodeHeader(_sDato *datosComLib){
 
     static uint8_t nBytes=0;
 
-    uint8_t indexWriteRxCopy=datosCom->indexWriteRx;
+    uint8_t indexWriteRxCopy=datosComLib->indexWriteRx;
 
-    while (datosCom->indexReadRx!=indexWriteRxCopy)
+    while (datosComLib->indexReadRx!=indexWriteRxCopy)
     {
         switch (estadoProtocolo) {
             case START:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='U'){
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='U'){
                     estadoProtocolo=HEADER_1;
-                    datosCom->cheksumRx=0;
+                    datosComLib->cheksumRx=0;
                 }
                 break;
             case HEADER_1:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='N')
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='N')
                    estadoProtocolo=HEADER_2;
                 else{
-                    datosCom->indexReadRx--;
+                    datosComLib->indexReadRx--;
                     estadoProtocolo=START;
                 }
                 break;
             case HEADER_2:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]=='E')
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='E')
                     estadoProtocolo=HEADER_3;
                 else{
-                    datosCom->indexReadRx--;
+                    datosComLib->indexReadRx--;
                    estadoProtocolo=START;
                 }
                 break;
 			case HEADER_3:
-				if (datosCom->bufferRx[datosCom->indexReadRx++]=='R')
+				if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='R')
 					estadoProtocolo=NBYTES;
 				else{
-					datosCom->indexReadRx--;
+					datosComLib->indexReadRx--;
 				    estadoProtocolo=START;
 				}
             break;
             case NBYTES:
-                datosCom->indexStart=datosCom->indexReadRx;
-                nBytes=datosCom->bufferRx[datosCom->indexReadRx++];
+                datosComLib->indexStart=datosComLib->indexReadRx;
+                nBytes=datosComLib->bufferRx[datosComLib->indexReadRx++];
                 estadoProtocolo=TOKEN;
                 break;
             case TOKEN:
-                if (datosCom->bufferRx[datosCom->indexReadRx++]==':'){
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]==':'){
                    estadoProtocolo=PAYLOAD;
-                    datosCom->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
+                    datosComLib->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
                 }
                 else{
-                    datosCom->indexReadRx--;
+                    datosComLib->indexReadRx--;
                     estadoProtocolo=START;
                 }
                 break;
             case PAYLOAD:
                 if (nBytes>1){
-                    datosCom->cheksumRx ^= datosCom->bufferRx[datosCom->indexReadRx++];
+                    datosComLib->cheksumRx ^= datosComLib->bufferRx[datosComLib->indexReadRx++];
                 }
                 nBytes--;
                 if(nBytes<=0){
                     estadoProtocolo=START;
-                    if(datosCom->cheksumRx == datosCom->bufferRx[datosCom->indexReadRx]){
-                    	UP_decodeData(datosCom);
+                    if(datosComLib->cheksumRx == datosComLib->bufferRx[datosComLib->indexReadRx]){
+                    	UP_decodeData(datosComLib);
                     }
                 }
 
@@ -121,13 +122,11 @@ void UP_decodeHeader(_sDato *datosCom){
     }
 }
 
-
-
-void UP_decodeData(_sDato *datosCom){
+void UP_decodeData(_sDato *datosComLib){
 
     uint8_t bufAux[20], indiceAux=0,bytes=0;
 
-    switch (datosCom->bufferRx[datosCom->indexStart+2])//CMD EN LA POSICION 2
+    switch (datosComLib->bufferRx[datosComLib->indexStart+2])//CMD EN LA POSICION 2
     {
     case ALIVE:
 
@@ -152,8 +151,8 @@ void UP_decodeData(_sDato *datosCom){
     case ENGINES:
     	bufAux[indiceAux++]=ENGINES;
 
-    	casts.u8[0]=datosCom->bufferRx[datosCom->indexStart+3];
-    	casts.u8[1]=datosCom->bufferRx[datosCom->indexStart+4];
+    	casts.u8[0]=datosComLib->bufferRx[datosComLib->indexStart+3];
+    	casts.u8[1]=datosComLib->bufferRx[datosComLib->indexStart+4];
 
     	value = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
 
@@ -169,35 +168,15 @@ void UP_decodeData(_sDato *datosCom){
     UP_sendInfo(bufAux,bytes);
 }
 
-void UP_datafromUSB(_sDato *datosCom,uint8_t *buf, uint16_t length) {
+void UP_datafromUSB(uint8_t *buf, uint16_t length) {
 
   uint16_t i;
 
   for (i = 0; i < length; i++) {
-	datosCom->bufferRx[datosCom->indexWriteRx] = buf[i];
-	datosCom->indexWriteRx++;
+	datosComLib->bufferRx[datosComLib->indexWriteRx] = buf[i];
+	datosComLib->indexWriteRx++;
   }
 
-}
-
-void UP_comunicationsTask(_sDato *datosCom){
-
-	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
-		UP_decodeHeader(datosCom);
-		datosCom->indexReadRx=datosCom->indexWriteRx;
-	}
-
-	if(datosCom->indexReadTx!=datosCom->indexWriteTx ){
-
-		if(datosCom->indexWriteTx > datosCom->indexReadTx){
-				datosCom->bytesTosend = datosCom->indexWriteTx - datosCom->indexReadTx;
-		    }else{
-		    	datosCom->bytesTosend =  RINGBUFFER - datosCom->indexReadTx;
-		    }
-		    if(CDC_Transmit_FS(&datosCom->bufferTx[datosCom->indexReadTx], datosCom->bytesTosend) == USBD_OK){
-		    	datosCom->indexReadTx += datosCom->bytesTosend;
-		    }
-	}
 }
 
 int16_t ret_eng_Values(){

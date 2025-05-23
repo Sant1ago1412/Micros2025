@@ -57,7 +57,7 @@ TIM_HandleTypeDef htim4;
 _sDato datosComSerie;
 uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
-
+_sEng motorL,motorR;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -115,6 +115,7 @@ int main(void)
   /* USER CODE BEGIN Init */
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
+  UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -153,7 +154,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	UP_comunicationsTask(&datosComSerie);
+	UP_comunicationsTask(&datosComSerie);
 
 	if(IS10MS){
 		if(counter>10){
@@ -501,6 +502,25 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void UP_comunicationsTask(_sDato *datosCom){
+
+	if(datosCom->indexReadRx!=datosCom->indexWriteRx ){
+		UP_decodeHeader(datosCom);
+		datosCom->indexReadRx=datosCom->indexWriteRx;
+	}
+
+	if(datosCom->indexReadTx!=datosCom->indexWriteTx ){
+
+		if(datosCom->indexWriteTx > datosCom->indexReadTx){
+				datosCom->bytesTosend = datosCom->indexWriteTx - datosCom->indexReadTx;
+		    }else{
+		    	datosCom->bytesTosend =  sizeof(datosCom->bufferRx) - datosCom->indexReadTx;
+		    }
+		    if(CDC_Transmit_FS(&datosCom->bufferTx[datosCom->indexReadTx], datosCom->bytesTosend) == USBD_OK){
+		    	datosCom->indexReadTx += datosCom->bytesTosend;
+		    }
+	}
+}
 /* USER CODE END 4 */
 
 /**

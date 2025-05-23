@@ -1,0 +1,185 @@
+/*
+ * UnerProtocol.c
+ *
+ *  Created on: May 18, 2025
+ *      Author: santi
+ */
+
+#include "UnerProtocol.h"
+#include "stdlib.h"
+
+_work casts;
+
+int16_t value=9999;
+_eProtocolo estadoProtocolo;
+_sDato *datosComLib;
+
+void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff){
+
+		datosCom->bufferRx = malloc(ringbuff);
+	    datosCom->bufferTx = malloc(ringbuff);
+	    datosComLib=datosCom;
+
+}
+
+void UP_sendInfo(uint8_t bufferAux[],uint8_t bytes){
+
+    uint8_t bufAux[30], indiceAux=0,cks=0,i=0;
+
+    bufAux[indiceAux++]='U';
+    bufAux[indiceAux++]='N';
+    bufAux[indiceAux++]='E';
+    bufAux[indiceAux++]='R';
+
+    bufAux[indiceAux++]=bytes;
+    bufAux[indiceAux++]=':';
+
+    for(i=0; i<bytes-1; i++)
+        bufAux[indiceAux++] = bufferAux[i];
+
+    cks=0;
+    for(i=0 ;i<indiceAux;i++){
+        cks^= bufAux[i];
+        datosComLib->bufferTx[datosComLib->indexWriteTx++]=bufAux[i];
+    }
+     datosComLib->bufferTx[datosComLib->indexWriteTx++]=cks;
+
+     datosComLib->bytesTosend=indiceAux;
+
+}
+
+void UP_decodeHeader(_sDato *datosComLib){
+
+    static uint8_t nBytes=0;
+
+    uint8_t indexWriteRxCopy=datosComLib.indexWriteRx;
+
+    while (datosComLib->indexReadRx!=indexWriteRxCopy)
+    {
+        switch (estadoProtocolo) {
+            case START:
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='U'){
+                    estadoProtocolo=HEADER_1;
+                    datosComLib.cheksumRx=0;
+                }
+                break;
+            case HEADER_1:
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='N')
+                   estadoProtocolo=HEADER_2;
+                else{
+                    datosComLib->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case HEADER_2:
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='E')
+                    estadoProtocolo=HEADER_3;
+                else{
+                    datosComLib->indexReadRx--;
+                   estadoProtocolo=START;
+                }
+                break;
+			case HEADER_3:
+				if (datosComLib->bufferRx[datosComLib->indexReadRx++]=='R')
+					estadoProtocolo=NBYTES;
+				else{
+					datosComLib->indexReadRx--;
+				    estadoProtocolo=START;
+				}
+            break;
+            case NBYTES:
+                datosComLib->indexStart=datosComLib->indexReadRx;
+                nBytes=datosComLib->bufferRx[datosComLib->indexReadRx++];
+                estadoProtocolo=TOKEN;
+                break;
+            case TOKEN:
+                if (datosComLib->bufferRx[datosComLib->indexReadRx++]==':'){
+                   estadoProtocolo=PAYLOAD;
+                    datosComLib->cheksumRx ='U'^'N'^'E'^'R'^ nBytes^':';
+                }
+                else{
+                    datosComLib->indexReadRx--;
+                    estadoProtocolo=START;
+                }
+                break;
+            case PAYLOAD:
+                if (nBytes>1){
+                    datosComLib->cheksumRx ^= datosComLib->bufferRx[datosComLib->indexReadRx++];
+                }
+                nBytes--;
+                if(nBytes<=0){
+                    estadoProtocolo=START;
+                    if(datosComLib->cheksumRx == datosComLib->bufferRx[datosComLib->indexReadRx]){
+                    	UP_decodeData(datosComLib);
+                    }
+                }
+
+                break;
+            default:
+                estadoProtocolo=START;
+                break;
+        }
+    }
+}
+
+void UP_decodeData(_sDato datosComLib){
+
+    uint8_t bufAux[20], indiceAux=0,bytes=0;
+
+    switch (datosComLib.bufferRx[datosComLib.indexStart+2])//CMD EN LA POSICION 2
+    {
+    case ALIVE:
+
+        bufAux[indiceAux++]=ALIVE;
+        bytes=0x02;//aca debo darle CMD+CKS+PAYLOAD
+
+    break;
+    case FIRMWARE:
+
+		bufAux[indiceAux++]=FIRMWARE;
+		bytes=0x02;
+
+    break;
+
+    case TEXT:
+
+		bufAux[indiceAux++]=TEXT;
+//		bytes=;
+
+    break;
+
+    case ENGINES:
+    	bufAux[indiceAux++]=ENGINES;
+
+    	casts.u8[0]=datosComLib.bufferRx[datosComLib.indexStart+3];
+    	casts.u8[1]=datosComLib.bufferRx[datosComLib.indexStart+4];
+
+    	value = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
+
+    break;
+    default:
+
+        bufAux[indiceAux++]=0xFF;
+        bytes=0x02;
+
+    break;
+    }
+
+    UP_sendInfo(bufAux,bytes);
+}
+
+void UP_datafromUSB(uint8_t *buf, uint16_t length) {
+
+  uint16_t i;
+
+  for (i = 0; i < length; i++) {
+	datosComLib.bufferRx[datosComLib.indexWriteRx] = buf[i];
+	datosComLib.indexWriteRx++;
+  }
+
+}
+
+int16_t ret_eng_Values(){
+	return value;
+}
+

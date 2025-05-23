@@ -11,6 +11,7 @@
 #include "Utilities.h"
 
 typedef struct ComStruct{
+
     uint8_t timeOut;         //!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
     uint8_t indexStart;      //!< Indice para saber en que parte del buffer circular arranca el ID
     uint8_t cheksumRx;       //!< Cheksumm RX
@@ -21,6 +22,8 @@ typedef struct ComStruct{
     uint8_t *bufferRx;   //!< Buffer circular de recepción
     uint8_t *bufferTx;   //!< Buffer circular de transmisión
     uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
+    uint8_t buffSize;
+
 }_sDato ;
 
 typedef enum Comands{
@@ -42,11 +45,11 @@ typedef enum ProtocolState{
 }_eProtocolo;
 
 int16_t ret_eng_Values();
-void UP_initprotocol(_sDato *datosCom,uint8_t *ringbuff);
+void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff);
 void UP_sendInfo(uint8_t bufferAux[], uint8_t bytes);
-void UP_decodeData(_sDato *datosCom);
-void UP_decodeHeader(_sDato *datosCom);
-void UP_datafromUSB(_sDato *datosCom, uint8_t *buf, uint16_t length) ;
+void UP_decodeData(_sDato *datosComLib);
+void UP_decodeHeader(_sDato *datosComLib);
+void UP_datafromUSB(uint8_t *buf, uint16_t length) ;
 void UP_comunicationsTask(_sDato *datosCom);
 
 #endif /* INC_UNERPROTOCOL_H_ */
