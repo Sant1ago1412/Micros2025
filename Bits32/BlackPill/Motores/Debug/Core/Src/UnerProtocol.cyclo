@@ -1,0 +1,6 @@
+../Core/Src/UnerProtocol.c:17:6:UP_initprotocol	1
+../Core/Src/UnerProtocol.c:25:6:UP_sendInfo	3
+../Core/Src/UnerProtocol.c:51:6:UP_decodeHeader	17
+../Core/Src/UnerProtocol.c:125:6:UP_decodeData	7
+../Core/Src/UnerProtocol.c:171:6:UP_datafromUSB	2
+../Core/Src/UnerProtocol.c:182:9:ret_eng_Values	1
