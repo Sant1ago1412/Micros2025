@@ -1,0 +1,2 @@
+../Core/Src/engines.c:10:6:en_InitENG	16	static
+../Core/Src/engines.c:18:6:en_HandlerENG	24	static

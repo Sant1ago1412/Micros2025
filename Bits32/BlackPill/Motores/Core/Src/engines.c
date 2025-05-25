@@ -5,25 +5,36 @@
  *      Author: Baccon
  */
 #include "engines.h"
+#include "stdlib.h"
 
-_sEng engine;
+void en_InitENG(_sEng *engines,uint16_t maxSpeed){
 
-void en_Init(_sEng *engines,uint16_t maxSpeed){
+	engines->estado=FREE;
+	engines->speed=0;
+	engines->maxSpeed=maxSpeed;
 
-//	engines->direction.pin1=
-//	engines->direction.pin2=
 }
-uint16_t pwm_value(){
 
-	int16_t pwm=0;
-	pwm=ret_eng_Values();
+void en_HandlerENG(_sEng *engines,int32_t newspeed,uint8_t freno){
 
-	if(pwm>maxspeedValue){
-		pwm=maxspeedValue;
+	if(newspeed==engines->speed)
+		return;
+	if(freno==1){
+		engines->estado=BRAKE;
+		return;
 	}
-//	else
-//	if{
-//
-//	}
-	return pwm;
+	if(newspeed>engines->maxSpeed)
+		newspeed=engines->maxSpeed;
+	//agregar el caso anterior para negativo
+	if(newspeed<0){
+		engines->estado=BACK;
+		engines->speed=-newspeed;
+	}else if(newspeed>0){
+		engines->estado=FRONT;
+		engines->speed=-newspeed;
+	}else if(newspeed==0){
+		engines->estado=FREE;
+		engines->speed=0;
+	}
+
 }

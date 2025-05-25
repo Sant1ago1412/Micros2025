@@ -56,6 +56,12 @@ default.size.stdout \
 OBJDUMP_LIST += \
 BlackEngines.list \
 
+OBJCOPY_HEX += \
+BlackEngines.hex \
+
+OBJCOPY_BIN += \
+BlackEngines.bin \
+
 
 # All Target
 all: main-build
@@ -79,12 +85,22 @@ BlackEngines.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+BlackEngines.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "BlackEngines.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
+BlackEngines.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "BlackEngines.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) BlackEngines.elf BlackEngines.list BlackEngines.map default.size.stdout
+	-$(RM) BlackEngines.bin BlackEngines.elf BlackEngines.hex BlackEngines.list BlackEngines.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

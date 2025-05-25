@@ -8,12 +8,7 @@
 #ifndef INC_ENGINES_H_
 #define INC_ENGINES_H_
 
-#include <stdint.h>
-
-typedef struct{
-	uint8_t pin1;
-	uint8_t pin2;
-}_sEpins;
+#include "stdint.h"
 
 typedef enum{
 	FRONT,
@@ -23,12 +18,12 @@ typedef enum{
 }_eState;
 
 typedef struct{
-	_sEpins direction;
 	uint16_t speed;
 	_eState estado;
-	uint8_t nMotor;
+	uint16_t maxSpeed;
 }_sEng;
 
-uint16_t pwm_value();
+void en_InitENG(_sEng *engines,uint16_t maxSpeed);
+void en_HandlerENG(_sEng *engines,int32_t newspeed,uint8_t freno);
 
 #endif /* INC_ENGINES_H_ */

@@ -1,0 +1,30 @@
+/*
+ * engines.c
+ *
+ *  Created on: May 21, 2025
+ *      Author: Baccon
+ */
+#include "engines.h"
+#include "UnerProtocol.h"
+
+void en_InitENG(_sEng *engines,uint16_t maxSpeed){
+
+	engines->estado=FREE;
+	engines->speed=0;
+	engines->maxSpeed=maxSpeed;
+
+}
+void en_HandlerENG(_sEng *engines){
+
+	int16_t pwm=0;
+	pwm=ret_eng_Values();
+
+	if(pwm>maxspeedValue){
+		pwm=maxspeedValue;
+	}
+//	else
+//	if{
+//
+//	}
+	return pwm;
+}
