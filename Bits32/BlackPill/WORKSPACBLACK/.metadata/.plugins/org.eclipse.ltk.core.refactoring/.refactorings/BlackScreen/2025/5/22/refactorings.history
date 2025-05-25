@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;BlackScreen/BlackEngines.ioc&apos; to &apos;BlackScreen.ioc&apos;" description="Rename resource &apos;BlackEngines.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="BlackEngines.ioc" name="BlackScreen.ioc" stamp="1748191297212" updateReferences="true"/>
+</session>
