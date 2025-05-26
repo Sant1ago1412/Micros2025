@@ -11,8 +11,8 @@ _sEng engine;
 
 void en_Init(_sEng *engines,uint16_t maxSpeed){
 
-	engines->direction.pin1=
-	engines->direction.pin2=
+//	engines->direction.pin1=
+//	engines->direction.pin2=
 }
 uint16_t pwm_value(){
 

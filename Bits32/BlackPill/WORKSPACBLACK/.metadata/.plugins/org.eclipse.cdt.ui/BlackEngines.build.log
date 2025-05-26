@@ -1,0 +1,10 @@
+02:09:19 **** Incremental Build of configuration Debug for project BlackEngines ****
+make -j4 all 
+arm-none-eabi-size  BlackEngines.elf 
+   text	   data	    bss	    dec	    hex	filename
+  41068	    344	   6264	  47676	   ba3c	BlackEngines.elf
+Finished building: default.size.stdout
+ 
+
+02:09:20 Build Finished. 0 errors, 0 warnings. (took 375ms)
+
