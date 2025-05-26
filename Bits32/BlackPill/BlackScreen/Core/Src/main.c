@@ -26,6 +26,7 @@
 #include "engines.h"
 #include "ssd1306_oled.h"
 #include "fonts.h"
+#include "image.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,6 +76,14 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void task10ms();
 void Engines_task();
+
+e_system I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size);
+
+e_system I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+
+e_system I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+
+e_system I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -102,22 +111,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 void task10ms(){
 
+	static uint8_t ticker=0;
+
 	if(!SISINIT){
 		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 20000) == HAL_OK){
 			SSD1306_Init();
 			SISINIT=TRUE;
 		}
 	}
-//		if(counter>10){
-////			Engines_task();
-//			counter=0;
-//		}
-//		if(DMAcounter>100){
-////			HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
-//			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-//
-//			DMAcounter=0;
-//		}
+	if(ticker%10==0){
+		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+		ticker=0;
+	}
+	ticker++;
 }
 
 
@@ -199,6 +205,7 @@ int main(void)
    UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
    en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
    en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+   Display_Set_I2C_Master_Transmit(&I2C_1_Abstract_Master_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -272,7 +279,7 @@ int main(void)
 //			HAL_Delay(1000);
 //
 //			SSD1306_Clear();
-//			SSD1306_DrawBitmap(0, 0, Esbastic, 128, 64, WHITE);
+//			SSD1306_DrawBitmap(0, 0, heart, 128, 64, WHITE);
 //			SSD1306_UpdateScreen();
 //			HAL_Delay(10000);
 //
@@ -587,6 +594,23 @@ void UP_comunicationsTask(_sDato *datosCom){
 		    }
 	}
 }
+e_system I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size){
+	return (e_system)HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+}
+
+e_system I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+	return (e_system)HAL_I2C_Master_Transmit(&hi2c1, Dev_Address, p_Data, _Size, _Timeout);
+}
+
+e_system I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+	return HAL_I2C_Mem_Write(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
+}
+
+e_system I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+	return HAL_I2C_Mem_Read(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
+}
+
+
 /* USER CODE END 4 */
 
 /**

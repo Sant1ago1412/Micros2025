@@ -38,7 +38,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../USB_DEVICE/Target/usbd_conf.h ../Core/Inc/UnerProtocol.h \
  ../Core/Inc/Utilities.h ../Core/Inc/engines.h ../Core/Inc/ssd1306_oled.h \
- ../Core/Inc/fonts.h ../Core/Inc/main.h ../Core/Inc/fonts.h
+ ../Core/Inc/fonts.h ../Core/Inc/main.h ../Core/Inc/fonts.h \
+ ../Core/Inc/image.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -85,3 +86,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/fonts.h:
 ../Core/Inc/main.h:
 ../Core/Inc/fonts.h:
+../Core/Inc/image.h:

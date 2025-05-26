@@ -3,14 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern I2C_HandleTypeDef hi2c1;
-
-#define SSD1306_WRITECOMMAND(command)	SSD1306_I2C_Write(SSD1306_I2C_ADDR, 0x00, (command))
-#define SSD1306_WRITEDATA(data)      	SSD1306_I2C_Write(SSD1306_I2C_ADDR, 0x40, (data))
+#define SSD1306_WRITECOMMAND(command)	ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x00, (command))
+#define SSD1306_WRITEDATA(data)      	ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x40, (data))
 #define ABS(x)   ((x) > 0 ? (x) : -(x))
 
 static uint8_t SSD1306_Buffer[SSD1306_WIDTH * SSD1306_HEIGHT / 8];
 
+static e_system (*I2C_Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size);
+static e_system (*I2C_Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+
+void Display_Set_I2C_Master_Transmit(
+		e_system (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),
+		e_system (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)){
+	I2C_Master_Transmit = Master_Transmit;
+	I2C_Master_Transmit_Blocking = Master_Transmit_Blocking;
+}
 typedef struct {
 	uint16_t CurrentX;
 	uint16_t CurrentY;
@@ -104,7 +111,7 @@ void SSD1306_DrawBitmap(int16_t x, int16_t y, const unsigned char* bitmap, int16
     }
 }
 
-uint8_t SSD1306_Init(void)
+void SSD1306_Init()
 {
 
 	SSD1306_WRITECOMMAND(0xAE);
@@ -136,12 +143,12 @@ uint8_t SSD1306_Init(void)
 	SSD1306_WRITECOMMAND(0x14);
 	SSD1306_WRITECOMMAND(0xAF);
 	SSD1306_WRITECOMMAND(SSD1306_DEACTIVATE_SCROLL);
+
 	SSD1306_Fill(BLACK);
 	SSD1306_UpdateScreen();
 	SSD1306.CurrentX = 0;
 	SSD1306.CurrentY = 0;
 	SSD1306.Initialized = 1;
-	return 1;
 }
 
 void SSD1306_UpdateScreen(void)
@@ -152,7 +159,7 @@ void SSD1306_UpdateScreen(void)
 		SSD1306_WRITECOMMAND(0xB0 + m);
 		SSD1306_WRITECOMMAND(0x00);
 		SSD1306_WRITECOMMAND(0x10);
-		SSD1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * m], SSD1306_WIDTH);
+		ssd1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * m], SSD1306_WIDTH);
 	}
 }
 
@@ -484,20 +491,18 @@ void SSD1306_OFF(void)
 	SSD1306_WRITECOMMAND(0xAE);
 }
 
-void SSD1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count)
-{
+e_system ssd1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count) {
 	uint8_t dt[256];
 	dt[0] = reg;
 	uint8_t i;
 	for(i = 0; i < count; i++)
-	dt[i+1] = data[i];
-	HAL_I2C_Master_Transmit(&hi2c1, address, dt, count+1, 10);
+		dt[i+1] = data[i];
+	return I2C_Master_Transmit(address, dt, count+1);
 }
 
-void SSD1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data)
-{
+e_system ssd1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data){
 	uint8_t dt[2];
 	dt[0] = reg;
 	dt[1] = data;
-	HAL_I2C_Master_Transmit(&hi2c1, address, dt, 2, 10);
+	return I2C_Master_Transmit_Blocking(address, dt, 2, 10);
 }
