@@ -114,7 +114,7 @@ void task10ms(){
 	static uint8_t ticker=0;
 
 	if(!SISINIT){
-		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 20000) == HAL_OK){
+		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 5000) == HAL_OK){
 			SSD1306_Init();
 			SISINIT=TRUE;
 		}
