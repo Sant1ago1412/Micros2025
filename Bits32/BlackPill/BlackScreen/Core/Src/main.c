@@ -239,7 +239,6 @@ int main(void)
 
   HAL_Delay(10);
   SSD1306_Init();
-  SSD1306_Fill(WHITE);
   HAL_Delay(100);
 
   CDC_AttachRxData(&UP_datafromUSB);
@@ -633,7 +632,7 @@ void UP_comunicationsTask(_sDato *datosCom){
 }
 
 void I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size){
-//	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
 	HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size);
 //	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
 }

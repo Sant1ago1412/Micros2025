@@ -136,6 +136,7 @@ void SSD1306_Init()
 	SSD1306.Initialized = 1;
 	SSD1306.Page=0;
 	SSD1306.DMA = Init;
+	SSD1306_Fill(BLACK);
 
 }
 

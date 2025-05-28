@@ -1,10 +1,10 @@
-13:47:27 **** Incremental Build of configuration Debug for project BlackScreen ****
+14:30:29 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-size  BlackScreen.elf 
    text	   data	    bss	    dec	    hex	filename
-  47152	    344	   7576	  55072	   d720	BlackScreen.elf
+  48240	    344	   7576	  56160	   db60	BlackScreen.elf
 Finished building: default.size.stdout
  
 
-13:47:28 Build Finished. 0 errors, 0 warnings. (took 630ms)
+14:30:29 Build Finished. 0 errors, 0 warnings. (took 653ms)
 
