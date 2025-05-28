@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
-	<item key="replaceBarOpen" value="false"/>
+	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="ssd1306_I2C_Write"/>
+		<item value="e_system"/>
 		<item value="ABS"/>
+	</list>
+	<list key="replacehistory">
+		<item value="SSD1306_I2C_Write"/>
+		<item value="void"/>
 	</list>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="selection" value="void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){"/>

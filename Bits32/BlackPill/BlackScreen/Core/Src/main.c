@@ -50,6 +50,8 @@
 ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c1;
+DMA_HandleTypeDef hdma_i2c1_tx;
+DMA_HandleTypeDef hdma_i2c1_rx;
 
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim11;
@@ -65,6 +67,7 @@ char buf_oled[20];
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM11_Init(void);
 static void MX_ADC1_Init(void);
@@ -76,14 +79,10 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void task10ms();
 void Engines_task();
-
-e_system I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size);
-
-e_system I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
-
-e_system I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
-
-e_system I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+uint8_t I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address,uint8_t reg, uint8_t *p_Data, uint16_t _Size);
+void I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+void I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+//void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -105,7 +104,19 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM11) {
-		task10ms();
+		task10ms();//cambiar esto por una bandera
+	}
+}
+
+void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
+	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
+		SSD1306_DMAREADY();
+	}
+}
+
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
+	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
+		SSD1306_DMAREADY();
 	}
 }
 
@@ -113,19 +124,20 @@ void task10ms(){
 
 	static uint8_t ticker=0;
 
-	if(!SISINIT){
-		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 20000) == HAL_OK){
-			SSD1306_Init();
-			SISINIT=TRUE;
-		}
-	}
+	SSD1306_UpdateScreen();
+
+//	if(!SISINIT){
+//		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 5000) == HAL_OK){
+//
+//			SISINIT=TRUE;
+//		}
+//	}
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 		ticker=0;
 	}
 	ticker++;
 }
-
 
 void Engines_task(){
 
@@ -200,12 +212,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-   CDC_AttachRxData(&UP_datafromUSB);
-   myFlags.allFlags=0;
-   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
-   en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
-   en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
-   Display_Set_I2C_Master_Transmit(&I2C_1_Abstract_Master_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -217,6 +224,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USB_DEVICE_Init();
   MX_TIM3_Init();
   MX_TIM11_Init();
@@ -229,6 +237,18 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
+  Display_Set_I2C_Master_Transmit(&I2C_1_Abstract_Master_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
+
+  HAL_Delay(10);
+  SSD1306_Init();
+  HAL_Delay(100);
+
+  CDC_AttachRxData(&UP_datafromUSB);
+  myFlags.allFlags=0;
+  UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
+  en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
+  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -239,13 +259,12 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	UP_comunicationsTask(&datosComSerie);
-	SSD1306_Clear();
-		SSD1306_GotoXY(10,20);
-			SSD1306_Puts("MAYER", &Font_11x18, WHITE);
-			SSD1306_GotoXY(15,40);
-			SSD1306_Puts("GAY", &Font_11x18, WHITE);
-			SSD1306_UpdateScreen();
-			HAL_Delay(10000);
+//	SSD1306_GotoXY(10,20);
+//	SSD1306_Puts("MAYER", &Font_11x18, WHITE);
+//	SSD1306_GotoXY(15,40);
+//	SSD1306_Puts("GAY", &Font_11x18, WHITE);
+
+
 //
 //			SSD1306_Clear();
 //			SSD1306_GotoXY(10,1);
@@ -522,6 +541,25 @@ static void MX_TIM11_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -594,21 +632,28 @@ void UP_comunicationsTask(_sDato *datosCom){
 		    }
 	}
 }
-e_system I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size){
-	return (e_system)HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+
+uint8_t I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address,uint8_t reg, uint8_t *p_Data, uint16_t _Size){
+	if(HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size)==HAL_OK)
+		return 1;
+
+//	if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size))
+//		return 1;
+	return 0;
+//	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
 }
 
-e_system I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
-	return (e_system)HAL_I2C_Master_Transmit(&hi2c1, Dev_Address, p_Data, _Size, _Timeout);
+void I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+	HAL_I2C_Master_Transmit(&hi2c1, Dev_Address, p_Data, _Size, _Timeout);
 }
 
-e_system I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
-	return HAL_I2C_Mem_Write(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
+void I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
 }
 
-e_system I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
-	return HAL_I2C_Mem_Read(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
-}
+//void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
+//	HAL_I2C_Mem_Read(&hi2c1, Dev_Address, Mem_Adress, Mem_AddSize, p_Data, _Size, _Timeout);
+//}
 
 
 /* USER CODE END 4 */
