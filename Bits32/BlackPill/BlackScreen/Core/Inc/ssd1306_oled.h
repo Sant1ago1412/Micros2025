@@ -40,8 +40,9 @@ typedef enum {
 	WHITE = 0x01
 } SSD1306_COLOR_t;
 
-void Display_Set_I2C_Master_Transmit(e_system (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),e_system (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
-
+void Display_Set_I2C_Master_Transmit(
+		void (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),
+		void (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
 void SSD1306_Init();
 
 void SSD1306_UpdateScreen(void);
@@ -58,8 +59,8 @@ void SSD1306_DrawTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, ui
 void SSD1306_DrawCircle(int16_t x0, int16_t y0, int16_t r, SSD1306_COLOR_t c);
 void SSD1306_DrawFilledCircle(int16_t x0, int16_t y0, int16_t r, SSD1306_COLOR_t c);
 
-e_system ssd1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data);
-e_system ssd1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count);
+void ssd1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data);
+void ssd1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count);
 void SSD1306_DrawBitmap(int16_t x, int16_t y, const unsigned char* bitmap, int16_t w, int16_t h, uint16_t color);
 void SSD1306_ScrollRight(uint8_t start_row, uint8_t end_row);
 void SSD1306_ScrollLeft(uint8_t start_row, uint8_t end_row);
