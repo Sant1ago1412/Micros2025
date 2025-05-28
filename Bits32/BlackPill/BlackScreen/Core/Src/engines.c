@@ -27,14 +27,14 @@ void en_HandlerENG(_sEng *engines,int32_t newspeed,uint8_t freno){
 		newspeed=engines->maxSpeed;
 	//agregar el caso anterior para negativo
 	if(newspeed<0){
-		engines->estado=BACK;
-		engines->speed=-newspeed;
+		engines->estado= BACK;
+		engines->speed= -newspeed;
 	}else if(newspeed>0){
-		engines->estado=FRONT;
-		engines->speed=newspeed;
+		engines->estado= FRONT;
+		engines->speed= newspeed;
 	}else if(newspeed==0){
-		engines->estado=FREE;
-		engines->speed=0;
+		engines->estado= FREE;
+		engines->speed= 0;
 	}
 
 }

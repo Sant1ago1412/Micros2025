@@ -4,26 +4,13 @@
 #include <string.h>
 
 #define SSD1306_WRITECOMMAND(command)	ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x00, (command))
-#define SSD1306_WRITEDATA(data)      	ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x40, (data))
+//#define SSD1306_WRITEDATA(data)      	ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x40, (data))
 #define ABS(x)   ((x) > 0 ? (x) : -(x))
 
 static uint8_t SSD1306_Buffer[SSD1306_WIDTH * SSD1306_HEIGHT / 8];
 
-static e_system (*I2C_Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size);
-static e_system (*I2C_Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
-
-void Display_Set_I2C_Master_Transmit(
-		e_system (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),
-		e_system (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)){
-	I2C_Master_Transmit = Master_Transmit;
-	I2C_Master_Transmit_Blocking = Master_Transmit_Blocking;
-}
-typedef struct {
-	uint16_t CurrentX;
-	uint16_t CurrentY;
-	uint8_t Inverted;
-	uint8_t Initialized;
-} SSD1306_t;
+static void (*I2C_Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size);
+static void (*I2C_Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 
 static SSD1306_t SSD1306;
 
@@ -144,22 +131,40 @@ void SSD1306_Init()
 	SSD1306_WRITECOMMAND(0xAF);
 	SSD1306_WRITECOMMAND(SSD1306_DEACTIVATE_SCROLL);
 
-	SSD1306_Fill(BLACK);
-	SSD1306_UpdateScreen();
 	SSD1306.CurrentX = 0;
 	SSD1306.CurrentY = 0;
 	SSD1306.Initialized = 1;
+	SSD1306.Page=0;
+	SSD1306.DMA = Init;
+	SSD1306_Fill(BLACK);
+
 }
 
 void SSD1306_UpdateScreen(void)
 {
-	uint8_t m;
-	for(m=0; m<8; m++)
-	{
-		SSD1306_WRITECOMMAND(0xB0 + m);
-		SSD1306_WRITECOMMAND(0x00);
-		SSD1306_WRITECOMMAND(0x10);
-		ssd1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * m], SSD1306_WIDTH);
+	switch(SSD1306.DMA){
+		case Init:
+			SSD1306.DMA=Ready;
+			break;
+		case Waiting:
+			//uso esto para esperar al callback del dma
+			break;
+		case Printing:
+			SSD1306.DMA=Waiting;
+			SSD1306.Page++;
+			break;
+		case Ready:
+			SSD1306_WRITECOMMAND(0xB0 + SSD1306.Page);
+			SSD1306_WRITECOMMAND(0x00);
+			SSD1306_WRITECOMMAND(0x10);
+			ssd1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * SSD1306.Page], SSD1306_WIDTH);
+			SSD1306.DMA=Printing;
+			break;
+		default:
+			break;
+		}
+	if(SSD1306.Page>7){
+		SSD1306.Page=0;
 	}
 }
 
@@ -491,18 +496,28 @@ void SSD1306_OFF(void)
 	SSD1306_WRITECOMMAND(0xAE);
 }
 
-e_system ssd1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count) {
+void ssd1306_I2C_WriteMulti(uint8_t address, uint8_t reg, uint8_t* data, uint16_t count) {
 	uint8_t dt[256];
 	dt[0] = reg;
 	uint8_t i;
 	for(i = 0; i < count; i++)
 		dt[i+1] = data[i];
-	return I2C_Master_Transmit(address, dt, count+1);
+
+	I2C_Master_Transmit(address, dt, count+1);
 }
 
-e_system ssd1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data){
+void ssd1306_I2C_Write(uint8_t address, uint8_t reg, uint8_t data){
 	uint8_t dt[2];
 	dt[0] = reg;
 	dt[1] = data;
-	return I2C_Master_Transmit_Blocking(address, dt, 2, 10);
+	I2C_Master_Transmit_Blocking(address, dt, 2, 10);
+}
+
+void Display_Set_I2C_Master_Transmit(void (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),void (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)){
+	I2C_Master_Transmit = Master_Transmit;
+	I2C_Master_Transmit_Blocking = Master_Transmit_Blocking;
+}
+
+void SSD1306_DMAREADY(){
+	SSD1306.DMA=Ready;
 }
