@@ -51,6 +51,7 @@ ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c1;
 DMA_HandleTypeDef hdma_i2c1_tx;
+DMA_HandleTypeDef hdma_i2c1_rx;
 
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim11;
@@ -103,13 +104,25 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM11) {
-		task10ms();
+		task10ms();//cambiar esto por una bandera
 	}
 }
 
+void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
+	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
+		SSD1306_DMAREADY();
+	}
+}
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
+	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
+		SSD1306_DMAREADY();
+	}
+}
 void task10ms(){
 
 	static uint8_t ticker=0;
+
+	SSD1306_UpdateScreen();
 
 	if(!SISINIT){
 		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 5000) == HAL_OK){
@@ -226,6 +239,7 @@ int main(void)
 
   HAL_Delay(10);
   SSD1306_Init();
+  SSD1306_Fill(WHITE);
   HAL_Delay(100);
 
   CDC_AttachRxData(&UP_datafromUSB);
@@ -244,13 +258,12 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	UP_comunicationsTask(&datosComSerie);
-	SSD1306_Clear();
-		SSD1306_GotoXY(10,20);
-			SSD1306_Puts("MAYER", &Font_11x18, WHITE);
-			SSD1306_GotoXY(15,40);
-			SSD1306_Puts("GAY", &Font_11x18, WHITE);
-			SSD1306_UpdateScreen();
-			HAL_Delay(10000);
+//	SSD1306_GotoXY(10,20);
+//	SSD1306_Puts("MAYER", &Font_11x18, WHITE);
+//	SSD1306_GotoXY(15,40);
+//	SSD1306_Puts("GAY", &Font_11x18, WHITE);
+
+
 //
 //			SSD1306_Clear();
 //			SSD1306_GotoXY(10,1);
@@ -536,6 +549,9 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
   /* DMA1_Stream1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
@@ -617,7 +633,8 @@ void UP_comunicationsTask(_sDato *datosCom){
 }
 
 void I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size){
-	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+//	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+	HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size);
 //	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
 }
 

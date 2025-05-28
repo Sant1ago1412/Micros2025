@@ -30,16 +30,26 @@
 #define ssd1306_I2C_TIMEOUT		20000
 #endif
 
-typedef enum{
-	SYS_OK,
-	SYS_ERROR
-}e_system;
-
 typedef enum {
 	BLACK = 0x00,
 	WHITE = 0x01
 } SSD1306_COLOR_t;
 
+typedef enum{
+	Init,
+	Waiting,
+	Printing,
+	Ready
+}_eDMA_Status;
+
+typedef struct {
+	uint16_t CurrentX;
+	uint16_t CurrentY;
+	uint8_t Inverted;
+	uint8_t Initialized;
+	uint8_t Page;
+	_eDMA_Status DMA;
+} SSD1306_t;
 void Display_Set_I2C_Master_Transmit(
 		void (*Master_Transmit)(uint16_t DevAddress, uint8_t *pData, uint16_t Size),
 		void (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
@@ -69,5 +79,7 @@ void SSD1306_Scrolldiagleft(uint8_t start_row, uint8_t end_row);
 void SSD1306_Stopscroll(void);
 void SSD1306_InvertDisplay(int i);
 void SSD1306_Clear(void);
+
+void SSD1306_DMAREADY();
 
 #endif
