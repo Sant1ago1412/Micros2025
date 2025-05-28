@@ -617,8 +617,8 @@ void UP_comunicationsTask(_sDato *datosCom){
 }
 
 void I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size){
-	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
-//	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
+//	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size);
+	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
 }
 
 void I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
