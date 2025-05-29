@@ -78,7 +78,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void task10ms();
 void Engines_task();
-uint8_t I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address,uint8_t reg, uint8_t *p_Data, uint16_t _Size);
+uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
 uint8_t I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 uint8_t I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 //void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
@@ -112,16 +112,7 @@ void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 		SSD1306_DMAREADY();
 	}
 }
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
-	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-			SSD1306_DMAREADY();
-		}
-}
-void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
-	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-			SSD1306_DMAREADY();
-		}
-}
+
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
 		SSD1306_DMAREADY();
@@ -131,8 +122,6 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
 void task10ms(){
 
 	static uint8_t ticker=0;
-
-	SSD1306_UpdateScreen();
 
 //	if(!SISINIT){
 //		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 5000) == HAL_OK){
@@ -246,12 +235,10 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-  Display_Set_I2C_Master_Transmit(&I2C_1_Abstract_Master_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
+  Display_Set_I2C_Master_Transmit(&I2C_DMA_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
 
   SSD1306_Init();
-  HAL_Delay(100);
 
-  SSD1306_Init();
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
@@ -268,6 +255,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	UP_comunicationsTask(&datosComSerie);
+	SSD1306_UpdateScreen();
 //	SSD1306_GotoXY(10,20);
 //	SSD1306_Puts("OLED I2C SSD1306", &Font_7x10, WHITE);
 //	SSD1306_GotoXY(15,40);
@@ -642,14 +630,19 @@ void UP_comunicationsTask(_sDato *datosCom){
 	}
 }
 
-uint8_t I2C_1_Abstract_Master_Transmit(uint16_t Dev_Address,uint8_t reg, uint8_t *p_Data, uint16_t _Size){
+uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size){
 
-//	return (uint8_t)HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size);
-	 HAL_I2C_Master_Transmit(&hi2c1, Dev_Address, p_Data, _Size, 1000);
-	 if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size)==HAL_OK){
-		 return 1;
-	 }
-	 return 0;
+//	if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size)==HAL_OK)
+//		return 1;
+//	HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size);
+	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size);
+//	if(HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size)==HAL_OK)
+//		return 1;
+
+//	 if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size)==HAL_OK){
+//		 return 1;
+//	 }
+	 return 1;
 //		return 1;
 //	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
 }

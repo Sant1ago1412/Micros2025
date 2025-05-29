@@ -3,12 +3,19 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="I2C_Master_Transmit"/>
+		<item value="I2C_1_DMA_Master_Transmit"/>
+		<item value="I2C_1_Abstract_Master_Transmit"/>
+		<item value="uint8_t reg"/>
 		<item value="e_system "/>
 		<item value="e_system"/>
 		<item value="ssd1306_I2C_Write"/>
 		<item value="ABS"/>
 	</list>
 	<list key="replacehistory">
+		<item value="I2C_DMA_Master_Transmit"/>
+		<item value="I2C_1_DMA_Master_Transmit"/>
+		<item value="uint16_t reg"/>
 		<item value="uint8_t"/>
 		<item value="SSD1306_I2C_Write"/>
 		<item value="void"/>
