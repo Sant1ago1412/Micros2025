@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
 <workingSet editPageId="org.eclipse.cdt.ui.CElementWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748191136296_1" label="BlackScreen" name="BlackScreen"/>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1748476631073_2" label="black" name="black"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1747242129478_0" label="Window Working Set" name="Aggregate for window 1747242129477"/>
+<mruList name="black"/>
 <mruList name="BlackScreen"/>
 </workingSetManager>

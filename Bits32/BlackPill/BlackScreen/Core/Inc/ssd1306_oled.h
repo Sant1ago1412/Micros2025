@@ -36,7 +36,6 @@ typedef enum {
 } SSD1306_COLOR_t;
 
 typedef enum{
-	Waiting,
 	CMD,
 	Data
 }_eDMA_Status;
@@ -52,7 +51,7 @@ typedef struct {
 } SSD1306_t;
 void Display_Set_I2C_Master_Transmit(
 		uint8_t (*Master_Transmit)(uint16_t DevAddress, uint8_t reg,uint8_t *pData, uint16_t Size),
-		void (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
+		uint8_t (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
 void SSD1306_Init();
 
 void SSD1306_UpdateScreen(void);

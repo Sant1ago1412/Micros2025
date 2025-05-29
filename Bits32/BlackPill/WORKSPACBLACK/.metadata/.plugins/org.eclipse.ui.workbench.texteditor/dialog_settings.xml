@@ -3,11 +3,13 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
-		<item value="ssd1306_I2C_Write"/>
+		<item value="e_system "/>
 		<item value="e_system"/>
+		<item value="ssd1306_I2C_Write"/>
 		<item value="ABS"/>
 	</list>
 	<list key="replacehistory">
+		<item value="uint8_t"/>
 		<item value="SSD1306_I2C_Write"/>
 		<item value="void"/>
 	</list>
