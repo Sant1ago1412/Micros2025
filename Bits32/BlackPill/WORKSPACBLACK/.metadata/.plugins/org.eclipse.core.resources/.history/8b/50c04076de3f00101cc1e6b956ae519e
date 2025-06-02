@@ -533,7 +533,3 @@ void Display_Set_I2C_Master_Transmit(uint8_t (*Master_Transmit)(uint16_t DevAddr
 void SSD1306_DMAREADY(){
 	SSD1306.DMAREADY=1;
 }
-
-void SSD1306_RefreshReady(){
-	SSD1306.Needtorefresh=1;
-}

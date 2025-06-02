@@ -26,3 +26,4 @@
 ../Core/Src/ssd1306_oled.c:521:6:SSD1306_I2C_Write	32	static
 ../Core/Src/ssd1306_oled.c:528:6:Display_Set_I2C_Master_Transmit	16	static
 ../Core/Src/ssd1306_oled.c:533:6:SSD1306_DMAREADY	4	static
+../Core/Src/ssd1306_oled.c:537:6:SSD1306_RefreshReady	4	static

@@ -257,7 +257,7 @@ int main(void)
 			HAL_Delay(2000);
 
 			SSD1306_Clear();
-			SSD1306_GotoXY(10,3);
+			SSD1306_GotoXY(10,1);
 			SSD1306_Puts("Font 1", &Font_7x10, WHITE);
 			SSD1306_GotoXY(10,15);
 			SSD1306_Puts("Font 2", &Font_11x18, WHITE);
