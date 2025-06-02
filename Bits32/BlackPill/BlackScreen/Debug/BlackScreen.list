@@ -2448,8 +2448,8 @@ void SSD1306_Init()
  8001352:	4b05      	ldr	r3, [pc, #20]	@ (8001368 <SSD1306_Init+0x160>)
  8001354:	2201      	movs	r2, #1
  8001356:	72da      	strb	r2, [r3, #11]
-	SSD1306_Fill(WHITE);
- 8001358:	2001      	movs	r0, #1
+	SSD1306_Fill(BLACK);
+ 8001358:	2000      	movs	r0, #0
  800135a:	f000 f867 	bl	800142c <SSD1306_Fill>
 	SSD1306_UpdateScreen();
  800135e:	f000 f805 	bl	800136c <SSD1306_UpdateScreen>
