@@ -13,7 +13,6 @@ static uint8_t (*I2C_DMA_Master_Transmit)(uint16_t DevAddress,uint16_t reg, uint
 static uint8_t (*I2C_Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 
 static SSD1306_t SSD1306;
-static uint8_t DMAREADY;
 
 void SSD1306_ScrollRight(uint8_t start_row, uint8_t end_row)
 {
@@ -137,7 +136,8 @@ void SSD1306_Init()
 	SSD1306.Initialized = 1;
 	SSD1306.Page=0;
 	SSD1306.DMA = CMD;
-	DMAREADY=1;
+	SSD1306.DMAREADY=1;
+	SSD1306.Needtorefresh=1;
 	SSD1306_Fill(WHITE);
 	SSD1306_UpdateScreen();
 
@@ -153,19 +153,16 @@ void SSD1306_UpdateScreen(void)
 //			SSD1306_WRITECOMMAND(0x10);
 //			SSD1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * m], SSD1306_WIDTH);
 //		}
-	if(DMAREADY==1){
+	if(SSD1306.DMAREADY && SSD1306.Needtorefresh){
 		switch(SSD1306.DMA){
 			case Data:
 				if(I2C_DMA_Master_Transmit(SSD1306_I2C_ADDR,0x40, &SSD1306_Buffer[0], sizeof(SSD1306_Buffer))==1){
 					SSD1306.Page++;
 					SSD1306.DMA=CMD;
-					DMAREADY=0;
+					SSD1306.DMAREADY=0;
 				}
 				break;
 			case CMD:
-	//			SSD1306_WRITECOMMAND(0xB0 + SSD1306.Page);
-	//			SSD1306_WRITECOMMAND(0x00);
-	//			SSD1306_WRITECOMMAND(0x10);
 
 				SSD1306.Commands[0]=0xB0 + SSD1306.Page;
 				SSD1306.Commands[1]=0x00;
@@ -173,7 +170,7 @@ void SSD1306_UpdateScreen(void)
 
 				if(I2C_DMA_Master_Transmit(SSD1306_I2C_ADDR,0x00, &SSD1306.Commands[0],3)==1){
 					SSD1306.DMA=Data;
-					DMAREADY=0;
+					SSD1306.DMAREADY=0;
 				}
 				break;
 
@@ -183,6 +180,7 @@ void SSD1306_UpdateScreen(void)
 			}
 		if(SSD1306.Page>7){
 			SSD1306.Page=0;
+			SSD1306.Needtorefresh=0;
 		}
 	}
 }
@@ -533,5 +531,5 @@ void Display_Set_I2C_Master_Transmit(uint8_t (*Master_Transmit)(uint16_t DevAddr
 }
 
 void SSD1306_DMAREADY(){
-	DMAREADY=1;
+	SSD1306.DMAREADY=1;
 }

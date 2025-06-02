@@ -1,0 +1,23 @@
+19:15:08 **** Incremental Build of configuration Debug for project BlockedScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "BlockedScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlockedScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlockedScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlockedScreen.elf
+ 
+arm-none-eabi-size  BlockedScreen.elf 
+arm-none-eabi-objdump -h -S BlockedScreen.elf  > "BlockedScreen.list"
+arm-none-eabi-objcopy  -O ihex BlockedScreen.elf  "BlockedScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  33880	    116	   3036	  37032	   90a8	BlockedScreen.elf
+arm-none-eabi-objcopy  -O binary BlockedScreen.elf  "BlockedScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlockedScreen.hex
+Finished building: BlockedScreen.bin
+Finished building: BlockedScreen.list
+ 
+ 
+ 
+
+19:15:09 Build Finished. 0 errors, 0 warnings. (took 1s.392ms)
+

@@ -1,0 +1,10 @@
+15:09:10 **** Incremental Build of configuration Debug for project PruebaPatnallaBLUE ****
+make -j8 all 
+arm-none-eabi-size  PruebaPatnallaBLUE.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22432	     16	   2912	  25360	   6310	PruebaPatnallaBLUE.elf
+Finished building: default.size.stdout
+ 
+
+15:09:11 Build Finished. 0 errors, 0 warnings. (took 511ms)
+

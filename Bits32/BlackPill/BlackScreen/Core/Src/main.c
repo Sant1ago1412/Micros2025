@@ -113,12 +113,6 @@ void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 	}
 }
 
-void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
-	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-		SSD1306_DMAREADY();
-	}
-}
-
 void task10ms(){
 
 	static uint8_t ticker=0;
@@ -131,7 +125,6 @@ void task10ms(){
 //	}
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		SSD1306_Fill(WHITE);
 		ticker=0;
 	}
 	ticker++;
@@ -256,10 +249,10 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	UP_comunicationsTask(&datosComSerie);
 	SSD1306_UpdateScreen();
-//	SSD1306_GotoXY(10,20);
-//	SSD1306_Puts("OLED I2C SSD1306", &Font_7x10, WHITE);
-//	SSD1306_GotoXY(15,40);
-//	SSD1306_Puts("STM32F103C8T6", &Font_7x10, WHITE);
+	SSD1306_GotoXY(10,20);
+	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
+	SSD1306_GotoXY(15,40);
+	SSD1306_Puts("GAY", &Font_7x10, WHITE);
 
 //			HAL_Delay(2000);
 //
