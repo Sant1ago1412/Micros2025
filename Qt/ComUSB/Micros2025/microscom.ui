@@ -6,37 +6,96 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>488</width>
-    <height>424</height>
+    <width>491</width>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MicrosCom</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="plainTextEdit"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="Comand"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QComboBox" name="SerialPort"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="Connect">
-      <property name="text">
-       <string>Connect</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="SendButton">
-      <property name="text">
-       <string>SendCMD</string>
-      </property>
-     </widget>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLCDNumber" name="Gy"/>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="Gz"/>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="Gx"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLCDNumber" name="Ay"/>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="Az"/>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="Ax"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QComboBox" name="SerialPort"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Connect">
+            <property name="text">
+             <string>Connect</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QComboBox" name="Comand"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="SendButton">
+            <property name="text">
+             <string>SendCMD</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPlainTextEdit" name="plainTextEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -45,7 +104,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>488</width>
+     <width>491</width>
      <height>21</height>
     </rect>
    </property>
