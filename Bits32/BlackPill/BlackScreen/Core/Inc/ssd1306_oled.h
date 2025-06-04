@@ -47,7 +47,7 @@ typedef struct {
 	uint8_t Initialized;
 	uint8_t Page;
 	_eDMA_Status DMA;
-	uint8_t Commands[3];
+	uint8_t Commands[8];
 	uint8_t Needtorefresh;
 	uint8_t DMAREADY;
 } SSD1306_t;
@@ -82,5 +82,5 @@ void SSD1306_InvertDisplay(int i);
 void SSD1306_Clear(void);
 
 void SSD1306_DMAREADY();
-
+void SSD1306_RefreshReady();
 #endif

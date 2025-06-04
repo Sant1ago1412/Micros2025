@@ -26,6 +26,8 @@
 #include "engines.h"
 #include "ssd1306_oled.h"
 #include "fonts.h"
+#include "Logo.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -237,7 +239,7 @@ int main(void)
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
   en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
   en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
-
+  SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -249,58 +251,60 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	UP_comunicationsTask(&datosComSerie);
 	SSD1306_UpdateScreen();
-	SSD1306_GotoXY(10,20);
-	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
-	SSD1306_GotoXY(15,40);
-	SSD1306_Puts("GAY", &Font_7x10, WHITE);
-
-			HAL_Delay(2000);
-
-			SSD1306_Clear();
-			SSD1306_GotoXY(10,3);
-			SSD1306_Puts("Font 1", &Font_7x10, WHITE);
-			SSD1306_GotoXY(10,15);
-			SSD1306_Puts("Font 2", &Font_11x18, WHITE);
-			SSD1306_GotoXY(10,35);
-			SSD1306_Puts("Font 3", &Font_16x26, WHITE);
-			SSD1306_UpdateScreen();
-			HAL_Delay(2000);
-
-			SSD1306_Clear();
-			SSD1306_DrawRectangle(2, 2, 123, 60, WHITE);
-			SSD1306_GotoXY(10,10);
-			SSD1306_Puts("CONTADOR", &Font_7x10, WHITE);
-			SSD1306_DrawCircle(95, 35, 16, WHITE);
-			SSD1306_UpdateScreen();
-
-			uint8_t contador = 0;
-			while(contador <= 10)
-			{
-				SSD1306_GotoXY(30,30);
-				sprintf(buf_oled, "%u ", contador);
-				SSD1306_Puts(buf_oled, &Font_11x18, WHITE);
-				SSD1306_UpdateScreen();
-				contador++;
-				HAL_Delay(400);
-			}
-			SSD1306_DrawFilledCircle(95, 35, 16, WHITE);
-			SSD1306_UpdateScreen();
-			HAL_Delay(1000);
+	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
+//	SSD1306_GotoXY(10,20);
+//	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
+//	SSD1306_GotoXY(15,40);
+//	SSD1306_Puts("GAY", &Font_7x10, WHITE);
+//
+//			HAL_Delay(2000);
+//
+//			SSD1306_Clear();
+//			SSD1306_GotoXY(10,3);
+//			SSD1306_Puts("Font 1", &Font_7x10, WHITE);
+//			SSD1306_GotoXY(10,15);
+//			SSD1306_Puts("Font 2", &Font_11x18, WHITE);
+//			SSD1306_GotoXY(10,35);
+//			SSD1306_Puts("Font 3", &Font_16x26, WHITE);
+//			SSD1306_UpdateScreen();
+//			HAL_Delay(2000);
+//
+//			SSD1306_Clear();
+//			SSD1306_DrawRectangle(2, 2, 123, 60, WHITE);
+//			SSD1306_GotoXY(10,10);
+//			SSD1306_Puts("CONTADOR", &Font_7x10, WHITE);
+//			SSD1306_DrawCircle(95, 35, 16, WHITE);
+//			SSD1306_UpdateScreen();
+//
+//			uint8_t contador = 0;
+//			while(contador <= 10)
+//			{
+//				SSD1306_GotoXY(30,30);
+//				sprintf(buf_oled, "%u ", contador);
+//				SSD1306_Puts(buf_oled, &Font_11x18, WHITE);
+//				SSD1306_UpdateScreen();
+//				contador++;
+//				HAL_Delay(400);
+//			}
+//			SSD1306_DrawFilledCircle(95, 35, 16, WHITE);
+//			SSD1306_UpdateScreen();
+//			HAL_Delay(1000);
 
 //			SSD1306_Clear();
-//			SSD1306_DrawBitmap(0, 0, imagen, 128, 64, WHITE);
+
 //			SSD1306_UpdateScreen();
 //			HAL_Delay(2000);
 
-			SSD1306_ScrollRight(0, 0x0F);
-			HAL_Delay(4000);
-			SSD1306_ScrollLeft(0, 0x0F);
-			HAL_Delay(4000);
-			SSD1306_Stopscroll();
-			HAL_Delay(1000);
-
-			SSD1306_Clear();
-			HAL_Delay(500);
+//			SSD1306_ScrollRight(0, 0xFF);
+//			SSD1306_RefreshReady();
+//			HAL_Delay(4000);
+//			SSD1306_ScrollLeft(0, 0x0F);
+//			HAL_Delay(4000);
+//			SSD1306_Stopscroll();
+//			HAL_Delay(1000);
+//
+//			SSD1306_Clear();
+//			HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
