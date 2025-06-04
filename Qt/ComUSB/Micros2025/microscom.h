@@ -51,7 +51,10 @@ public:
 private slots:
 
     void OnRxChar();
+
     void OnQTimer1();
+
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
     void on_pushButton_clicked();
 

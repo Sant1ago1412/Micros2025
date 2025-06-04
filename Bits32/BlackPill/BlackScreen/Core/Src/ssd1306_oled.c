@@ -150,14 +150,6 @@ void SSD1306_Init()
 
 void SSD1306_UpdateScreen(void)
 {
-//	uint8_t m;
-//		for(m=0; m<8; m++)
-//		{
-//			SSD1306_WRITECOMMAND(0xB0 + m);
-//			SSD1306_WRITECOMMAND(0x00);
-//			SSD1306_WRITECOMMAND(0x10);
-//			SSD1306_I2C_WriteMulti(SSD1306_I2C_ADDR, 0x40, &SSD1306_Buffer[SSD1306_WIDTH * m], SSD1306_WIDTH);
-//		}
 	if(SSD1306.DMAREADY && SSD1306.Needtorefresh){
 		switch(SSD1306.DMA){
 			case Data:

@@ -7,7 +7,7 @@ MicrosCom::MicrosCom(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("AUTO CP3");
+    this->setWindowTitle("AUTO MICROS");
 
 //    setStyleSheet( "QInputDialog {background-color: rgb(0,85,0); font: bold italic large Comic Sans Ms; font: bold 40px;}");
 
@@ -38,6 +38,26 @@ MicrosCom::~MicrosCom()
     // delete QPaintBox1;
     // delete QUdpSocket1;
     delete QSerialPort1;
+}
+
+bool MicrosCom::eventFilter(QObject *watched, QEvent *event){
+    if(watched == ui->SerialPort) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            ui->SerialPort->clear();
+            QSerialPortInfo SerialPortInfo1;
+
+            for(int i=0;i<SerialPortInfo1.availablePorts().count();i++)
+                ui->SerialPort->addItem(SerialPortInfo1.availablePorts().at(i).portName());
+
+            return QMainWindow::eventFilter(watched, event);
+        }
+        else {
+            return false;
+        }
+    }
+    else{
+        return QMainWindow::eventFilter(watched, event);
+    }
 }
 
 void MicrosCom::OnRxChar(){
