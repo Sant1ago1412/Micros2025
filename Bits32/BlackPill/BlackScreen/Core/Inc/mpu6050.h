@@ -15,6 +15,7 @@
 #define TEMP_OUT_H_REG 0x41
 #define GYRO_CONFIG_REG 0x1B
 #define GYRO_XOUT_H_REG 0x43
+#define LOWPASS_CONFIG 0x1A
 
 // Setup MPU6050
 #define MPU6050_ADDR 0xD0
@@ -25,21 +26,17 @@ typedef struct {
     int16_t Accel_X_RAW;
     int16_t Accel_Y_RAW;
     int16_t Accel_Z_RAW;
-    float Ax;
-    float Ay;
-    float Az;
+
+    int16_t temp;
 
     int16_t Gyro_X_RAW;
     int16_t Gyro_Y_RAW;
     int16_t Gyro_Z_RAW;
-    float Gx;
-    float Gy;
-    float Gz;
 
-    float Temperature;
 
-    float KalmanAngleX;
-    float KalmanAngleY;
+//
+//    float KalmanAngleX;
+//    float KalmanAngleY;
 
 } MPU6050_t;
 
@@ -63,13 +60,13 @@ void MPU6050_NonBlocking_DMA(
 
 void MPU6050_I2C_Blocking(uint8_t (*Recive_Blocking)(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size),
 		uint8_t (*Transmit_Blocking)(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout));
-void MPU6050_Read_Accel(MPU6050_t *DataStruct);
+void MPU6050_Read_Accel(MPU6050_t *MpuData);
 
-void MPU6050_Read_Gyro(MPU6050_t *DataStruct);
+void MPU6050_Read_Gyro(MPU6050_t *MpuData);
 
-void MPU6050_Read_Temp(MPU6050_t *DataStruct);
+void MPU6050_Read_Temp();
 
-void MPU6050_Read_All(MPU6050_t *DataStruct);
+void MPU6050_Read_All(MPU6050_t *MpuData);
 
 void MPU6050_DMAREADY();
 

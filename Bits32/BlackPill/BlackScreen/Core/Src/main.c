@@ -28,6 +28,7 @@
 #include "fonts.h"
 #include "Logo.h"
 #include "mpu6050.h"
+//#include "mpu6050.h"
 
 /* USER CODE END Includes */
 
@@ -42,6 +43,7 @@
 #define NUM_CHANNELS 8
 #define RINGBUFFER 256
 #define SISINIT  myFlags.individualFlags.bit0
+#define IS10MS 	 myFlags.individualFlags.bit1
 
 /* USER CODE END PD */
 
@@ -65,7 +67,7 @@ _sDato datosComSerie;
 uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
 _sEng motorL,motorR;
-char buf_oled[20];
+MPU6050_t mpuValues;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,7 +90,7 @@ uint8_t I2C_DMA_Recive(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16
 uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
 uint8_t I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 uint8_t I2C_1_Abstract_Mem_Write_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
-//void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
+void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,7 +112,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM11) {
-		task10ms();//cambiar esto por una bandera
+		IS10MS = TRUE;
 	}
 }
 
@@ -130,22 +132,19 @@ void task10ms(){
 
 	static uint8_t ticker=0;
 
-//	if(!SISINIT){
-//		if(HAL_I2C_IsDeviceReady(&hi2c1, SSD1306_I2C_ADDR, 1, 5000) == HAL_OK){
-//
-//			SISINIT=TRUE;
-//		}
-//	}
+//	MPU6050_Read_All(&mpuValues);
+
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
 	}
-	if(ticker%200==0){
-		if(SISINIT){
+	if(ticker==255){
+		if(!SISINIT){
 			SSD1306_Clear();
 			SSD1306_RefreshReady();
 		}
 		SISINIT=TRUE;
+//		UP_sendInfo((uint8_t*)&mpuValues, 28);
 		ticker=0;
 	}
 	ticker++;
@@ -253,13 +252,17 @@ int main(void)
   MPU6050_I2C_Blocking(&I2C_RBlocking,&I2C_1_Abstract_Mem_Write_Blocking);
   MPU6050_NonBlocking_DMA(&I2C_DMA_Transmit,&I2C_DMA_Recive);
   SSD1306_Init();
+  MPU6050_Init();
 
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
   en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
   en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+
+  SSD1306_RefreshReady();
   SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -269,13 +272,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  if(IS10MS){
+		 task10ms();
+		 IS10MS=FALSE;
+	  }
 	UP_comunicationsTask(&datosComSerie);
 	SSD1306_UpdateScreen();
-//	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
-//	SSD1306_GotoXY(10,20);
-//	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
-//	SSD1306_GotoXY(15,40);
-//	SSD1306_Puts("GAY", &Font_7x10, WHITE);
+	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
+	SSD1306_GotoXY(10,20);
+	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
+	SSD1306_GotoXY(15,40);
+	SSD1306_Puts("GAY", &Font_7x10, WHITE);
 //
 //			HAL_Delay(2000);
 //
@@ -649,19 +656,8 @@ void UP_comunicationsTask(_sDato *datosCom){
 
 uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size){
 
-//	if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size)==HAL_OK)
-//		return 1;
-//	HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size);
 	HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size);
-//	if(HAL_I2C_Mem_Write_DMA(&hi2c1, Dev_Address, reg, 1, p_Data, _Size)==HAL_OK)
-//		return 1;
-
-//	 if(HAL_I2C_Master_Transmit_DMA(&hi2c1, Dev_Address, p_Data, _Size)==HAL_OK){
-//		 return 1;
-//	 }
-	 return 1;
-//		return 1;
-//	HAL_I2C_Mem_Write(&hi2c1, Dev_Address, 0x40, 1, p_Data, _Size, 10);
+	return 1;
 }
 
 uint8_t I2C_1_Abstract_Master_Transmit_Blocking(uint16_t Dev_Address, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){

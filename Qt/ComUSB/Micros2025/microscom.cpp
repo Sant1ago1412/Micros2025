@@ -157,7 +157,9 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
 
         ui->plainTextEdit->appendPlainText("NO CMD");
         break;
+    case MPUDATA:
 
+        break;
     default:
 
         break;

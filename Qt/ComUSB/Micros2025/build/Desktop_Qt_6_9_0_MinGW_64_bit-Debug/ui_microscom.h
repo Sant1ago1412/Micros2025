@@ -15,10 +15,12 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -29,25 +31,31 @@ class Ui_MicrosCom
 {
 public:
     QWidget *centralwidget;
-    QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout_7;
-    QHBoxLayout *horizontalLayout_4;
-    QLCDNumber *Gy;
-    QLCDNumber *Gz;
-    QLCDNumber *Gx;
-    QHBoxLayout *horizontalLayout_5;
-    QLCDNumber *Ay;
-    QLCDNumber *Az;
-    QLCDNumber *Ax;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_5;
     QComboBox *SerialPort;
     QPushButton *Connect;
-    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_3;
     QComboBox *Comand;
     QPushButton *SendButton;
     QPlainTextEdit *plainTextEdit;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout_4;
+    QSpacerItem *verticalSpacer_2;
+    QLabel *label;
+    QHBoxLayout *horizontalLayout_4;
+    QLCDNumber *Gx;
+    QLCDNumber *Gy;
+    QLCDNumber *Gz;
+    QVBoxLayout *verticalLayout_3;
+    QSpacerItem *verticalSpacer;
+    QLabel *label_2;
+    QHBoxLayout *horizontalLayout_5;
+    QLCDNumber *Ax;
+    QLCDNumber *Ay;
+    QLCDNumber *Az;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -55,19 +63,81 @@ public:
     {
         if (MicrosCom->objectName().isEmpty())
             MicrosCom->setObjectName("MicrosCom");
-        MicrosCom->resize(491, 370);
+        MicrosCom->resize(762, 374);
         centralwidget = new QWidget(MicrosCom);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
         centralwidget->setMouseTracking(false);
-        gridLayout_2 = new QGridLayout(centralwidget);
-        gridLayout_2->setObjectName("gridLayout_2");
-        gridLayout = new QGridLayout();
+        gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName("gridLayout");
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setObjectName("verticalLayout_7");
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(10);
+        horizontalLayout->setObjectName("horizontalLayout");
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        SerialPort = new QComboBox(centralwidget);
+        SerialPort->setObjectName("SerialPort");
+
+        horizontalLayout_2->addWidget(SerialPort);
+
+        Connect = new QPushButton(centralwidget);
+        Connect->setObjectName("Connect");
+
+        horizontalLayout_2->addWidget(Connect);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        Comand = new QComboBox(centralwidget);
+        Comand->setObjectName("Comand");
+
+        horizontalLayout_3->addWidget(Comand);
+
+        SendButton = new QPushButton(centralwidget);
+        SendButton->setObjectName("SendButton");
+
+        horizontalLayout_3->addWidget(SendButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        plainTextEdit = new QPlainTextEdit(centralwidget);
+        plainTextEdit->setObjectName("plainTextEdit");
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
+        plainTextEdit->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(plainTextEdit);
+
+
+        horizontalLayout->addLayout(verticalLayout);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        verticalLayout_4->addItem(verticalSpacer_2);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+
+        verticalLayout_4->addWidget(label);
+
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
+        Gx = new QLCDNumber(centralwidget);
+        Gx->setObjectName("Gx");
+
+        horizontalLayout_4->addWidget(Gx);
+
         Gy = new QLCDNumber(centralwidget);
         Gy->setObjectName("Gy");
 
@@ -78,16 +148,34 @@ public:
 
         horizontalLayout_4->addWidget(Gz);
 
-        Gx = new QLCDNumber(centralwidget);
-        Gx->setObjectName("Gx");
+        horizontalLayout_4->setStretch(0, 1);
+        horizontalLayout_4->setStretch(1, 1);
+        horizontalLayout_4->setStretch(2, 1);
 
-        horizontalLayout_4->addWidget(Gx);
+        verticalLayout_4->addLayout(horizontalLayout_4);
 
+        verticalLayout_4->setStretch(2, 1);
 
-        verticalLayout_7->addLayout(horizontalLayout_4);
+        verticalLayout_2->addLayout(verticalLayout_4);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+
+        verticalLayout_3->addWidget(label_2);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName("horizontalLayout_5");
+        Ax = new QLCDNumber(centralwidget);
+        Ax->setObjectName("Ax");
+
+        horizontalLayout_5->addWidget(Ax);
+
         Ay = new QLCDNumber(centralwidget);
         Ay->setObjectName("Ay");
 
@@ -98,69 +186,28 @@ public:
 
         horizontalLayout_5->addWidget(Az);
 
-        Ax = new QLCDNumber(centralwidget);
-        Ax->setObjectName("Ax");
+        horizontalLayout_5->setStretch(0, 1);
+        horizontalLayout_5->setStretch(1, 1);
+        horizontalLayout_5->setStretch(2, 1);
 
-        horizontalLayout_5->addWidget(Ax);
+        verticalLayout_3->addLayout(horizontalLayout_5);
 
+        verticalLayout_3->setStretch(2, 1);
 
-        verticalLayout_7->addLayout(horizontalLayout_5);
-
-
-        gridLayout->addLayout(verticalLayout_7, 2, 0, 1, 1);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName("verticalLayout_5");
-        SerialPort = new QComboBox(centralwidget);
-        SerialPort->setObjectName("SerialPort");
-
-        verticalLayout_5->addWidget(SerialPort);
-
-        Connect = new QPushButton(centralwidget);
-        Connect->setObjectName("Connect");
-
-        verticalLayout_5->addWidget(Connect);
+        verticalLayout_2->addLayout(verticalLayout_3);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_5);
+        horizontalLayout->addLayout(verticalLayout_2);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName("verticalLayout_4");
-        Comand = new QComboBox(centralwidget);
-        Comand->setObjectName("Comand");
+        horizontalLayout->setStretch(0, 1);
+        horizontalLayout->setStretch(1, 2);
 
-        verticalLayout_4->addWidget(Comand);
-
-        SendButton = new QPushButton(centralwidget);
-        SendButton->setObjectName("SendButton");
-
-        verticalLayout_4->addWidget(SendButton);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_4);
-
-
-        gridLayout->addLayout(horizontalLayout_2, 0, 1, 1, 1);
-
-        plainTextEdit = new QPlainTextEdit(centralwidget);
-        plainTextEdit->setObjectName("plainTextEdit");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
-        plainTextEdit->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(plainTextEdit, 2, 1, 1, 1);
-
-
-        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 1);
 
         MicrosCom->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MicrosCom);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 491, 21));
+        menubar->setGeometry(QRect(0, 0, 762, 21));
         MicrosCom->setMenuBar(menubar);
         statusbar = new QStatusBar(MicrosCom);
         statusbar->setObjectName("statusbar");
@@ -176,6 +223,8 @@ public:
         MicrosCom->setWindowTitle(QCoreApplication::translate("MicrosCom", "MicrosCom", nullptr));
         Connect->setText(QCoreApplication::translate("MicrosCom", "Connect", nullptr));
         SendButton->setText(QCoreApplication::translate("MicrosCom", "SendCMD", nullptr));
+        label->setText(QCoreApplication::translate("MicrosCom", "Giroscope Values", nullptr));
+        label_2->setText(QCoreApplication::translate("MicrosCom", "Acelerometter Values", nullptr));
     } // retranslateUi
 
 };

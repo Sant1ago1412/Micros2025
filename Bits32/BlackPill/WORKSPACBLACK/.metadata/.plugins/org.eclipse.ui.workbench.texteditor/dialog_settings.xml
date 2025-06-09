@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="DataStruct-&gt;"/>
 		<item value="HAL_I2C_Mem_Read"/>
 		<item value="DMA"/>
 		<item value="I2C_Master_Transmit"/>
@@ -15,6 +16,7 @@
 		<item value="ABS"/>
 	</list>
 	<list key="replacehistory">
+		<item value="MpuData."/>
 		<item value="I2C_DMA_Master_Transmit"/>
 		<item value="I2C_1_DMA_Master_Transmit"/>
 		<item value="uint16_t reg"/>

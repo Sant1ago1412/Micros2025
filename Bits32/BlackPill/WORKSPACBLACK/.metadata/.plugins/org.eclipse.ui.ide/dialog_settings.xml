@@ -16,6 +16,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="false"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="false"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\santi\Downloads\Video 29 - Lectura de sensor MPU6050\MPU6050_Read"/>
+			<item value="C:\Users\santi\Downloads\Video 29 - Lectura de sensor MPU6050\MPU6050_Read\Core"/>
 			<item value="C:\Users\santi\Desktop\BlackPill"/>
 			<item value="C:\Users\Baccon\Documents\MicrosCodes\Bits32\BlackPill\BlackScreen"/>
 			<item value="C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen"/>

@@ -156,6 +156,7 @@ void UP_decodeData(_sDato *datosComLib){
     	value = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
 
     break;
+
     default:
 
         bufAux[indiceAux++]=0xFF;

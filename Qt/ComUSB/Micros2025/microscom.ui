@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>491</width>
-    <height>370</height>
+    <width>762</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,43 +20,16 @@
    <property name="mouseTracking">
     <bool>false</bool>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="0">
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLCDNumber" name="Gy"/>
-          </item>
-          <item>
-           <widget class="QLCDNumber" name="Gz"/>
-          </item>
-          <item>
-           <widget class="QLCDNumber" name="Gx"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QLCDNumber" name="Ay"/>
-          </item>
-          <item>
-           <widget class="QLCDNumber" name="Az"/>
-          </item>
-          <item>
-           <widget class="QLCDNumber" name="Ax"/>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QComboBox" name="SerialPort"/>
           </item>
@@ -70,7 +43,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QComboBox" name="Comand"/>
           </item>
@@ -83,17 +56,95 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QPlainTextEdit" name="plainTextEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
-      <item row="2" column="1">
-       <widget class="QPlainTextEdit" name="plainTextEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,1">
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Giroscope Values</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,1,1">
+            <item>
+             <widget class="QLCDNumber" name="Gx"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="Gy"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="Gz"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1">
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Acelerometter Values</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1,1">
+            <item>
+             <widget class="QLCDNumber" name="Ax"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="Ay"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="Az"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -104,7 +155,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>491</width>
+     <width>762</width>
      <height>21</height>
     </rect>
    </property>

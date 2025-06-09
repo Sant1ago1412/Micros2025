@@ -1,9 +1,6 @@
-../Core/Src/mpu6050.c:26:9:MPU6050_Init	2
-../Core/Src/mpu6050.c:62:6:MPU6050_Read_Accel	2
-../Core/Src/mpu6050.c:86:6:MPU6050_Read_Gyro	1
-../Core/Src/mpu6050.c:107:6:MPU6050_Read_Temp	1
-../Core/Src/mpu6050.c:119:6:MPU6050_Read_All	1
-../Core/Src/mpu6050.c:167:8:Kalman_getAngle	1
-../Core/Src/mpu6050.c:196:6:MPU6050_NonBlocking_DMA	1
-../Core/Src/mpu6050.c:200:6:MPU6050_I2C_Blocking	1
-../Core/Src/mpu6050.c:204:6:MPU6050_DMAREADY	1
+../Core/Src/mpu6050.c:25:9:MPU6050_Init	2
+../Core/Src/mpu6050.c:65:6:MPU6050_Read_Accel	2
+../Core/Src/mpu6050.c:124:6:MPU6050_Read_All	2
+../Core/Src/mpu6050.c:203:6:MPU6050_NonBlocking_DMA	1
+../Core/Src/mpu6050.c:207:6:MPU6050_I2C_Blocking	1
+../Core/Src/mpu6050.c:211:6:MPU6050_DMAREADY	1
