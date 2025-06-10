@@ -1,42 +1,25 @@
-16:59:42 **** Incremental Build of configuration Debug for project BlackScreen ****
+14:40:59 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61564	    352	   7624	  69540	  10fa4	BlackScreen.elf
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.hex
-Finished building: BlackScreen.bin
- 
- 
-Finished building: BlackScreen.list
- 
-16:59:45 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-size  BlackScreen.elf 
-   text	   data	    bss	    dec	    hex	filename
-  61564	    352	   7624	  69540	  10fa4	BlackScreen.elf
-Finished building: default.size.stdout
- 
-17:00:09 **** Incremental Build of configuration Debug for project BlackScreen ****
+../Core/Src/main.c: In function 'HAL_I2C_MemRxCpltCallback':
+../Core/Src/main.c:135:26: error: expected identifier or '(' before '.' token
+  135 |                 SSD1306_t.DMAREADY=0;
+      |                          ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:42:14 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: BlackScreen.elf
  
 arm-none-eabi-size  BlackScreen.elf 
 arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61556	    352	   7624	  69532	  10f9c	BlackScreen.elf
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+   text	   data	    bss	    dec	    hex	filename
+  59184	    344	   7712	  67240	  106a8	BlackScreen.elf
 Finished building: default.size.stdout
  
 Finished building: BlackScreen.hex
@@ -45,87 +28,37 @@ Finished building: BlackScreen.bin
  
 Finished building: BlackScreen.list
  
-17:05:52 **** Incremental Build of configuration Debug for project BlackScreen ****
+15:00:25 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61752	    352	   7624	  69728	  11060	BlackScreen.elf
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.hex
-Finished building: BlackScreen.bin
- 
- 
-Finished building: BlackScreen.list
- 
-17:10:01 **** Incremental Build of configuration Debug for project BlackScreen ****
+arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
+../Core/Src/main.c: In function 'DMA_Task':
+../Core/Src/main.c:155:12: error: expected expression before ')' token
+  155 |         if()
+      |            ^
+../Core/Src/ssd1306_oled.c:533:9: error: conflicting types for 'SSD1306_RefreshReady'; have 'uint8_t()' {aka 'unsigned char()'}
+  533 | uint8_t SSD1306_RefreshReady(){
+      |         ^~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/ssd1306_oled.c:1:
+../Core/Inc/ssd1306_oled.h:86:6: note: previous declaration of 'SSD1306_RefreshReady' with type 'void()'
+   86 | void SSD1306_RefreshReady();
+      |      ^~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:49: Core/Src/ssd1306_oled.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:00:46 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61728	    352	   7624	  69704	  11048	BlackScreen.elf
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.hex
-Finished building: BlackScreen.bin
- 
- 
-Finished building: BlackScreen.list
- 
-17:11:35 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61752	    352	   7624	  69728	  11060	BlackScreen.elf
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.hex
-Finished building: BlackScreen.bin
- 
- 
-Finished building: BlackScreen.list
- 
-17:18:29 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-   text	   data	    bss	    dec	    hex	filename
-  61764	    352	   7624	  69740	  1106c	BlackScreen.elf
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.bin
-Finished building: BlackScreen.hex
- 
- 
-Finished building: BlackScreen.list
- 
-17:21:55 **** Incremental Build of configuration Debug for project BlackScreen ****
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
+../Core/Src/main.c: In function 'DMA_Task':
+../Core/Src/main.c:155:12: error: expected expression before ')' token
+  155 |         if()
+      |            ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:01:10 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -136,7 +69,7 @@ arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
    text	   data	    bss	    dec	    hex	filename
-  61556	    352	   7624	  69532	  10f9c	BlackScreen.elf
+  59172	    344	   7712	  67228	  1069c	BlackScreen.elf
 Finished building: default.size.stdout
  
 Finished building: BlackScreen.bin
@@ -145,7 +78,7 @@ Finished building: BlackScreen.hex
  
 Finished building: BlackScreen.list
  
-17:23:25 **** Incremental Build of configuration Debug for project BlackScreen ****
+15:04:02 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -155,7 +88,7 @@ arm-none-eabi-size  BlackScreen.elf
 arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
    text	   data	    bss	    dec	    hex	filename
-  61764	    352	   7624	  69740	  1106c	BlackScreen.elf
+  59172	    344	   7712	  67228	  1069c	BlackScreen.elf
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
 Finished building: default.size.stdout
  
@@ -164,52 +97,4 @@ Finished building: BlackScreen.bin
  
  
 Finished building: BlackScreen.list
- 
-17:25:47 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-   text	   data	    bss	    dec	    hex	filename
-  61764	    352	   7624	  69740	  1106c	BlackScreen.elf
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.hex
-Finished building: BlackScreen.bin
- 
- 
-Finished building: BlackScreen.list
- 
-17:28:05 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
-arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: BlackScreen.elf
- 
-arm-none-eabi-size  BlackScreen.elf 
-arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
-arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
-   text	   data	    bss	    dec	    hex	filename
-  61560	    352	   7608	  69520	  10f90	BlackScreen.elf
-Finished building: default.size.stdout
- 
-Finished building: BlackScreen.bin
-Finished building: BlackScreen.hex
- 
- 
-Finished building: BlackScreen.list
- 
-17:33:24 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-size  BlackScreen.elf 
-   text	   data	    bss	    dec	    hex	filename
-  61560	    352	   7608	  69520	  10f90	BlackScreen.elf
-Finished building: default.size.stdout
  

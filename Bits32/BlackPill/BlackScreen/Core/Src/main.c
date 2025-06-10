@@ -60,6 +60,7 @@ DMA_HandleTypeDef hdma_i2c1_tx;
 DMA_HandleTypeDef hdma_i2c1_rx;
 
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim10;
 TIM_HandleTypeDef htim11;
 
 /* USER CODE BEGIN PV */
@@ -78,6 +79,7 @@ static void MX_TIM3_Init(void);
 static void MX_TIM11_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_TIM10_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
@@ -114,7 +116,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM11) {
 		IS10MS = TRUE;
 	}
-}
+	if (htim->Instance == TIM10) {
+		MPU6050_Read_All(&mpuValues);
+		}
+	}
 
 void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
@@ -124,19 +129,16 @@ void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==MPU6050_ADDR){
-		MPU6050_DMAREADY();
+		mpuValues.DMAREADY=1;
 	}
 }
 
 void task10ms(){
 
 	static uint8_t ticker=0;
-
-//	MPU6050_Read_All(&mpuValues);
-
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-
+		UP_sendInfo(MPUDATA,mpuValues.Rec_Data, 15);
 	}
 	if(ticker==255){
 		if(!SISINIT){
@@ -144,11 +146,16 @@ void task10ms(){
 			SSD1306_RefreshReady();
 		}
 		SISINIT=TRUE;
-//		UP_sendInfo((uint8_t*)&mpuValues, 28);
 		ticker=0;
 	}
 	ticker++;
 }
+
+//void DMA_Task(){
+//	if(mpuValues.DMAREADY){
+//
+//	}
+//}
 
 void Engines_task(){
 
@@ -241,9 +248,11 @@ int main(void)
   MX_TIM11_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
+  MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim11);
+  HAL_TIM_Base_Start_IT(&htim10);
 
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
@@ -252,8 +261,7 @@ int main(void)
   MPU6050_I2C_Blocking(&I2C_RBlocking,&I2C_1_Abstract_Mem_Write_Blocking);
   MPU6050_NonBlocking_DMA(&I2C_DMA_Transmit,&I2C_DMA_Recive);
   SSD1306_Init();
-  MPU6050_Init();
-
+  MPU6050_Init(&mpuValues);
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
@@ -278,11 +286,11 @@ int main(void)
 	  }
 	UP_comunicationsTask(&datosComSerie);
 	SSD1306_UpdateScreen();
-	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
-	SSD1306_GotoXY(10,20);
-	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
-	SSD1306_GotoXY(15,40);
-	SSD1306_Puts("GAY", &Font_7x10, WHITE);
+//	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
+//	SSD1306_GotoXY(10,20);
+//	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
+//	SSD1306_GotoXY(15,40);
+//	SSD1306_Puts("GAY", &Font_7x10, WHITE);
 //
 //			HAL_Delay(2000);
 //
@@ -531,6 +539,37 @@ static void MX_TIM3_Init(void)
 }
 
 /**
+  * @brief TIM10 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM10_Init(void)
+{
+
+  /* USER CODE BEGIN TIM10_Init 0 */
+
+  /* USER CODE END TIM10_Init 0 */
+
+  /* USER CODE BEGIN TIM10_Init 1 */
+
+  /* USER CODE END TIM10_Init 1 */
+  htim10.Instance = TIM10;
+  htim10.Init.Prescaler = 47;
+  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim10.Init.Period = 9999;
+  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM10_Init 2 */
+
+  /* USER CODE END TIM10_Init 2 */
+
+}
+
+/**
   * @brief TIM11 Initialization Function
   * @param None
   * @retval None
@@ -675,7 +714,7 @@ uint8_t I2C_DMA_Recive(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16
 
 uint8_t I2C_RBlocking(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size){
 
-	HAL_I2C_Mem_Read(&hi2c1, DevAddress, MemAddress, MemAddSize, pData, Size,100);
+	HAL_I2C_Mem_Read(&hi2c1, DevAddress, MemAddress, MemAddSize, pData, Size,1000);
 	return 1;
 
 }

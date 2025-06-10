@@ -158,7 +158,26 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
         ui->plainTextEdit->appendPlainText("NO CMD");
         break;
     case MPUDATA:
+        ui->plainTextEdit->appendPlainText("DatoMPU");
+        w.u8[0]=rxBuf[1];
+        w.u8[1]=rxBuf[2];
+        ui->Ax->display(w.i16[0]);
+        w.u8[0]=rxBuf[3];
+        w.u8[1]=rxBuf[4];
+        ui->Ay->display(w.i16[0]);
+        w.u8[0]=rxBuf[5];
+        w.u8[1]=rxBuf[6];
+        ui->Az->display(w.i16[0]);
 
+        w.u8[0]=rxBuf[9];
+        w.u8[1]=rxBuf[10];
+        ui->Gx->display(w.i16[0]);
+        w.u8[0]=rxBuf[11];
+        w.u8[1]=rxBuf[12];
+        ui->Gy->display(w.i16[0]);
+        w.u8[0]=rxBuf[13];
+        w.u8[1]=rxBuf[14];
+        ui->Gz->display(w.i16[0]);
         break;
     default:
 

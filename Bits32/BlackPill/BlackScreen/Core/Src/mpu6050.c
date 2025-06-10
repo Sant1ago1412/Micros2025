@@ -8,7 +8,8 @@ static uint8_t (*I2C_Recive)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, ui
 static uint8_t (*I2C_Transmit)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, uint16_t Size);
 static uint8_t (*I2C_Recive_Blocking)(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size);
 static uint8_t (*I2C_Transmit_Blocking)(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
-static uint8_t DMAREADY=0;
+
+
 
 Kalman_t KalmanX = {
         .Q_angle = 0.001f,
@@ -22,17 +23,15 @@ Kalman_t KalmanY = {
         .R_measure = 0.03f,
 };
 
-uint8_t MPU6050_Init(){
+uint8_t MPU6050_Init(MPU6050_t *MpuData){
 
     uint8_t check;
     uint8_t Data;
 
+    MpuData->DMAREADY=1;
     // check device ID WHO_AM_I
 
-    DMAREADY=1;
     I2C_Recive_Blocking(MPU6050_ADDR, WHO_AM_I_REG, 1, &check, 1);
-//    HAL_I2C_Mem_Read(I2Cx, MPU6050_ADDR, WHO_AM_I_REG, 1, &check, 1, i2c_timeout);
-
     if (check == 0x68)  // 0x68 will be returned by the sensor if everything goes well
     {
         // power management register 0X6B we should write all 0's to wake the sensor up
@@ -63,18 +62,17 @@ uint8_t MPU6050_Init(){
 
 
 void MPU6050_Read_Accel(MPU6050_t *MpuData){
-    uint8_t Rec_Data[6];
 
     // Read 6 BYTES of data starting from ACCEL_XOUT_H register
 
-    if(!DMAREADY)
+    if(!MpuData->DMAREADY)
     	return;
 
-    I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG, Rec_Data, 6);
+    I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG, MpuData->Rec_Data, 6);
 
-    MpuData->Accel_X_RAW = (int16_t) (Rec_Data[0] << 8 | Rec_Data[1]);
-    MpuData->Accel_Y_RAW = (int16_t) (Rec_Data[2] << 8 | Rec_Data[3]);
-    MpuData->Accel_Z_RAW = (int16_t) (Rec_Data[4] << 8 | Rec_Data[5]);
+    MpuData->Accel_X_RAW = (int16_t) (MpuData->Rec_Data[0] << 8 | MpuData->Rec_Data[1]);
+    MpuData->Accel_Y_RAW = (int16_t) (MpuData->Rec_Data[2] << 8 | MpuData->Rec_Data[3]);
+    MpuData->Accel_Z_RAW = (int16_t) (MpuData->Rec_Data[4] << 8 | MpuData->Rec_Data[5]);
 
     /*** convert the RAW values into acceleration in 'g'
          we have to divide according to the Full scale value set in FS_SEL
@@ -122,22 +120,24 @@ void MPU6050_Read_Accel(MPU6050_t *MpuData){
 //}
 
 void MPU6050_Read_All(MPU6050_t *MpuData) {
-    uint8_t Rec_Data[14];
 
     // Read 14 BYTES of data starting from ACCEL_XOUT_H register
 
-    if(!DMAREADY)
+    if(!MpuData->DMAREADY)
     	return;
 
-    I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG,Rec_Data, 14);
+    I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG,MpuData->Rec_Data, 14);
+    MpuData->DMAREADY=0;
 
-    MpuData->Accel_X_RAW = (int16_t) (Rec_Data[0] << 8 | Rec_Data[1]);
-    MpuData->Accel_Y_RAW = (int16_t) (Rec_Data[2] << 8 | Rec_Data[3]);
-    MpuData->Accel_Z_RAW = (int16_t) (Rec_Data[4] << 8 | Rec_Data[5]);
-    MpuData->temp 		= 			(Rec_Data[6] << 8 | Rec_Data[7]);
-    MpuData->Gyro_X_RAW = (int16_t)  (Rec_Data[8] << 8 | Rec_Data[9]);
-    MpuData->Gyro_Y_RAW = (int16_t)  (Rec_Data[10]<< 8 | Rec_Data[11]);
-    MpuData->Gyro_Z_RAW = (int16_t)  (Rec_Data[12]<< 8 | Rec_Data[13]);
+
+    MpuData->Accel_X_RAW = (int16_t) (MpuData->Rec_Data[0] << 8 | MpuData->Rec_Data[1]);
+    MpuData->Accel_Y_RAW = (int16_t) (MpuData->Rec_Data[2] << 8 | MpuData->Rec_Data[3]);
+    MpuData->Accel_Z_RAW = (int16_t) (MpuData->Rec_Data[4] << 8 | MpuData->Rec_Data[5]);
+    MpuData->temp 		 = 			 (MpuData->Rec_Data[6] << 8 | MpuData->Rec_Data[7]);
+    MpuData->Gyro_X_RAW  = (int16_t) (MpuData->Rec_Data[8] << 8 | MpuData->Rec_Data[9]);
+    MpuData->Gyro_Y_RAW  = (int16_t) (MpuData->Rec_Data[10]<< 8 | MpuData->Rec_Data[11]);
+    MpuData->Gyro_Z_RAW  = (int16_t) (MpuData->Rec_Data[12]<< 8 | MpuData->Rec_Data[13]);
+
 
 //    MpuData.Ax = MpuData.Accel_X_RAW / 16384.0;
 //    MpuData.Ay = MpuData.Accel_Y_RAW / 16384.0;
@@ -207,7 +207,4 @@ void MPU6050_NonBlocking_DMA(uint8_t (*Master_Transmit)(uint16_t DevAddress,uint
 void MPU6050_I2C_Blocking(uint8_t (*Recive_Blocking)(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size),uint8_t (*Transmit_Blocking)(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout)){
 	I2C_Recive_Blocking = Recive_Blocking;
 	I2C_Transmit_Blocking = Transmit_Blocking;
-}
-void MPU6050_DMAREADY(){
-	DMAREADY=1;
 }

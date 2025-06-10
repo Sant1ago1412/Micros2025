@@ -21,7 +21,7 @@ void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff){
 
 }
 
-void UP_sendInfo(uint8_t bufferAux[],uint8_t bytes){
+void UP_sendInfo(_eEstadoMEFcmd CMD,uint8_t *bufferAux,uint8_t bytes){
 
     uint8_t bufAux[30], indiceAux=0,cks=0,i=0;
 
@@ -30,8 +30,9 @@ void UP_sendInfo(uint8_t bufferAux[],uint8_t bytes){
     bufAux[indiceAux++]='E';
     bufAux[indiceAux++]='R';
 
-    bufAux[indiceAux++]=bytes;
+    bufAux[indiceAux++]=bytes+1;
     bufAux[indiceAux++]=':';
+    bufAux[indiceAux++]=CMD;
 
     for(i=0; i<bytes-1; i++)
         bufAux[indiceAux++] = bufferAux[i];
@@ -165,7 +166,7 @@ void UP_decodeData(_sDato *datosComLib){
     break;
     }
 
-    UP_sendInfo(bufAux,bytes);
+    UP_sendInfo(datosComLib->indexStart+2,bufAux,bytes);
 }
 
 void UP_datafromUSB(uint8_t *buf, uint16_t length) {

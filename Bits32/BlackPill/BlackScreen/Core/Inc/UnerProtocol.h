@@ -47,7 +47,7 @@ typedef enum ProtocolState{
 
 int16_t ret_eng_Values();
 void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff);
-void UP_sendInfo(uint8_t bufferAux[], uint8_t bytes);
+void UP_sendInfo(_eEstadoMEFcmd CMD,uint8_t *bufferAux, uint8_t bytes);
 void UP_decodeData(_sDato *datosComLib);
 void UP_decodeHeader(_sDato *datosComLib);
 void UP_datafromUSB(uint8_t *buf, uint16_t length) ;

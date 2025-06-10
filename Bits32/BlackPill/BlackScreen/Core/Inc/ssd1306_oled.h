@@ -51,6 +51,7 @@ typedef struct {
 	uint8_t Needtorefresh;
 	uint8_t DMAREADY;
 } SSD1306_t;
+
 void Display_Set_I2C_Master_Transmit(
 		uint8_t (*Master_Transmit)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, uint16_t Size),
 		uint8_t (*Master_Transmit_Blocking)(uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout));
