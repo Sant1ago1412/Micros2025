@@ -16,42 +16,49 @@
 #define GYRO_CONFIG_REG 0x1B
 #define GYRO_XOUT_H_REG 0x43
 #define LOWPASS_CONFIG 0x1A
-
+#define NUM_AXIS     6              // x,y,z de Acc y x,y,z de Gyro
+#define NUM_MAF      8              // Tamaño de la ventana de la media móvil
+#define NUM_MAF_BITS 3              // 2^3 = 8, usado para división eficiente con shift
 // Setup MPU6050
 #define MPU6050_ADDR 0xD0
 
-// MPU6050 structure
+#define NUM_SAMPLES                 4096    ///< Muestras para calibración
+#define NUM_SAMPLES_BITS            12      ///< Bits de desplazamiento equivalente a 4096
+
+// MPU6050 structures
+typedef struct {
+    int16_t rawData[NUM_AXIS];                 // Lectura nueva cruda del sensor
+    int32_t sumData[NUM_AXIS];                 // Suma acumulada para cada canal
+    int16_t mediaBuffer[NUM_MAF][NUM_AXIS];    // Buffer circular para el historial
+    int16_t filtredData[NUM_AXIS];             // Resultado filtrado
+    uint8_t index;                             // Índice del buffer circular
+    uint8_t isOn;                              // Bandera para aplicar el filtro
+} MAF_t;
+
+typedef struct {
+	int16_t X_RAW;
+	int16_t Y_RAW;
+	int16_t Z_RAW;
+	int16_t X_filtered;
+	int16_t Y_filtered;
+	int16_t Z_filtered;
+	int16_t X_Offset;
+	int16_t Y_Offset;
+	int16_t Z_Offset;
+}s_Axis;
 typedef struct{
 
-    int16_t Accel_X_RAW;
-    int16_t Accel_Y_RAW;
-    int16_t Accel_Z_RAW;
+	s_Axis Gyro;
+	s_Axis Accel;
 
     int16_t temp;
 
-    int16_t Gyro_X_RAW;
-    int16_t Gyro_Y_RAW;
-    int16_t Gyro_Z_RAW;
-
     uint8_t Rec_Data[14];
     uint8_t DMAREADY;
-//
-//    float KalmanAngleX;
-//    float KalmanAngleY;
+    MAF_t MAF;
+
 
 } MPU6050_t;
-
-
-// Kalman structure
-typedef struct {
-    float Q_angle;
-    float Q_bias;
-    float R_measure;
-    float angle;
-    float bias;
-    float P[2][2];
-} Kalman_t;
-
 
 uint8_t MPU6050_Init();
 
@@ -61,15 +68,12 @@ void MPU6050_NonBlocking_DMA(
 
 void MPU6050_I2C_Blocking(uint8_t (*Recive_Blocking)(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size),
 		uint8_t (*Transmit_Blocking)(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout));
-void MPU6050_Read_Accel(MPU6050_t *MpuData);
-
-void MPU6050_Read_Gyro(MPU6050_t *MpuData);
-
-void MPU6050_Read_Temp();
 
 void MPU6050_Read_All(MPU6050_t *MpuData);
 
 void MPU6050_DMAREADY();
 
-double Kalman_getAngle(Kalman_t *Kalman, double newAngle, double newRate, double dt);
+void MPU6050_Calibrate(MPU6050_t *mpu);
+
+void MPU6050_MAF(MPU6050_t *mpu);
 

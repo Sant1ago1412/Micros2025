@@ -41,9 +41,12 @@
 /* USER CODE BEGIN PD */
 
 #define NUM_CHANNELS 8
-#define RINGBUFFER 256
-#define SISINIT  myFlags.individualFlags.bit0
-#define IS10MS 	 myFlags.individualFlags.bit1
+#define RINGBUFFER 	256
+#define SISINIT  	myFlags.individualFlags.bit0
+#define IS10MS 	 	myFlags.individualFlags.bit1
+#define RECIVEDMA 	myFlags.individualFlags.bit2
+#define SENDDMA 	myFlags.individualFlags.bit3
+#define DMABUSY		myFlags.individualFlags.bit4
 
 /* USER CODE END PD */
 
@@ -118,18 +121,28 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	}
 	if (htim->Instance == TIM10) {
 		MPU6050_Read_All(&mpuValues);
-		}
+		mpuValues.DMAREADY=1;
 	}
+}
 
 void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-		SSD1306_DMAREADY();
+		mpuValues.DMAREADY=1;
 	}
 }
 
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==MPU6050_ADDR){
-		mpuValues.DMAREADY=1;
+
+	    mpuValues.MAF.rawData[0] = (int16_t) (mpuValues.Rec_Data[0] << 8 | mpuValues.Rec_Data[1]);
+	    mpuValues.MAF.rawData[1] = (int16_t) (mpuValues.Rec_Data[2] << 8 | mpuValues.Rec_Data[3]);
+	    mpuValues.MAF.rawData[2] = (int16_t) (mpuValues.Rec_Data[4] << 8 | mpuValues.Rec_Data[5]);
+	    mpuValues.MAF.rawData[3] = (int16_t) (mpuValues.Rec_Data[8] << 8 | mpuValues.Rec_Data[9]);
+	    mpuValues.MAF.rawData[4] = (int16_t) (mpuValues.Rec_Data[10]<< 8 | mpuValues.Rec_Data[11]);
+	    mpuValues.MAF.rawData[5] = (int16_t) (mpuValues.Rec_Data[12]<< 8 | mpuValues.Rec_Data[13]);
+
+		mpuValues.MAF.isOn=1;
+		SSD1306_DMAREADY();
 	}
 }
 
@@ -138,7 +151,7 @@ void task10ms(){
 	static uint8_t ticker=0;
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		UP_sendInfo(MPUDATA,mpuValues.Rec_Data, 15);
+		UP_sendInfo(MPUDATA,(uint8_t*)mpuValues.MAF.filtredData, 13);
 	}
 	if(ticker==255){
 		if(!SISINIT){
@@ -270,7 +283,7 @@ int main(void)
 
   SSD1306_RefreshReady();
   SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
-
+  MPU6050_Calibrate(&mpuValues);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -284,13 +297,14 @@ int main(void)
 		 task10ms();
 		 IS10MS=FALSE;
 	  }
+	MPU6050_MAF(&mpuValues);
 	UP_comunicationsTask(&datosComSerie);
+
 	SSD1306_UpdateScreen();
-//	SSD1306_DrawLine(5, 5, 100, 20, WHITE);
-//	SSD1306_GotoXY(10,20);
-//	SSD1306_Puts("MAYER", &Font_7x10, WHITE);
-//	SSD1306_GotoXY(15,40);
-//	SSD1306_Puts("GAY", &Font_7x10, WHITE);
+
+	if(SISINIT){
+		SSD1306_DrawBitmap(0, 0, MainScreen, 128, 64,WHITE);
+	}
 //
 //			HAL_Delay(2000);
 //

@@ -1,16 +1,72 @@
-14:40:59 **** Incremental Build of configuration Debug for project BlackScreen ****
+20:29:59 **** Clean-only build of configuration Debug for project BlackScreen ****
+make -j8 clean 
+rm -rf ./USB_DEVICE/Target/usbd_conf.cyclo ./USB_DEVICE/Target/usbd_conf.d ./USB_DEVICE/Target/usbd_conf.o ./USB_DEVICE/Target/usbd_conf.su
+rm -rf ./USB_DEVICE/App/usb_device.cyclo ./USB_DEVICE/App/usb_device.d ./USB_DEVICE/App/usb_device.o ./USB_DEVICE/App/usb_device.su ./USB_DEVICE/App/usbd_cdc_if.cyclo ./USB_DEVICE/App/usbd_cdc_if.d ./USB_DEVICE/App/usbd_cdc_if.o ./USB_DEVICE/App/usbd_cdc_if.su ./USB_DEVICE/App/usbd_desc.cyclo ./USB_DEVICE/App/usbd_desc.d ./USB_DEVICE/App/usbd_desc.o ./USB_DEVICE/App/usbd_desc.su
+rm -rf ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.cyclo ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.su ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.cyclo ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.su ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.cyclo ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.su
+rm -rf ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.cyclo ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o ./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.su
+rm -rf ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.su
+rm -rf ./Core/Startup/startup_stm32f411ceux.d ./Core/Startup/startup_stm32f411ceux.o
+rm -rf ./Core/Src/UnerProtocol.cyclo ./Core/Src/UnerProtocol.d ./Core/Src/UnerProtocol.o ./Core/Src/UnerProtocol.su ./Core/Src/engines.cyclo ./Core/Src/engines.d ./Core/Src/engines.o ./Core/Src/engines.su ./Core/Src/fonts.cyclo ./Core/Src/fonts.d ./Core/Src/fonts.o ./Core/Src/fonts.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/mpu6050.cyclo ./Core/Src/mpu6050.d ./Core/Src/mpu6050.o ./Core/Src/mpu6050.su ./Core/Src/ssd1306_oled.cyclo ./Core/Src/ssd1306_oled.d ./Core/Src/ssd1306_oled.o ./Core/Src/ssd1306_oled.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
+rm -rf BlackScreen.bin BlackScreen.elf BlackScreen.hex BlackScreen.list BlackScreen.map default.size.stdout
+ 
+20:30:03 **** Build of configuration Debug for project BlackScreen ****
 make -j8 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f411ceux.d" -MT"Core/Startup/startup_stm32f411ceux.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32f411ceux.o" "../Core/Startup/startup_stm32f411ceux.s"
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/engines.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/engines.d" -MT"Core/Src/engines.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/engines.o"
+arm-none-eabi-gcc "../Core/Src/fonts.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/fonts.d" -MT"Core/Src/fonts.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fonts.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'HAL_I2C_MemRxCpltCallback':
-../Core/Src/main.c:135:26: error: expected identifier or '(' before '.' token
-  135 |                 SSD1306_t.DMAREADY=0;
-      |                          ^
-make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
-14:42:14 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+In file included from ../Core/Src/main.c:29:
+../Core/Inc/Logo.h:136:84: error: stray '\302' in program
+  136 | 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,<U+00A0>0xff,<U+00A0>0xff
+      |                                                                                    ^~~~~~~~
+../Core/Inc/Logo.h:136:90: error: stray '\302' in program
+  136 | 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,<U+00A0>0xff,<U+00A0>0xff
+      |                                                                                                 ^~~~~~~~
 arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+20:30:15 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: BlackScreen.elf
  
@@ -19,7 +75,7 @@ arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
    text	   data	    bss	    dec	    hex	filename
-  59184	    344	   7712	  67240	  106a8	BlackScreen.elf
+  62392	    352	   7872	  70616	  113d8	BlackScreen.elf
 Finished building: default.size.stdout
  
 Finished building: BlackScreen.hex
@@ -28,37 +84,7 @@ Finished building: BlackScreen.bin
  
 Finished building: BlackScreen.list
  
-15:00:25 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
-../Core/Src/main.c: In function 'DMA_Task':
-../Core/Src/main.c:155:12: error: expected expression before ')' token
-  155 |         if()
-      |            ^
-../Core/Src/ssd1306_oled.c:533:9: error: conflicting types for 'SSD1306_RefreshReady'; have 'uint8_t()' {aka 'unsigned char()'}
-  533 | uint8_t SSD1306_RefreshReady(){
-      |         ^~~~~~~~~~~~~~~~~~~~
-In file included from ../Core/Src/ssd1306_oled.c:1:
-../Core/Inc/ssd1306_oled.h:86:6: note: previous declaration of 'SSD1306_RefreshReady' with type 'void()'
-   86 | void SSD1306_RefreshReady();
-      |      ^~~~~~~~~~~~~~~~~~~~
-make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [Core/Src/subdir.mk:49: Core/Src/ssd1306_oled.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
-15:00:46 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
-../Core/Src/main.c: In function 'DMA_Task':
-../Core/Src/main.c:155:12: error: expected expression before ')' token
-  155 |         if()
-      |            ^
-make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
-15:01:10 **** Incremental Build of configuration Debug for project BlackScreen ****
+20:30:34 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -67,9 +93,9 @@ Finished building target: BlackScreen.elf
 arm-none-eabi-size  BlackScreen.elf 
 arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
-arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
    text	   data	    bss	    dec	    hex	filename
-  59172	    344	   7712	  67228	  1069c	BlackScreen.elf
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
 Finished building: default.size.stdout
  
 Finished building: BlackScreen.bin
@@ -78,7 +104,14 @@ Finished building: BlackScreen.hex
  
 Finished building: BlackScreen.list
  
-15:04:02 **** Incremental Build of configuration Debug for project BlackScreen ****
+20:30:46 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-size  BlackScreen.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
+Finished building: default.size.stdout
+ 
+20:31:45 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -88,8 +121,533 @@ arm-none-eabi-size  BlackScreen.elf
 arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
    text	   data	    bss	    dec	    hex	filename
-  59172	    344	   7712	  67228	  1069c	BlackScreen.elf
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
+20:32:29 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
+22:06:59 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-size  BlackScreen.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
+Finished building: default.size.stdout
+ 
+22:15:12 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-size  BlackScreen.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60592	    344	   7872	  68808	  10cc8	BlackScreen.elf
+Finished building: default.size.stdout
+ 
+22:17:03 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:64:32: error: 'NUM_SAMPLES' undeclared (first use in this function)
+   64 |         for (uint16_t i=0; i < NUM_SAMPLES; i++){
+      |                                ^~~~~~~~~~~
+../Core/Src/mpu6050.c:64:32: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:65:17: warning: implicit declaration of function 'I2C_Mem_Read' [-Wimplicit-function-declaration]
+   65 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                 ^~~~~~~~~~~~
+../Core/Src/mpu6050.c:65:44: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   65 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                            ^~~~~~~~~~~~~~
+      |                                            ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:65:66: error: 'MPU6050_t' has no member named 'bit_data'
+   65 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                                                  ^~
+../Core/Src/mpu6050.c:65:82: error: 'MPU_TIMEOUT' undeclared (first use in this function)
+   65 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                                                                  ^~~~~~~~~~~
+../Core/Src/mpu6050.c:66:46: error: 'MPU6050_t' has no member named 'bit_data'
+   66 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                              ^~
+../Core/Src/mpu6050.c:66:71: error: 'MPU6050_t' has no member named 'bit_data'
+   66 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:67:46: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                              ^~
+../Core/Src/mpu6050.c:67:71: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:68:46: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                              ^~
+../Core/Src/mpu6050.c:68:71: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:70:46: error: 'MPU6050_t' has no member named 'bit_data'
+   70 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                              ^~
+../Core/Src/mpu6050.c:70:72: error: 'MPU6050_t' has no member named 'bit_data'
+   70 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:71:46: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                              ^~
+../Core/Src/mpu6050.c:71:72: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:72:46: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                              ^~
+../Core/Src/mpu6050.c:72:72: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:74:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   74 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:74:50: error: 'NUM_SAMPLES_BITS' undeclared (first use in this function); did you mean 'NUM_MAF_BITS'?
+   74 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |                                                  ^~~~~~~~~~~~~~~~
+      |                                                  NUM_MAF_BITS
+../Core/Src/mpu6050.c:75:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   75 |     mpu->Acc.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:76:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   76 |     mpu->Acc.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:78:14: error: 's_Axis' has no member named 'offset'
+   78 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |              ^
+../Core/Src/mpu6050.c:79:18: error: 's_Axis' has no member named 'offset'
+   79 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                  ^
+../Core/Src/mpu6050.c:80:18: error: 's_Axis' has no member named 'offset'
+   80 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                  ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:18:06 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:17: warning: implicit declaration of function 'I2C_Mem_Read' [-Wimplicit-function-declaration]
+   66 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                 ^~~~~~~~~~~~
+../Core/Src/mpu6050.c:66:44: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                            ^~~~~~~~~~~~~~
+      |                                            ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:44: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:66:66: error: 'MPU6050_t' has no member named 'bit_data'
+   66 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                                                  ^~
+../Core/Src/mpu6050.c:66:82: error: 'MPU_TIMEOUT' undeclared (first use in this function)
+   66 |                 I2C_Mem_Read(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->bit_data, 14, MPU_TIMEOUT);
+      |                                                                                  ^~~~~~~~~~~
+../Core/Src/mpu6050.c:67:46: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                              ^~
+../Core/Src/mpu6050.c:67:71: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:68:46: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                              ^~
+../Core/Src/mpu6050.c:68:71: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:69:46: error: 'MPU6050_t' has no member named 'bit_data'
+   69 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                              ^~
+../Core/Src/mpu6050.c:69:71: error: 'MPU6050_t' has no member named 'bit_data'
+   69 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:71:46: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                              ^~
+../Core/Src/mpu6050.c:71:72: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:72:46: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                              ^~
+../Core/Src/mpu6050.c:72:72: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:73:46: error: 'MPU6050_t' has no member named 'bit_data'
+   73 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                              ^~
+../Core/Src/mpu6050.c:73:72: error: 'MPU6050_t' has no member named 'bit_data'
+   73 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:75:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   75 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:76:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   76 |     mpu->Acc.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:77:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   77 |     mpu->Acc.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:79:14: error: 's_Axis' has no member named 'offset'
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |              ^
+../Core/Src/mpu6050.c:80:18: error: 's_Axis' has no member named 'offset'
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                  ^
+../Core/Src/mpu6050.c:81:18: error: 's_Axis' has no member named 'offset'
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                  ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:22:37 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:67:46: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                              ^~
+../Core/Src/mpu6050.c:67:71: error: 'MPU6050_t' has no member named 'bit_data'
+   67 |                 temp_raw[0] += (int16_t)((mpu->bit_data[0] << 8) | mpu->bit_data[1]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:68:46: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                              ^~
+../Core/Src/mpu6050.c:68:71: error: 'MPU6050_t' has no member named 'bit_data'
+   68 |                 temp_raw[1] += (int16_t)((mpu->bit_data[2] << 8) | mpu->bit_data[3]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:69:46: error: 'MPU6050_t' has no member named 'bit_data'
+   69 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                              ^~
+../Core/Src/mpu6050.c:69:71: error: 'MPU6050_t' has no member named 'bit_data'
+   69 |                 temp_raw[2] += (int16_t)((mpu->bit_data[4] << 8) | mpu->bit_data[5]);
+      |                                                                       ^~
+../Core/Src/mpu6050.c:71:46: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                              ^~
+../Core/Src/mpu6050.c:71:72: error: 'MPU6050_t' has no member named 'bit_data'
+   71 |                 temp_raw[3] += (int16_t)((mpu->bit_data[8 ] << 8) | mpu->bit_data[9 ]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:72:46: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                              ^~
+../Core/Src/mpu6050.c:72:72: error: 'MPU6050_t' has no member named 'bit_data'
+   72 |                 temp_raw[4] += (int16_t)((mpu->bit_data[10] << 8) | mpu->bit_data[11]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:73:46: error: 'MPU6050_t' has no member named 'bit_data'
+   73 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                              ^~
+../Core/Src/mpu6050.c:73:72: error: 'MPU6050_t' has no member named 'bit_data'
+   73 |                 temp_raw[5] += (int16_t)((mpu->bit_data[12] << 8) | mpu->bit_data[13]);
+      |                                                                        ^~
+../Core/Src/mpu6050.c:75:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   75 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:76:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   76 |     mpu->Acc.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:77:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   77 |     mpu->Acc.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:79:14: error: 's_Axis' has no member named 'offset'
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |              ^
+../Core/Src/mpu6050.c:80:18: error: 's_Axis' has no member named 'offset'
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                  ^
+../Core/Src/mpu6050.c:81:18: error: 's_Axis' has no member named 'offset'
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                  ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:23:24 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:75:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   75 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:76:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   76 |     mpu->Acc.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:77:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   77 |     mpu->Acc.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:79:14: error: 's_Axis' has no member named 'offset'
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |              ^
+../Core/Src/mpu6050.c:80:18: error: 's_Axis' has no member named 'offset'
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                  ^
+../Core/Src/mpu6050.c:81:18: error: 's_Axis' has no member named 'offset'
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                  ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:23:50 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:75:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   75 |     mpu->Acc.offset.x = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:76:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   76 |     mpu->Acc.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:77:10: error: 'MPU6050_t' has no member named 'Acc'; did you mean 'Accel'?
+   77 |     mpu->Acc.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |          ^~~
+      |          Accel
+../Core/Src/mpu6050.c:79:14: error: 's_Axis' has no member named 'offset'
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |              ^
+../Core/Src/mpu6050.c:80:18: error: 's_Axis' has no member named 'offset'
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                  ^
+../Core/Src/mpu6050.c:81:18: error: 's_Axis' has no member named 'offset'
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                  ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:25:08 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:76:16: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   76 |     mpu->Accel.offset.y = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+      |                ^~~~~~
+      |                X_Offset
+../Core/Src/mpu6050.c:77:16: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   77 |     mpu->Accel.offset.z = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+      |                ^~~~~~
+      |                X_Offset
+../Core/Src/mpu6050.c:79:15: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |               ^~~~~~
+      |               X_Offset
+../Core/Src/mpu6050.c:80:19: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                   ^~~~~~
+      |                   X_Offset
+../Core/Src/mpu6050.c:81:19: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                   ^~~~~~
+      |                   X_Offset
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:25:29 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:79:15: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   79 |     mpu->Gyro.offset.x = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+      |               ^~~~~~
+      |               X_Offset
+../Core/Src/mpu6050.c:80:19: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   80 |         mpu->Gyro.offset.y = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+      |                   ^~~~~~
+      |                   X_Offset
+../Core/Src/mpu6050.c:81:19: error: 's_Axis' has no member named 'offset'; did you mean 'X_Offset'?
+   81 |         mpu->Gyro.offset.z = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+      |                   ^~~~~~
+      |                   X_Offset
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:25:44 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:26:02 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:51: error: 'ACCEL_XOUT_REG' undeclared (first use in this function); did you mean 'ACCEL_XOUT_H_REG'?
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, &mpu->Rec_Data, 14);
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   ACCEL_XOUT_H_REG
+../Core/Src/mpu6050.c:66:51: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/mpu6050.c:66:70: warning: passing argument 4 of 'I2C_Recive_Blocking' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_REG, 1, &mpu->Rec_Data, 14);
+      |                                                                      ^~~~~~~~~~~~~~
+      |                                                                      |
+      |                                                                      uint8_t (*)[14] {aka unsigned char (*)[14]}
+../Core/Src/mpu6050.c:66:70: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[14]' {aka 'unsigned char (*)[14]'}
+make: *** [Core/Src/subdir.mk:49: Core/Src/mpu6050.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+22:26:13 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+../Core/Src/mpu6050.c: In function 'MPU6050_Calibrate':
+../Core/Src/mpu6050.c:66:72: warning: passing argument 4 of 'I2C_Recive_Blocking' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_H_REG, 1, &mpu->Rec_Data, 14);
+      |                                                                        ^~~~~~~~~~~~~~
+      |                                                                        |
+      |                                                                        uint8_t (*)[14] {aka unsigned char (*)[14]}
+../Core/Src/mpu6050.c:66:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[14]' {aka 'unsigned char (*)[14]'}
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  60600	    344	   7888	  68832	  10ce0	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.bin
+Finished building: BlackScreen.hex
+ 
+ 
+Finished building: BlackScreen.list
+ 
+22:26:16 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  60600	    344	   7888	  68832	  10ce0	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
+22:26:50 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:286:3: warning: implicit declaration of function 'MPU6050_Calibrate' [-Wimplicit-function-declaration]
+  286 |   MPU6050_Calibrate(&mpuValues);
+      |   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+   text	   data	    bss	    dec	    hex	filename
+  60924	    344	   7888	  69156	  10e24	BlackScreen.elf
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
+22:27:10 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  60924	    344	   7888	  69156	  10e24	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
+22:29:38 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+   text	   data	    bss	    dec	    hex	filename
+  61020	    344	   7888	  69252	  10e84	BlackScreen.elf
 Finished building: default.size.stdout
  
 Finished building: BlackScreen.hex

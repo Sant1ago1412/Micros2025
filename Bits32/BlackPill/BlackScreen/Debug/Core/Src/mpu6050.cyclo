@@ -1,5 +1,6 @@
-../Core/Src/mpu6050.c:26:9:MPU6050_Init	2
-../Core/Src/mpu6050.c:64:6:MPU6050_Read_Accel	2
-../Core/Src/mpu6050.c:122:6:MPU6050_Read_All	2
-../Core/Src/mpu6050.c:203:6:MPU6050_NonBlocking_DMA	1
-../Core/Src/mpu6050.c:207:6:MPU6050_I2C_Blocking	1
+../Core/Src/mpu6050.c:12:9:MPU6050_Init	2
+../Core/Src/mpu6050.c:50:6:MPU6050_Read_All	2
+../Core/Src/mpu6050.c:62:6:MPU6050_Calibrate	2
+../Core/Src/mpu6050.c:87:6:MPU6050_MAF	3
+../Core/Src/mpu6050.c:111:6:MPU6050_NonBlocking_DMA	1
+../Core/Src/mpu6050.c:115:6:MPU6050_I2C_Blocking	1

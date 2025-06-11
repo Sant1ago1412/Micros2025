@@ -142,6 +142,7 @@ void SSD1306_Init()
 	SSD1306.Page=0;
 	SSD1306.DMA = CMD;
 	SSD1306.Needtorefresh=1;
+	SSD1306.DMAREADY=1;
 	SSD1306_Fill(BLACK);
 	SSD1306_UpdateScreen();
 

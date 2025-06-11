@@ -9,20 +9,6 @@ static uint8_t (*I2C_Transmit)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, 
 static uint8_t (*I2C_Recive_Blocking)(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size);
 static uint8_t (*I2C_Transmit_Blocking)(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout);
 
-
-
-Kalman_t KalmanX = {
-        .Q_angle = 0.001f,
-        .Q_bias = 0.003f,
-        .R_measure = 0.03f
-};
-
-Kalman_t KalmanY = {
-        .Q_angle = 0.001f,
-        .Q_bias = 0.003f,
-        .R_measure = 0.03f,
-};
-
 uint8_t MPU6050_Init(MPU6050_t *MpuData){
 
     uint8_t check;
@@ -61,64 +47,6 @@ uint8_t MPU6050_Init(MPU6050_t *MpuData){
 }
 
 
-void MPU6050_Read_Accel(MPU6050_t *MpuData){
-
-    // Read 6 BYTES of data starting from ACCEL_XOUT_H register
-
-    if(!MpuData->DMAREADY)
-    	return;
-
-    I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG, MpuData->Rec_Data, 6);
-
-    MpuData->Accel_X_RAW = (int16_t) (MpuData->Rec_Data[0] << 8 | MpuData->Rec_Data[1]);
-    MpuData->Accel_Y_RAW = (int16_t) (MpuData->Rec_Data[2] << 8 | MpuData->Rec_Data[3]);
-    MpuData->Accel_Z_RAW = (int16_t) (MpuData->Rec_Data[4] << 8 | MpuData->Rec_Data[5]);
-
-    /*** convert the RAW values into acceleration in 'g'
-         we have to divide according to the Full scale value set in FS_SEL
-         I have configured FS_SEL = 0. So I am dividing by 16384.0
-         for more details check ACCEL_CONFIG Register              ****/
-
-//    MpuData.Ax = MpuData.Accel_X_RAW / 16384.0;
-//    MpuData.Ay = MpuData.Accel_Y_RAW / 16384.0;
-//    MpuData.Az = MpuData.Accel_Z_RAW / Accel_Z_corrector;
-}
-
-//void MPU6050_Read_Gyro(MPU6050_t *MpuData){
-//    uint8_t Rec_Data[6];
-//
-//    // Read 6 BYTES of data starting from GYRO_XOUT_H register
-//    if(!DMAREADY)
-//        	return;
-//
-//    I2C_Recive(MPU6050_ADDR, GYRO_XOUT_H_REG,Rec_Data, 6);
-//
-//    MpuData->Gx = ((int16_t) (Rec_Data[0] << 8 | Rec_Data[1]))/ 131.0;
-//    MpuData->Gy = ((int16_t) (Rec_Data[2] << 8 | Rec_Data[3]))/ 131.0;
-//    MpuData->Gz = ((int16_t) (Rec_Data[4] << 8 | Rec_Data[5]))/ 131.0;
-//
-//    /*** convert the RAW values into dps (�/s)
-//         we have to divide according to the Full scale value set in FS_SEL
-//         I have configured FS_SEL = 0. So I am dividing by 131.0
-//         for more details check GYRO_CONFIG Register              ****/
-//
-////    MpuData.Gx = MpuData.Gyro_X_RAW / 131.0;
-////    MpuData.Gy = MpuData.Gyro_Y_RAW / 131.0;
-////    MpuData.Gz = MpuData.Gyro_Z_RAW / 131.0;
-//}
-//
-//void MPU6050_Read_Temp(MPU6050_t *DataStruct) {
-//    uint8_t Rec_Data[2];
-//    int16_t temp;
-//
-//    // Read 2 BYTES of data starting from TEMP_OUT_H_REG register
-//
-//    I2C_Recive(MPU6050_ADDR, TEMP_OUT_H_REG,Rec_Data, 2);
-//
-//    temp = (int16_t) (Rec_Data[0] << 8 | Rec_Data[1]);
-//    MpuData.Temperature = (float) ((int16_t) temp / (float) 340.0 + (float) 36.53);
-//}
-
 void MPU6050_Read_All(MPU6050_t *MpuData) {
 
     // Read 14 BYTES of data starting from ACCEL_XOUT_H register
@@ -129,76 +57,56 @@ void MPU6050_Read_All(MPU6050_t *MpuData) {
     I2C_Recive(MPU6050_ADDR, ACCEL_XOUT_H_REG,MpuData->Rec_Data, 14);
     MpuData->DMAREADY=0;
 
-
-    MpuData->Accel_X_RAW = (int16_t) (MpuData->Rec_Data[0] << 8 | MpuData->Rec_Data[1]);
-    MpuData->Accel_Y_RAW = (int16_t) (MpuData->Rec_Data[2] << 8 | MpuData->Rec_Data[3]);
-    MpuData->Accel_Z_RAW = (int16_t) (MpuData->Rec_Data[4] << 8 | MpuData->Rec_Data[5]);
-    MpuData->temp 		 = 			 (MpuData->Rec_Data[6] << 8 | MpuData->Rec_Data[7]);
-    MpuData->Gyro_X_RAW  = (int16_t) (MpuData->Rec_Data[8] << 8 | MpuData->Rec_Data[9]);
-    MpuData->Gyro_Y_RAW  = (int16_t) (MpuData->Rec_Data[10]<< 8 | MpuData->Rec_Data[11]);
-    MpuData->Gyro_Z_RAW  = (int16_t) (MpuData->Rec_Data[12]<< 8 | MpuData->Rec_Data[13]);
-
-
-//    MpuData.Ax = MpuData.Accel_X_RAW / 16384.0;
-//    MpuData.Ay = MpuData.Accel_Y_RAW / 16384.0;
-//    MpuData.Az = MpuData.Accel_Z_RAW / Accel_Z_corrector;
-//    MpuData.Temperature = (float) ((int16_t) temp / (float) 340.0 + (float) 36.53);
-//    MpuData.Gx = MpuData.Gyro_X_RAW / 131.0;
-//    MpuData.Gy = MpuData.Gyro_Y_RAW / 131.0;
-//    MpuData.Gz = MpuData.Gyro_Z_RAW / 131.0;
-//
-//    // Kalman angle solve
-//    double dt = (double) (HAL_GetTick() - timer) / 1000;
-//    timer = HAL_GetTick();
-//    double roll;
-//    double roll_sqrt = sqrt(
-//            MpuData.Accel_X_RAW * MpuData.Accel_X_RAW + MpuData.Accel_Z_RAW * MpuData.Accel_Z_RAW);
-//    if (roll_sqrt != 0.0) {
-//        roll = atan(MpuData.Accel_Y_RAW / roll_sqrt) * RAD_TO_DEG;
-//    } else {
-//        roll = 0.0;
-//    }
-//    double pitch = atan2(-MpuData.Accel_X_RAW, MpuData.Accel_Z_RAW) * RAD_TO_DEG;
-//    if ((pitch < -90 && MpuData.KalmanAngleY > 90) || (pitch > 90 && MpuData.KalmanAngleY < -90)) {
-//        KalmanY.angle = pitch;
-//        MpuData.KalmanAngleY = pitch;
-//    } else {
-//        MpuData.KalmanAngleY = Kalman_getAngle(&KalmanY, pitch, MpuData.Gy, dt);
-//    }
-//    if (fabs(MpuData.KalmanAngleY) > 90)
-//        MpuData.Gx = -MpuData.Gx;
-//    MpuData.KalmanAngleX = Kalman_getAngle(&KalmanX, roll, MpuData.Gy, dt);
-
 }
-//
-//double Kalman_getAngle(Kalman_t *Kalman, double newAngle, double newRate, double dt) {
-//    double rate = newRate - Kalman->bias;
-//    Kalman->angle += dt * rate;
-//
-//    Kalman->P[0][0] += dt * (dt * Kalman->P[1][1] - Kalman->P[0][1] - Kalman->P[1][0] + Kalman->Q_angle);
-//    Kalman->P[0][1] -= dt * Kalman->P[1][1];
-//    Kalman->P[1][0] -= dt * Kalman->P[1][1];
-//    Kalman->P[1][1] += Kalman->Q_bias * dt;
-//
-//    double S = Kalman->P[0][0] + Kalman->R_measure;
-//    double K[2];
-//    K[0] = Kalman->P[0][0] / S;
-//    K[1] = Kalman->P[1][0] / S;
-//
-//    double y = newAngle - Kalman->angle;
-//    Kalman->angle += K[0] * y;
-//    Kalman->bias += K[1] * y;
-//
-//    double P00_temp = Kalman->P[0][0];
-//    double P01_temp = Kalman->P[0][1];
-//
-//    Kalman->P[0][0] -= K[0] * P00_temp;
-//    Kalman->P[0][1] -= K[0] * P01_temp;
-//    Kalman->P[1][0] -= K[1] * P00_temp;
-//    Kalman->P[1][1] -= K[1] * P01_temp;
-//
-//    return Kalman->angle;
-//};
+
+void MPU6050_Calibrate(MPU6050_t *mpu){
+	int32_t temp_raw[6] = {0};
+
+	for (uint16_t i=0; i < NUM_SAMPLES; i++){
+		I2C_Recive_Blocking(MPU6050_ADDR, ACCEL_XOUT_H_REG, 1, mpu->Rec_Data, 14);
+		temp_raw[0] += (int16_t)((mpu->Rec_Data[0] << 8) | mpu->Rec_Data[1]);
+		temp_raw[1] += (int16_t)((mpu->Rec_Data[2] << 8) | mpu->Rec_Data[3]);
+		temp_raw[2] += (int16_t)((mpu->Rec_Data[4] << 8) | mpu->Rec_Data[5]);
+
+		temp_raw[3] += (int16_t)((mpu->Rec_Data[8 ] << 8) | mpu->Rec_Data[9 ]);
+		temp_raw[4] += (int16_t)((mpu->Rec_Data[10] << 8) | mpu->Rec_Data[11]);
+		temp_raw[5] += (int16_t)((mpu->Rec_Data[12] << 8) | mpu->Rec_Data[13]);
+	}
+    mpu->Accel.X_Offset = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
+    mpu->Accel.Y_Offset = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
+    mpu->Accel.Z_Offset = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
+
+    mpu->Gyro.X_Offset = (int16_t)(temp_raw[3] >> NUM_SAMPLES_BITS);
+	mpu->Gyro.Y_Offset = (int16_t)(temp_raw[4] >> NUM_SAMPLES_BITS);
+	mpu->Gyro.Z_Offset = (int16_t)(temp_raw[5] >> NUM_SAMPLES_BITS);
+
+	//mpu->Angle.pitch = atan2f(mpu->Acc.offset.y, sqrtf(mpu->Acc.offset.x * mpu->Acc.offset.x + mpu->Acc.offset.z * mpu->Acc.offset.z)) * 180.0f / M_PI;
+	//mpu->Angle.roll  = atan2f(-mpu->Acc.offset.x, mpu->Acc.offset.z) * 180.0f / M_PI;
+}
+
+void MPU6050_MAF(MPU6050_t *mpu){ //Moving Average Filter
+	if(mpu->MAF.isOn){
+		mpu->MAF.isOn = 0;
+		for(uint8_t channel = 0; channel < NUM_AXIS; channel++){
+			mpu->MAF.sumData[channel] -= mpu->MAF.mediaBuffer[mpu->MAF.index][channel];
+			mpu->MAF.sumData[channel] += mpu->MAF.rawData[channel];
+			mpu->MAF.mediaBuffer[mpu->MAF.index][channel] = mpu->MAF.rawData[channel];
+			mpu->MAF.filtredData[channel] = (mpu->MAF.sumData[channel] >> NUM_MAF_BITS);
+		}
+		mpu->MAF.index++;
+		mpu->MAF.index &= (NUM_MAF - 1);
+
+		// ACC: CALCULATE TRUE ACCELERATION
+
+		mpu->Accel.X_filtered = mpu->MAF.filtredData[0] - mpu->Accel.X_Offset ;
+		mpu->Accel.Y_filtered = mpu->MAF.filtredData[1] - mpu->Accel.Y_Offset;
+		mpu->Accel.Z_filtered = mpu->MAF.filtredData[2] - mpu->Accel.Z_Offset;
+		// GYR: CALCULATE TRUE ACCELERATION
+		mpu->Gyro.X_filtered = mpu->MAF.filtredData[3] - mpu->Gyro.X_Offset;
+		mpu->Gyro.Y_filtered = mpu->MAF.filtredData[4] - mpu->Gyro.Y_Offset;
+		mpu->Gyro.Z_filtered = mpu->MAF.filtredData[5] - mpu->Gyro.Z_Offset;
+	}
+}
 
 void MPU6050_NonBlocking_DMA(uint8_t (*Master_Transmit)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, uint16_t Size),uint8_t (*Master_Recive)(uint16_t DevAddress,uint16_t reg,uint8_t *pData, uint16_t Size)){
 	I2C_Transmit = Master_Transmit;
