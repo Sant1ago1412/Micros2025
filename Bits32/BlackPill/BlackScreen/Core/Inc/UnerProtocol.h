@@ -32,6 +32,7 @@ typedef enum Comands{
 	TEXT = 0xF2,
 	ENGINES = 0xF3,
 	MPUDATA = 0xF4,
+	ADCVALUES = 0xF5,
     STARTCONFIG=0xEE,
 } _eEstadoMEFcmd;
 

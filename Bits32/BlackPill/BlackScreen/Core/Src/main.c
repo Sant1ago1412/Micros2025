@@ -28,7 +28,8 @@
 #include "fonts.h"
 #include "Logo.h"
 #include "mpu6050.h"
-//#include "mpu6050.h"
+#include "math.h"
+#include "Utilities.h"
 
 /* USER CODE END Includes */
 
@@ -44,9 +45,6 @@
 #define RINGBUFFER 	256
 #define SISINIT  	myFlags.individualFlags.bit0
 #define IS10MS 	 	myFlags.individualFlags.bit1
-#define RECIVEDMA 	myFlags.individualFlags.bit2
-#define SENDDMA 	myFlags.individualFlags.bit3
-#define DMABUSY		myFlags.individualFlags.bit4
 
 /* USER CODE END PD */
 
@@ -63,6 +61,7 @@ DMA_HandleTypeDef hdma_i2c1_tx;
 DMA_HandleTypeDef hdma_i2c1_rx;
 
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim9;
 TIM_HandleTypeDef htim10;
 TIM_HandleTypeDef htim11;
 
@@ -72,6 +71,8 @@ uint16_t adcBuffer[NUM_CHANNELS];
 _bFlags myFlags;
 _sEng motorL,motorR;
 MPU6050_t mpuValues;
+_work casts1;
+char display[20];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -83,6 +84,7 @@ static void MX_TIM11_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM10_Init(void);
+static void MX_TIM9_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
@@ -90,6 +92,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void task10ms();
 void Engines_task();
+void SSD1306_Task();
 uint8_t I2C_RBlocking(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size);
 uint8_t I2C_DMA_Recive(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
 uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
@@ -107,27 +110,31 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 	for(u=0;u<NUM_CHANNELS;u++){
 
-//		casts.u16[0]=adcBuffer[u];
+		casts1.u16[0]=adcBuffer[u];
 		sprintf(&palabra[0],"Channel %d:%i\n",u,adcBuffer[u]);
 //		memcpy(datosComSerie.bufferTx,palabra,sizeof(palabra));
 //		datosComSerie.indexWriteTx  += sizeof(palabra);
 	}
-	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM11) {
 		IS10MS = TRUE;
 	}
+
 	if (htim->Instance == TIM10) {
 		MPU6050_Read_All(&mpuValues);
 		mpuValues.DMAREADY=1;
 	}
+	if(htim->Instance == TIM11){
+		HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcBuffer, 8);
+	}
+
 }
 
 void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
 	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-		mpuValues.DMAREADY=1;
+		SSD1306_DMAREADY();
 	}
 }
 
@@ -146,29 +153,51 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
 	}
 }
 
+void SSD1306_Task(){
+
+	if(SISINIT){
+		SSD1306_DrawBitmap(0, 0, MainScreen, 128, 64,WHITE);
+
+//		sprintf(display, "X%c%.*f",(mpuValues.Accel.X_filtered >= 0.0f) ? '+' : '-',(fabsf(mpuValues.Accel.X_filtered) < 9.9f) ? 2 : 1,fabsf(mpuValues.Accel.X_filtered));
+//		SSD1306_GotoXY(43, 20);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Y%c%.*f",(mpuValues.Accel.Y_filtered >= 0.0f) ? '+' : '-',(fabsf(mpuValues.Accel.Y_filtered) < 9.9f) ? 2 : 1,fabsf(mpuValues.Accel.Y_filtered));
+//		SSD1306_GotoXY(43, 35);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Z%c%.*f",(mpuValues.Accel.Z_filtered >= 0.0f) ? '+' : '-',(fabsf(mpuValues.Accel.Z_filtered) < 9.9f) ? 2 : 1,fabsf(mpuValues.Accel.Z_filtered));
+//		SSD1306_GotoXY(43, 50);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+		sprintf(display, "X:%c%d ", (mpuValues.Gyro.X_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.X_filtered));
+		SSD1306_GotoXY(90, 20);
+		SSD1306_Puts(display, &Font_7x10, BLACK);
+		sprintf(display, "Y:%c%d ", (mpuValues.Gyro.Y_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.Y_filtered));
+		SSD1306_GotoXY(90, 35);
+		SSD1306_Puts(display, &Font_7x10, BLACK);
+		sprintf(display, "Z:%c%d ", (mpuValues.Gyro.Z_filtered) ? '+' : '-', abs(mpuValues.Gyro.Z_filtered));
+		SSD1306_GotoXY(90, 50);
+		SSD1306_Puts(display, &Font_7x10, BLACK);
+	}
+}
+
 void task10ms(){
 
 	static uint8_t ticker=0;
+
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 		UP_sendInfo(MPUDATA,(uint8_t*)mpuValues.MAF.filtredData, 13);
+		SSD1306_Task();
+		SSD1306_RefreshReady();
 	}
 	if(ticker==255){
 		if(!SISINIT){
 			SSD1306_Clear();
-			SSD1306_RefreshReady();
 		}
 		SISINIT=TRUE;
 		ticker=0;
 	}
 	ticker++;
 }
-
-//void DMA_Task(){
-//	if(mpuValues.DMAREADY){
-//
-//	}
-//}
 
 void Engines_task(){
 
@@ -262,6 +291,7 @@ int main(void)
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_TIM10_Init();
+  MX_TIM9_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim11);
@@ -281,7 +311,6 @@ int main(void)
   en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
   en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
 
-  SSD1306_RefreshReady();
   SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
   MPU6050_Calibrate(&mpuValues);
   /* USER CODE END 2 */
@@ -302,9 +331,6 @@ int main(void)
 
 	SSD1306_UpdateScreen();
 
-	if(SISINIT){
-		SSD1306_DrawBitmap(0, 0, MainScreen, 128, 64,WHITE);
-	}
 //
 //			HAL_Delay(2000);
 //
@@ -549,6 +575,44 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 2 */
   HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
+  * @brief TIM9 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM9_Init(void)
+{
+
+  /* USER CODE BEGIN TIM9_Init 0 */
+
+  /* USER CODE END TIM9_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+
+  /* USER CODE BEGIN TIM9_Init 1 */
+
+  /* USER CODE END TIM9_Init 1 */
+  htim9.Instance = TIM9;
+  htim9.Init.Prescaler = 0;
+  htim9.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim9.Init.Period = 23999;
+  htim9.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim9.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim9) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim9, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM9_Init 2 */
+
+  /* USER CODE END TIM9_Init 2 */
 
 }
 

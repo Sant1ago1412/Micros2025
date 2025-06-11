@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -42,6 +43,14 @@ public:
     QPushButton *SendButton;
     QPlainTextEdit *plainTextEdit;
     QVBoxLayout *verticalLayout_2;
+    QLabel *label_4;
+    QHBoxLayout *horizontalLayout_7;
+    QSlider *verticalSlider_2;
+    QSlider *verticalSlider;
+    QLabel *label_3;
+    QHBoxLayout *horizontalLayout_6;
+    QLCDNumber *lcdNumber;
+    QLCDNumber *lcdNumber_2;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_2;
     QLabel *label;
@@ -63,7 +72,7 @@ public:
     {
         if (MicrosCom->objectName().isEmpty())
             MicrosCom->setObjectName("MicrosCom");
-        MicrosCom->resize(762, 374);
+        MicrosCom->resize(815, 458);
         centralwidget = new QWidget(MicrosCom);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
@@ -120,6 +129,48 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
+        label_4 = new QLabel(centralwidget);
+        label_4->setObjectName("label_4");
+
+        verticalLayout_2->addWidget(label_4);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName("horizontalLayout_7");
+        verticalSlider_2 = new QSlider(centralwidget);
+        verticalSlider_2->setObjectName("verticalSlider_2");
+        verticalSlider_2->setOrientation(Qt::Orientation::Vertical);
+
+        horizontalLayout_7->addWidget(verticalSlider_2);
+
+        verticalSlider = new QSlider(centralwidget);
+        verticalSlider->setObjectName("verticalSlider");
+        verticalSlider->setOrientation(Qt::Orientation::Vertical);
+
+        horizontalLayout_7->addWidget(verticalSlider);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
+
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName("label_3");
+
+        verticalLayout_2->addWidget(label_3);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        lcdNumber = new QLCDNumber(centralwidget);
+        lcdNumber->setObjectName("lcdNumber");
+
+        horizontalLayout_6->addWidget(lcdNumber);
+
+        lcdNumber_2 = new QLCDNumber(centralwidget);
+        lcdNumber_2->setObjectName("lcdNumber_2");
+
+        horizontalLayout_6->addWidget(lcdNumber_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName("verticalLayout_4");
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
@@ -207,7 +258,7 @@ public:
         MicrosCom->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MicrosCom);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 762, 21));
+        menubar->setGeometry(QRect(0, 0, 815, 21));
         MicrosCom->setMenuBar(menubar);
         statusbar = new QStatusBar(MicrosCom);
         statusbar->setObjectName("statusbar");
@@ -223,6 +274,8 @@ public:
         MicrosCom->setWindowTitle(QCoreApplication::translate("MicrosCom", "MicrosCom", nullptr));
         Connect->setText(QCoreApplication::translate("MicrosCom", "Connect", nullptr));
         SendButton->setText(QCoreApplication::translate("MicrosCom", "SendCMD", nullptr));
+        label_4->setText(QCoreApplication::translate("MicrosCom", "Motores", nullptr));
+        label_3->setText(QCoreApplication::translate("MicrosCom", "ADC", nullptr));
         label->setText(QCoreApplication::translate("MicrosCom", "Giroscope Values", nullptr));
         label_2->setText(QCoreApplication::translate("MicrosCom", "Acelerometter Values", nullptr));
     } // retranslateUi

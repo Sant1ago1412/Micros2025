@@ -72,6 +72,7 @@ void MPU6050_Calibrate(MPU6050_t *mpu){
 		temp_raw[4] += (int16_t)((mpu->Rec_Data[10] << 8) | mpu->Rec_Data[11]);
 		temp_raw[5] += (int16_t)((mpu->Rec_Data[12] << 8) | mpu->Rec_Data[13]);
 	}
+
     mpu->Accel.X_Offset = (int16_t)(temp_raw[0] >> NUM_SAMPLES_BITS);
     mpu->Accel.Y_Offset = (int16_t)(temp_raw[1] >> NUM_SAMPLES_BITS);
     mpu->Accel.Z_Offset = (int16_t)(temp_raw[2] >> NUM_SAMPLES_BITS)/* - SCALE_FACTOR*/;
@@ -98,9 +99,17 @@ void MPU6050_MAF(MPU6050_t *mpu){ //Moving Average Filter
 
 		// ACC: CALCULATE TRUE ACCELERATION
 
-		mpu->Accel.X_filtered = mpu->MAF.filtredData[0] - mpu->Accel.X_Offset ;
+		mpu->MAF.filtredData[0] = mpu->MAF.filtredData[0] - mpu->Accel.X_Offset;
+		mpu->MAF.filtredData[1] = mpu->MAF.filtredData[1] - mpu->Accel.Y_Offset;
+		mpu->MAF.filtredData[2]  = mpu->MAF.filtredData[2] - mpu->Accel.Z_Offset;
+		// GYR: CALCULATE TRUE ACCELERATION
+		mpu->MAF.filtredData[3] = mpu->MAF.filtredData[3] - mpu->Gyro.X_Offset;
+		mpu->MAF.filtredData[4] = mpu->MAF.filtredData[4] - mpu->Gyro.Y_Offset;
+		mpu->MAF.filtredData[5] = mpu->MAF.filtredData[5] - mpu->Gyro.Z_Offset;
+
+		mpu->Accel.X_filtered = mpu->MAF.filtredData[0] - mpu->Accel.X_Offset;
 		mpu->Accel.Y_filtered = mpu->MAF.filtredData[1] - mpu->Accel.Y_Offset;
-		mpu->Accel.Z_filtered = mpu->MAF.filtredData[2] - mpu->Accel.Z_Offset;
+		mpu->Accel.Z_filtered  = mpu->MAF.filtredData[2] - mpu->Accel.Z_Offset;
 		// GYR: CALCULATE TRUE ACCELERATION
 		mpu->Gyro.X_filtered = mpu->MAF.filtredData[3] - mpu->Gyro.X_Offset;
 		mpu->Gyro.Y_filtered = mpu->MAF.filtredData[4] - mpu->Gyro.Y_Offset;
