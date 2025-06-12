@@ -25,5 +25,5 @@
 ../Core/Src/ssd1306_oled.c:506:6:SSD1306_OFF	8	static
 ../Core/Src/ssd1306_oled.c:518:6:SSD1306_I2C_Write	32	static
 ../Core/Src/ssd1306_oled.c:525:6:Display_Set_I2C_Master_Transmit	16	static
-../Core/Src/ssd1306_oled.c:530:6:SSD1306_DMAREADY	4	static
+../Core/Src/ssd1306_oled.c:530:6:SSD1306_DMAREADY	16	static
 ../Core/Src/ssd1306_oled.c:534:6:SSD1306_RefreshReady	4	static

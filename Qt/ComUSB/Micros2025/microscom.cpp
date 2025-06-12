@@ -17,6 +17,7 @@ MicrosCom::MicrosCom(QWidget *parent)
 
     ui->Comand->addItem("ALIVE", 0xF0);
     ui->Comand->addItem("FIRMWARE", 0xF1);
+    ui->Comand->addItem("MOTORES", 0xF3);
     header=01;
     connect(QSerialPort1,&QSerialPort::readyRead, this,&MicrosCom::OnRxChar);
 
@@ -167,7 +168,7 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
         ui->Ay->display(w.i16[0]/(float)16384);
         w.u8[0]=rxBuf[5];
         w.u8[1]=rxBuf[6];
-        ui->Az->display(w.i16[0]/(float)16384);
+        ui->Az->display(w.i16[0]/(float)16384+1);
 
         w.u8[0]=rxBuf[7];
         w.u8[1]=rxBuf[8];
@@ -178,6 +179,35 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
         w.u8[0]=rxBuf[11];
         w.u8[1]=rxBuf[12];
         ui->Gz->display(w.i16[0]/(float)131);
+        break;
+
+    case ADCVALUES:
+
+        w.u8[0]=rxBuf[1];
+        w.u8[1]=rxBuf[2];
+        ui->ADC1->display(w.u16[0]);
+        w.u8[0]=rxBuf[3];
+        w.u8[1]=rxBuf[4];
+        ui->ADC2->display(w.u16[0]);
+        w.u8[0]=rxBuf[5];
+        w.u8[1]=rxBuf[6];
+        ui->ADC3->display(w.u16[0]);
+        w.u8[0]=rxBuf[7];
+        w.u8[1]=rxBuf[8];
+        ui->ADC4->display(w.u16[0]);
+        w.u8[0]=rxBuf[9];
+        w.u8[1]=rxBuf[10];
+        ui->ADC5->display(w.u16[0]);
+        w.u8[0]=rxBuf[11];
+        w.u8[1]=rxBuf[12];
+        ui->ADC6->display(w.u16[0]);
+        w.u8[0]=rxBuf[13];
+        w.u8[1]=rxBuf[14];
+        ui->ADC7->display(w.u16[0]);
+        w.u8[0]=rxBuf[15];
+        w.u8[1]=rxBuf[16];
+        ui->ADC8->display(w.u16[0]);
+
         break;
     default:
 
@@ -234,6 +264,10 @@ void MicrosCom::on_SendButton_pressed()
     case FIRMWARE://FIRMWARE   PC=>MBED 0xF1 ;  MBED=>PC 0xF1 FIRMWARE
         n = 1;
         break;
+    case MOTORES:
+        n=4;
+        w.i16[0]=ui->M1->value();
+        w.i16[1]=ui->M2->value();
         break;
     default:
         break;

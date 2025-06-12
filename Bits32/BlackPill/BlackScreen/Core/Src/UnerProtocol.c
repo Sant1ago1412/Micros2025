@@ -9,7 +9,8 @@
 #include "stdlib.h"
 
 _work casts;
-int16_t value=9999;
+int16_t valuem1;
+int16_t valuem2;
 _eProtocolo estadoProtocolo;
 _sDato *datosComLib;
 
@@ -153,9 +154,10 @@ void UP_decodeData(_sDato *datosComLib){
 
     	casts.u8[0]=datosComLib->bufferRx[datosComLib->indexStart+3];
     	casts.u8[1]=datosComLib->bufferRx[datosComLib->indexStart+4];
-
-    	value = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
-
+    	casts.u8[2]=datosComLib->bufferRx[datosComLib->indexStart+3];
+        casts.u8[3]=datosComLib->bufferRx[datosComLib->indexStart+4];
+    	valuem1 = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
+    	valuem2 = casts.i16[1];
     break;
 
     default:
@@ -179,7 +181,10 @@ void UP_datafromUSB(uint8_t *buf, uint16_t length) {
   }
 }
 
-int16_t ret_eng_Values(){
-	return value;
+int16_t ret_eng_Values(uint8_t eng){
+	if(eng)
+		return valuem1;
+	else
+		return valuem2;
 }
 

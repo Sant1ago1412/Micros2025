@@ -46,7 +46,7 @@ typedef enum ProtocolState{
     PAYLOAD
 }_eProtocolo;
 
-int16_t ret_eng_Values();
+int16_t ret_eng_Values(uint8_t eng);
 void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff);
 void UP_sendInfo(_eEstadoMEFcmd CMD,uint8_t *bufferAux, uint8_t bytes);
 void UP_decodeData(_sDato *datosComLib);

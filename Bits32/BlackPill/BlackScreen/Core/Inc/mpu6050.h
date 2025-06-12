@@ -57,7 +57,6 @@ typedef struct{
     uint8_t DMAREADY;
     MAF_t MAF;
 
-
 } MPU6050_t;
 
 uint8_t MPU6050_Init();

@@ -45,12 +45,20 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout_7;
-    QSlider *verticalSlider_2;
-    QSlider *verticalSlider;
+    QSlider *M2;
+    QSlider *M1;
     QLabel *label_3;
     QHBoxLayout *horizontalLayout_6;
-    QLCDNumber *lcdNumber;
-    QLCDNumber *lcdNumber_2;
+    QVBoxLayout *verticalLayout_6;
+    QLCDNumber *ADC5;
+    QLCDNumber *ADC6;
+    QLCDNumber *ADC7;
+    QLCDNumber *ADC8;
+    QVBoxLayout *verticalLayout_5;
+    QLCDNumber *ADC1;
+    QLCDNumber *ADC2;
+    QLCDNumber *ADC3;
+    QLCDNumber *ADC4;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_2;
     QLabel *label;
@@ -136,17 +144,21 @@ public:
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName("horizontalLayout_7");
-        verticalSlider_2 = new QSlider(centralwidget);
-        verticalSlider_2->setObjectName("verticalSlider_2");
-        verticalSlider_2->setOrientation(Qt::Orientation::Vertical);
+        M2 = new QSlider(centralwidget);
+        M2->setObjectName("M2");
+        M2->setMinimum(-50000);
+        M2->setMaximum(50000);
+        M2->setOrientation(Qt::Orientation::Vertical);
 
-        horizontalLayout_7->addWidget(verticalSlider_2);
+        horizontalLayout_7->addWidget(M2);
 
-        verticalSlider = new QSlider(centralwidget);
-        verticalSlider->setObjectName("verticalSlider");
-        verticalSlider->setOrientation(Qt::Orientation::Vertical);
+        M1 = new QSlider(centralwidget);
+        M1->setObjectName("M1");
+        M1->setMinimum(-50000);
+        M1->setMaximum(50000);
+        M1->setOrientation(Qt::Orientation::Vertical);
 
-        horizontalLayout_7->addWidget(verticalSlider);
+        horizontalLayout_7->addWidget(M1);
 
 
         verticalLayout_2->addLayout(horizontalLayout_7);
@@ -158,15 +170,55 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName("horizontalLayout_6");
-        lcdNumber = new QLCDNumber(centralwidget);
-        lcdNumber->setObjectName("lcdNumber");
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName("verticalLayout_6");
+        ADC5 = new QLCDNumber(centralwidget);
+        ADC5->setObjectName("ADC5");
 
-        horizontalLayout_6->addWidget(lcdNumber);
+        verticalLayout_6->addWidget(ADC5);
 
-        lcdNumber_2 = new QLCDNumber(centralwidget);
-        lcdNumber_2->setObjectName("lcdNumber_2");
+        ADC6 = new QLCDNumber(centralwidget);
+        ADC6->setObjectName("ADC6");
 
-        horizontalLayout_6->addWidget(lcdNumber_2);
+        verticalLayout_6->addWidget(ADC6);
+
+        ADC7 = new QLCDNumber(centralwidget);
+        ADC7->setObjectName("ADC7");
+
+        verticalLayout_6->addWidget(ADC7);
+
+        ADC8 = new QLCDNumber(centralwidget);
+        ADC8->setObjectName("ADC8");
+
+        verticalLayout_6->addWidget(ADC8);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_6);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        ADC1 = new QLCDNumber(centralwidget);
+        ADC1->setObjectName("ADC1");
+
+        verticalLayout_5->addWidget(ADC1);
+
+        ADC2 = new QLCDNumber(centralwidget);
+        ADC2->setObjectName("ADC2");
+
+        verticalLayout_5->addWidget(ADC2);
+
+        ADC3 = new QLCDNumber(centralwidget);
+        ADC3->setObjectName("ADC3");
+
+        verticalLayout_5->addWidget(ADC3);
+
+        ADC4 = new QLCDNumber(centralwidget);
+        ADC4->setObjectName("ADC4");
+
+        verticalLayout_5->addWidget(ADC4);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_5);
 
 
         verticalLayout_2->addLayout(horizontalLayout_6);

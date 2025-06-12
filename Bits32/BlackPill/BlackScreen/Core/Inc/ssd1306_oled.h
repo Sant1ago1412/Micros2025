@@ -82,6 +82,6 @@ void SSD1306_Stopscroll(void);
 void SSD1306_InvertDisplay(int i);
 void SSD1306_Clear(void);
 
-void SSD1306_DMAREADY();
+void SSD1306_DMAREADY(uint8_t val);
 void SSD1306_RefreshReady();
 #endif

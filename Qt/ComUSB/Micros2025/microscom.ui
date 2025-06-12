@@ -80,14 +80,26 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QSlider" name="verticalSlider_2">
+           <widget class="QSlider" name="M2">
+            <property name="minimum">
+             <number>-50000</number>
+            </property>
+            <property name="maximum">
+             <number>50000</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider">
+           <widget class="QSlider" name="M1">
+            <property name="minimum">
+             <number>-50000</number>
+            </property>
+            <property name="maximum">
+             <number>50000</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
             </property>
@@ -105,10 +117,36 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QLCDNumber" name="lcdNumber"/>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLCDNumber" name="ADC5"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC6"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC7"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC8"/>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lcdNumber_2"/>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLCDNumber" name="ADC1"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC2"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC3"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="ADC4"/>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>

@@ -527,8 +527,8 @@ void Display_Set_I2C_Master_Transmit(uint8_t (*Master_Transmit)(uint16_t DevAddr
 	I2C_Master_Transmit_Blocking = Master_Transmit_Blocking;
 }
 
-void SSD1306_DMAREADY(){
-	SSD1306.DMAREADY=1;
+void SSD1306_DMAREADY(uint8_t val){
+	SSD1306.DMAREADY=val;
 }
 
 void SSD1306_RefreshReady(){

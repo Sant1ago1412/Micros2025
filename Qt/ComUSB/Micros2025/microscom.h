@@ -78,7 +78,9 @@ private:
     typedef enum{
         ALIVE=0xF0,
         FIRMWARE=0xF1,
+        MOTORES = 0xF3,
         MPUDATA=0xF4,
+        ADCVALUES = 0xF5,
         ACKNOWLEDGE=0x0D,
         UNKNOWNCOMANND=0xFF
     }_eIDCommand;
