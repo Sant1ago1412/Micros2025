@@ -13,6 +13,7 @@ int16_t valuem1;
 int16_t valuem2;
 _eProtocolo estadoProtocolo;
 _sDato *datosComLib;
+static void (*aPtrFunADC)(uint8_t *buf) = NULL;
 
 void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff){
 
@@ -31,11 +32,11 @@ void UP_sendInfo(_eEstadoMEFcmd CMD,uint8_t *bufferAux,uint8_t bytes){
     bufAux[indiceAux++]='E';
     bufAux[indiceAux++]='R';
 
-    bufAux[indiceAux++]=bytes+1;
+    bufAux[indiceAux++]=bytes+2;
     bufAux[indiceAux++]=':';
     bufAux[indiceAux++]=CMD;
 
-    for(i=0; i<bytes-1; i++)
+    for(i=0; i<bytes; i++)
         bufAux[indiceAux++] = bufferAux[i];
 
     cks=0;
@@ -125,7 +126,7 @@ void UP_decodeHeader(_sDato *datosComLib){
 
 void UP_decodeData(_sDato *datosComLib){
 
-    uint8_t bufAux[20], indiceAux=0,bytes=0;
+    uint8_t bufAux[30], indiceAux=0,bytes=0;
 
     switch (datosComLib->bufferRx[datosComLib->indexStart+2])//CMD EN LA POSICION 2
     {
@@ -154,12 +155,24 @@ void UP_decodeData(_sDato *datosComLib){
 
     	casts.u8[0]=datosComLib->bufferRx[datosComLib->indexStart+3];
     	casts.u8[1]=datosComLib->bufferRx[datosComLib->indexStart+4];
-    	casts.u8[2]=datosComLib->bufferRx[datosComLib->indexStart+3];
-        casts.u8[3]=datosComLib->bufferRx[datosComLib->indexStart+4];
+    	casts.u8[2]=datosComLib->bufferRx[datosComLib->indexStart+5];
+        casts.u8[3]=datosComLib->bufferRx[datosComLib->indexStart+6];
     	valuem1 = casts.i16[0]; //ver aca que pasa para recuperar el valor de la velocidad
     	valuem2 = casts.i16[1];
+
     break;
 
+    case MPUDATA:
+
+    	bufAux[indiceAux++]=MPUDATA;
+    break;
+    case ADCVALUES:
+
+    	aPtrFunADC(&bufAux[0]);
+
+    	bytes=0x10;
+
+    break;
     default:
 
         bufAux[indiceAux++]=0xFF;
@@ -168,7 +181,7 @@ void UP_decodeData(_sDato *datosComLib){
     break;
     }
 
-    UP_sendInfo(datosComLib->indexStart+2,bufAux,bytes);
+    UP_sendInfo(datosComLib->bufferRx[datosComLib->indexStart+2],bufAux,bytes);
 }
 
 void UP_datafromUSB(uint8_t *buf, uint16_t length) {
@@ -186,5 +199,8 @@ int16_t ret_eng_Values(uint8_t eng){
 		return valuem1;
 	else
 		return valuem2;
+}
+void UP_attachData(void(*ptrGetADCValues)(uint8_t *buf)){
+	aPtrFunADC=ptrGetADCValues;
 }
 

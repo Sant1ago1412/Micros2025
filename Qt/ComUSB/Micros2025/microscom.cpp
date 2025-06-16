@@ -18,6 +18,8 @@ MicrosCom::MicrosCom(QWidget *parent)
     ui->Comand->addItem("ALIVE", 0xF0);
     ui->Comand->addItem("FIRMWARE", 0xF1);
     ui->Comand->addItem("MOTORES", 0xF3);
+    ui->Comand->addItem("MPUDATA", 0xF4);
+    ui->Comand->addItem("ADCVALUES", 0xF5);
     header=01;
     connect(QSerialPort1,&QSerialPort::readyRead, this,&MicrosCom::OnRxChar);
 
@@ -30,7 +32,7 @@ MicrosCom::MicrosCom(QWidget *parent)
     // QUdpSocket1 =new QUdpSocket(this);
     // connect(QUdpSocket1,&QUdpSocket::readyRead,this,&QForm1::onRxUDP);
 
-    QTimer1->start(200);
+    QTimer1->start(100);
 }
 
 MicrosCom::~MicrosCom()
@@ -75,11 +77,11 @@ void MicrosCom::OnRxChar(){
 
     strHex = "SERIAL<-- 0x";
     for (int a=0; a<count; a++) {
-        strHex = strHex + QString("%1").arg(buf[a], 2, 16, QChar('0')).toUpper();
+        strHex = strHex + QString("%1 ").arg(buf[a], 2, 16, QChar('0')).toUpper();
     }
     ui->plainTextEdit->appendPlainText(strHex);
     for (int i=0; i<count; i++) {
-        strHex = strHex + QString("%1").arg(buf[i], 2, 16, QChar('0')).toUpper();
+        strHex = strHex + QString("%1 ").arg(buf[i], 2, 16, QChar('0')).toUpper();
 
         switch(header){
         case 0:
@@ -216,7 +218,9 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
 }
 
 void MicrosCom::OnQTimer1(){
+    uint8_t buf=(uint8_t)ADCVALUES;
 
+    SendCMD(&buf,1);
 }
 
 void MicrosCom::on_Connect_pressed()

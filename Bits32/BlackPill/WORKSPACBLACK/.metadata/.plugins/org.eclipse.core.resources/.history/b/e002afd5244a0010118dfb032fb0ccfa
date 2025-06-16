@@ -1,0 +1,19 @@
+/*
+ * ADC.h
+ *
+ *  Created on: Jun 15, 2025
+ *      Author: santi
+ */
+
+#ifndef INC_ADC_H_
+#define INC_ADC_H_
+
+#include <stdint.h>
+
+typedef struct{
+	uint16_t raw_Data[8];
+	uint16_t filteredData[8];
+	uint32_t Sumatoria[8];
+}s_ADC;
+
+#endif /* INC_ADC_H_ */

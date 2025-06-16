@@ -1,6 +1,6 @@
-19:27:39 **** Incremental Build of configuration Debug for project BlackScreen ****
+20:41:47 **** Incremental Build of configuration Debug for project BlackScreen ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/ADC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ADC.d" -MT"Core/Src/ADC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ADC.o"
 arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: BlackScreen.elf
  
@@ -8,16 +8,16 @@ arm-none-eabi-size  BlackScreen.elf
 arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
 arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
    text	   data	    bss	    dec	    hex	filename
-  86400	    724	   8132	  95256	  17418	BlackScreen.elf
+  71096	    716	   6964	  78776	  133b8	BlackScreen.elf
 arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
 Finished building: default.size.stdout
  
-Finished building: BlackScreen.hex
 Finished building: BlackScreen.bin
+Finished building: BlackScreen.hex
  
  
 Finished building: BlackScreen.list
  
 
-19:27:42 Build Finished. 0 errors, 0 warnings. (took 3s.8ms)
+20:41:48 Build Finished. 0 errors, 0 warnings. (took 1s.474ms)
 

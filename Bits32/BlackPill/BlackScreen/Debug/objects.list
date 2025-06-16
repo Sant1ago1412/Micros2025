@@ -1,3 +1,4 @@
+"./Core/Src/ADC.o"
 "./Core/Src/UnerProtocol.o"
 "./Core/Src/engines.o"
 "./Core/Src/fonts.o"

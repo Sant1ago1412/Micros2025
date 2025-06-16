@@ -9,6 +9,7 @@
 #define INC_UNERPROTOCOL_H_
 
 #include "Utilities.h"
+#include "stdio.h"
 
 typedef struct ComStruct{
 
@@ -53,5 +54,6 @@ void UP_decodeData(_sDato *datosComLib);
 void UP_decodeHeader(_sDato *datosComLib);
 void UP_datafromUSB(uint8_t *buf, uint16_t length) ;
 void UP_comunicationsTask(_sDato *datosCom);
+void UP_attachData(void(*ptrGetADCValues)(uint8_t *buf));
 
 #endif /* INC_UNERPROTOCOL_H_ */

@@ -30,16 +30,13 @@
 #include "mpu6050.h"
 #include "math.h"
 #include "Utilities.h"
+#include "ADC.h"
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef struct{
-	uint16_t raw_Data[8];
-	uint16_t filteredData[8];
-	uint32_t Sumatoria[8];
-}s_ADC;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -80,19 +77,19 @@ _work casts1;
 s_ADC adcValues;
 char display[20];
 
-const uint8_t Index_to_Bar[] = {
-    21, 22, 23, 24, 25, 26, 27, 28, 29,
-    30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-    40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-    50, 51, 52, 53, 54, 55, 56, 57, 58, 59
-};
-
-const uint16_t ADC_to_Index[] = {
-  105,  210,  315,  420,  525,  630,  735,  840,  945,
-  1050, 1155, 1260, 1365, 1470, 1575, 1680, 1785, 1890, 1995,
-  2100, 2205, 2310, 2415, 2520, 2625, 2730, 2835, 2940, 3045,
-  3150, 3255, 3360, 3465, 3570, 3675, 3780, 3885, 3990, 4095
-};
+//const uint8_t Index_to_Bar[] = {
+//    21, 22, 23, 24, 25, 26, 27, 28, 29,
+//    30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+//    40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+//    50, 51, 52, 53, 54, 55, 56, 57, 58, 59
+//};
+//
+//const uint16_t ADC_to_Index[] = {
+//  105,  210,  315,  420,  525,  630,  735,  840,  945,
+//  1050, 1155, 1260, 1365, 1470, 1575, 1680, 1785, 1890, 1995,
+//  2100, 2205, 2310, 2415, 2520, 2625, 2730, 2835, 2940, 3045,
+//  3150, 3255, 3360, 3465, 3570, 3675, 3780, 3885, 3990, 4095
+//};
 
 /* USER CODE END PV */
 
@@ -114,6 +111,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void task10ms();
 void Engines_task();
 void SSD1306_Task();
+void Get_ADCValues(uint8_t *buf);
 uint8_t I2C_RBlocking(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size);
 uint8_t I2C_DMA_Recive(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
 uint8_t I2C_DMA_Transmit(uint16_t Dev_Address,uint16_t reg,uint8_t *p_Data, uint16_t _Size);
@@ -125,7 +123,7 @@ void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-	NEWADCVALUES=TRUE;
+	adcValues.newValue=1;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
@@ -133,97 +131,97 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		IS10MS = TRUE;
 	}
 
-	if (htim->Instance == TIM10) {
-		MPU6050_Read_All(&mpuValues);
-		mpuValues.DMAREADY=1;
-		SSD1306_DMAREADY(0);
-	}
+//	if (htim->Instance == TIM10) {
+//		MPU6050_Read_All(&mpuValues);
+//		mpuValues.DMAREADY=1;
+//		SSD1306_DMAREADY(0);
+//	}
 	if(htim->Instance == TIM9){
 		HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adcValues.raw_Data, 8);
 	}
 }
 
-void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
-	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
-		SSD1306_DMAREADY(1);
-	}
-}
+//void HAL_I2C_MemTxCpltCallback(I2C_HandleTypeDef *hi2c){
+//	if(hi2c->Devaddress==SSD1306_I2C_ADDR){
+//		SSD1306_DMAREADY(1);
+//	}
+//}
+//
+//void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
+//	if(hi2c->Devaddress==MPU6050_ADDR){
+//
+//	    mpuValues.MAF.rawData[0] = (int16_t) (mpuValues.Rec_Data[0] << 8 | mpuValues.Rec_Data[1]);
+//	    mpuValues.MAF.rawData[1] = (int16_t) (mpuValues.Rec_Data[2] << 8 | mpuValues.Rec_Data[3]);
+//	    mpuValues.MAF.rawData[2] = (int16_t) (mpuValues.Rec_Data[4] << 8 | mpuValues.Rec_Data[5]);
+//	    mpuValues.MAF.rawData[3] = (int16_t) (mpuValues.Rec_Data[8] << 8 | mpuValues.Rec_Data[9]);
+//	    mpuValues.MAF.rawData[4] = (int16_t) (mpuValues.Rec_Data[10]<< 8 | mpuValues.Rec_Data[11]);
+//	    mpuValues.MAF.rawData[5] = (int16_t) (mpuValues.Rec_Data[12]<< 8 | mpuValues.Rec_Data[13]);
+//
+//		mpuValues.MAF.isOn=1;
+//		SSD1306_DMAREADY(1);
+//	}
+//}
 
-void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c){
-	if(hi2c->Devaddress==MPU6050_ADDR){
-
-	    mpuValues.MAF.rawData[0] = (int16_t) (mpuValues.Rec_Data[0] << 8 | mpuValues.Rec_Data[1]);
-	    mpuValues.MAF.rawData[1] = (int16_t) (mpuValues.Rec_Data[2] << 8 | mpuValues.Rec_Data[3]);
-	    mpuValues.MAF.rawData[2] = (int16_t) (mpuValues.Rec_Data[4] << 8 | mpuValues.Rec_Data[5]);
-	    mpuValues.MAF.rawData[3] = (int16_t) (mpuValues.Rec_Data[8] << 8 | mpuValues.Rec_Data[9]);
-	    mpuValues.MAF.rawData[4] = (int16_t) (mpuValues.Rec_Data[10]<< 8 | mpuValues.Rec_Data[11]);
-	    mpuValues.MAF.rawData[5] = (int16_t) (mpuValues.Rec_Data[12]<< 8 | mpuValues.Rec_Data[13]);
-
-		mpuValues.MAF.isOn=1;
-		SSD1306_DMAREADY(1);
-	}
-}
-
-void SSD1306_Task(){
-
-	uint32_t guiaBarras;
-
-	if(SISINIT){
-		SSD1306_DrawBitmap(0, 0, MainScreen, 128, 64,WHITE);
-
-		sprintf(display, "X:%c%d",(mpuValues.Accel.X_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.X_filtered));
-		SSD1306_GotoXY(43, 20);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		sprintf(display, "Y:%c%d",(mpuValues.Accel.Y_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.Y_filtered));
-		SSD1306_GotoXY(43, 35);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		sprintf(display, "Z:%c%d",(mpuValues.Accel.Z_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.Z_filtered));
-		SSD1306_GotoXY(43, 50);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		sprintf(display, "X:%c%d ", (mpuValues.Gyro.X_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.X_filtered));
-		SSD1306_GotoXY(90, 20);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		sprintf(display, "Y:%c%d ", (mpuValues.Gyro.Y_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.Y_filtered));
-		SSD1306_GotoXY(90, 35);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		sprintf(display, "Z:%c%d ", (mpuValues.Gyro.Z_filtered) ? '+' : '-', abs(mpuValues.Gyro.Z_filtered));
-		SSD1306_GotoXY(90, 50);
-		SSD1306_Puts(display, &Font_7x10, BLACK);
-		for(uint8_t i = 0; i < 9; i++){
-			for(uint8_t j = 0; j < 39; j++){
-				if(adcValues.raw_Data[i] <= ADC_to_Index[j]){
-					guiaBarras = 5 + i * 4;
-					SSD1306_DrawLine(guiaBarras, 59,  guiaBarras, Index_to_Bar[j], BLACK);
-					SSD1306_DrawLine(guiaBarras+1, 59,  guiaBarras+1, Index_to_Bar[j], BLACK);
-					break;
-				}
-			}
-		}
-	}
-}
+//void SSD1306_Task(){
+//
+//	uint32_t guiaBarras;
+//
+//	if(SISINIT){
+//		SSD1306_DrawBitmap(0, 0, MainScreen, 128, 64,WHITE);
+//
+//		sprintf(display, "X:%c%d",(mpuValues.Accel.X_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.X_filtered));
+//		SSD1306_GotoXY(43, 20);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Y:%c%d",(mpuValues.Accel.Y_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.Y_filtered));
+//		SSD1306_GotoXY(43, 35);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Z:%c%d",(mpuValues.Accel.Z_filtered >= 0) ? '+' : '-',abs(mpuValues.Accel.Z_filtered));
+//		SSD1306_GotoXY(43, 50);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "X:%c%d ", (mpuValues.Gyro.X_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.X_filtered));
+//		SSD1306_GotoXY(90, 20);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Y:%c%d ", (mpuValues.Gyro.Y_filtered >= 0) ? '+' : '-', abs(mpuValues.Gyro.Y_filtered));
+//		SSD1306_GotoXY(90, 35);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		sprintf(display, "Z:%c%d ", (mpuValues.Gyro.Z_filtered) ? '+' : '-', abs(mpuValues.Gyro.Z_filtered));
+//		SSD1306_GotoXY(90, 50);
+//		SSD1306_Puts(display, &Font_7x10, BLACK);
+//		for(uint8_t i = 0; i < 9; i++){
+//			for(uint8_t j = 0; j < 39; j++){
+//				if(adcValues.raw_Data[i] <= ADC_to_Index[j]){
+//					guiaBarras = 5 + i * 4;
+//					SSD1306_DrawLine(guiaBarras, 59,  guiaBarras, Index_to_Bar[j], BLACK);
+//					SSD1306_DrawLine(guiaBarras+1, 59,  guiaBarras+1, Index_to_Bar[j], BLACK);
+//					break;
+//				}
+//			}
+//		}
+//	}
+//}
 
 void task10ms(){
 
 	static uint8_t ticker=0;
-	uint16_t buffaux[8];
+//	uint16_t buffaux[8];
 
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		UP_sendInfo(MPUDATA,(uint8_t*)mpuValues.MAF.filtredData, 13);
-
-		for(uint8_t i=0;i<7;i++)
-			buffaux[i]=adcValues.raw_Data[i];
-
-		UP_sendInfo(ADCVALUES,(uint8_t*)&buffaux, 17);
-
-		SSD1306_Task();
-		SSD1306_RefreshReady();
+//		UP_sendInfo(MPUDATA,(uint8_t*)mpuValues.MAF.filtredData, 13);
+//
+//		for(uint8_t i=0;i<7;i++)
+//			buffaux[i]=adcValues.raw_Data[i];
+//
+//		UP_sendInfo(ADCVALUES,(uint8_t*)&buffaux, 17);
+//
+//		SSD1306_Task();
+//		SSD1306_RefreshReady();
 	}
 	if(ticker>250){
-		if(!SISINIT){
-			SSD1306_Clear();
-		}
-		SISINIT=TRUE;
+//		if(!SISINIT){
+//			SSD1306_Clear();
+//		}
+//		SISINIT=TRUE;
 		ticker=0;
 	}
 	ticker++;
@@ -284,22 +282,7 @@ void Engines_task(){
 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, motorL.speed);
 		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, motorR.speed);
 }
-void AdcFilter(){
 
-	static uint8_t index=0;
-	static uint16_t Buffer[8][8];
-
-	for(uint8_t channel = 0; channel < NUM_CHANNELS; channel++){
-		adcValues.Sumatoria[channel] -= Buffer[index][channel];
-		adcValues.Sumatoria[channel] += adcValues.raw_Data[channel];
-		Buffer[index][channel] = adcValues.raw_Data[channel];
-		adcValues.filteredData[channel] = (adcValues.Sumatoria[channel] >> 8);
-	}
-
-	index++;
-	if(index>7)
-		index=0;
-}
 /* USER CODE END 0 */
 
 /**
@@ -347,19 +330,20 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-  Display_Set_I2C_Master_Transmit(&I2C_DMA_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
-  MPU6050_I2C_Blocking(&I2C_RBlocking,&I2C_1_Abstract_Mem_Write_Blocking);
-  MPU6050_NonBlocking_DMA(&I2C_DMA_Transmit,&I2C_DMA_Recive);
-  SSD1306_Init();
-  MPU6050_Init(&mpuValues);
+//  Display_Set_I2C_Master_Transmit(&I2C_DMA_Transmit, &I2C_1_Abstract_Master_Transmit_Blocking);
+//  MPU6050_I2C_Blocking(&I2C_RBlocking,&I2C_1_Abstract_Mem_Write_Blocking);
+//  MPU6050_NonBlocking_DMA(&I2C_DMA_Transmit,&I2C_DMA_Recive);
+//  SSD1306_Init();
+//  MPU6050_Init(&mpuValues);
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
-  en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
-  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+//  en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
+//  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+  UP_attachData(&Get_ADCValues);
 
-  SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
-  MPU6050_Calibrate(&mpuValues);
+//  SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
+////  MPU6050_Calibrate(&mpuValues);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -372,15 +356,12 @@ int main(void)
 	  if(IS10MS){
 		 task10ms();
 		 IS10MS=FALSE;
-		 Engines_task();
+//		 Engines_task();
 	  }
-	MPU6050_MAF(&mpuValues);
+//	MPU6050_MAF(&mpuValues);
 	UP_comunicationsTask(&datosComSerie);
-
-//	if(NEWADCVALUES)
-//		AdcFilter();
-
-	SSD1306_UpdateScreen();
+	ADC_Filter(&adcValues);
+//	SSD1306_UpdateScreen();
 
 //
 //			HAL_Delay(2000);
@@ -912,6 +893,19 @@ uint8_t I2C_RBlocking(uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddS
 
 	HAL_I2C_Mem_Read(&hi2c1, DevAddress, MemAddress, MemAddSize, pData, Size,1000);
 	return 1;
+
+}
+
+void Get_ADCValues(uint8_t *buf){
+
+	uint8_t j=0;
+
+	for(uint8_t i=0;i<7;i++){
+		casts1.i16[0]=adcValues.filteredData[i];
+		buf[j*2]=casts1.u8[0];
+		buf[1+j*2]=casts1.u8[1];
+		j++;
+	}
 
 }
 //void I2C_1_Abstract_Mem_Read_Blocking(uint16_t Dev_Address, uint8_t Mem_Adress, uint8_t Mem_AddSize, uint8_t *p_Data, uint16_t _Size, uint32_t _Timeout){
