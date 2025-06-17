@@ -70,19 +70,7 @@ typedef enum{
 typedef enum{
     ALIVE = 0xF0,
     FIRMWARE= 0xF1,
-    LEDSTATUS = 0x10,
-    BUTTONSTATUS = 0x12,
-    ANALOGSENSORS = 0xA0,
-    SETBLACKCOLOR = 0xA6,
-    SETWHITECOLOR = 0xA7,
-    STARTSTOP = 0xDE,
-    NEWBOX=0xAA,
-    MOTORTEST = 0xA1,
-    SERVOANGLE = 0xA2,
-    CONFIGSERVO = 0xA5,
-    SERVOFINISHMOVE = 0x0A,
-    GETDISTANCE = 0xA3,
-    GETSPEED = 0xA4,
+	DATA = 0xA5,
     ACK = 0x0D,
     UNKNOWN = 0xFF
 }_eCmd;

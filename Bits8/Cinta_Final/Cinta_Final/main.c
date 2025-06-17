@@ -60,6 +60,9 @@
 #define IR2				PD4
 #define IR3				PD5
 
+ 
+ #define N 3
+ 
 /************************************************************************/
 /*							Pin Declaration HCSR                        */
 /************************************************************************/
@@ -89,7 +92,7 @@ uint8_t putHeaderOnTx(_sTx  *dataTx, _eCmd ID, uint8_t frameLength);
 uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
 
 void newBox(uint16_t distance);
-void addBox(uint16_t distance);
+void addBox();
 void kickBox();
 void servoreset();
 /* END Function prototypes ---------------------------------------------------*/
@@ -102,7 +105,11 @@ flags flag0;
  _sRx		dataRx;
  _sTx		dataTx;
  _uWord		myWord;
- 
+ 	
+ uint16_t buffer[N];
+ uint8_t idx = 0;
+ uint16_t suma = 0;
+	 
 uint8_t raw_input[bufferIrn];
 uint8_t state1;
 uint8_t	count100ms	= 10;
@@ -110,7 +117,7 @@ uint8_t count40ms = 4;
 uint8_t count200ms = 75;
 uint8_t boxToTx;
 s_boxType Cajita[bufferBox];
-uint16_t Numbox;
+uint16_t Numbox=0;
 IRDebounce ir_sensor[bufferIrn];
 
 volatile uint8_t buffRx[RXBUFSIZE];
@@ -226,7 +233,7 @@ void ini_USART(uint8_t ubrr){
 
 void IR_Init(IRDebounce *ir) {
 	for(int globalIndex = 0;globalIndex<bufferIrn;globalIndex++){
-		ir[globalIndex].state = IR_RISING;
+		ir[globalIndex].state = IR_DOWN;
 		ir[globalIndex].last_sample = 0;
 		ir[globalIndex].stateConfirmed = 0;
 	}
@@ -325,52 +332,23 @@ uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte)
 }
 void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 	switch(dataRx->buff[dataRx->indexData]){
+		
 		case ALIVE:
-		putHeaderOnTx(dataTx, ALIVE, 2);
-		putByteOnTx(dataTx, ACK );
-		putByteOnTx(dataTx, dataTx->chk);
+		
+			putHeaderOnTx(dataTx, ALIVE, 2);
+			putByteOnTx(dataTx, ACK );
+			putByteOnTx(dataTx, dataTx->chk);
+		
 		break;
 		case FIRMWARE:
 		break;
-		case LEDSTATUS:
-		myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
-		putHeaderOnTx(dataTx, LEDSTATUS, 3);
-		putByteOnTx(dataTx, myWord.ui8[0] );
-		putByteOnTx(dataTx, myWord.ui8[1] );
-		putByteOnTx(dataTx, dataTx->chk);
-		break;
-		case BUTTONSTATUS:
-		break;
-		case ANALOGSENSORS:
-		break;
-		case SETBLACKCOLOR:
-		break;
-		case SETWHITECOLOR:
-		break;
-		case MOTORTEST:
-		break;
-		case SERVOANGLE:
-		break;
-		case CONFIGSERVO:
-		break;
-		case GETDISTANCE:
+
+		case DATA:
 			myWord.ui16[0]	= globalDistance;
-			putHeaderOnTx(dataTx, GETDISTANCE, 3);
+			putHeaderOnTx(dataTx, DATA, 8);
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
-			putByteOnTx(dataTx, dataTx->chk);
-		break;
-		case GETSPEED:
-		break;
-		case STARTSTOP:
-		break;
-		case NEWBOX:
-			myWord.ui8[0]=boxToTx;
-			putHeaderOnTx(dataTx, NEWBOX, 8);
-			putByteOnTx(dataTx, myWord.ui8[0]);
-			myWord.ui16[0]	= globalDistance;
-			putByteOnTx(dataTx, myWord.ui8[0]);
-			putByteOnTx(dataTx, myWord.ui8[1]);
+			putByteOnTx(dataTx, boxToTx);
 			myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
@@ -378,13 +356,29 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
 			putByteOnTx(dataTx, dataTx->chk);
-			
 		break;
+		
+		//case NEWBOX:
+		//myWord.ui8[0]=boxToTx;
+		//putHeaderOnTx(dataTx, NEWBOX, 8);
+		//putByteOnTx(dataTx, myWord.ui8[0]);
+		//myWord.ui16[0]	= globalDistance;
+		//putByteOnTx(dataTx, myWord.ui8[0]);
+		//putByteOnTx(dataTx, myWord.ui8[1]);
+		//myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
+		//putByteOnTx(dataTx, myWord.ui8[0]);
+		//putByteOnTx(dataTx, myWord.ui8[1]);
+		//myWord.ui16[0] = Numbox;
+		//putByteOnTx(dataTx, myWord.ui8[0]);
+		//putByteOnTx(dataTx, myWord.ui8[1]);
+		//putByteOnTx(dataTx, dataTx->chk);
+		//
+		//break;
 
 		default:
-		putHeaderOnTx(dataTx, (_eCmd)dataRx->buff[dataRx->indexData], 2);
-		putByteOnTx(dataTx,UNKNOWN );
-		putByteOnTx(dataTx, dataTx->chk);
+			putHeaderOnTx(dataTx, (_eCmd)dataRx->buff[dataRx->indexData], 2);
+			putByteOnTx(dataTx,UNKNOWN );
+			putByteOnTx(dataTx, dataTx->chk);
 		break;
 		
 	}
@@ -478,7 +472,7 @@ void every10ms(){
 	}
 	if (!count200ms){
 			servoreset();
-			count200ms = 75;
+			count200ms = 60;
 			
 	}
 	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
@@ -493,29 +487,32 @@ void every10ms(){
 }
 
 void sensorMeasure(uint16_t distance){
-	globalDistance=distance;
+	
+	globalDistance = distance;
+	
 }
 
-void addBox(uint16_t distance){
+void addBox(){
 	
-		if (globalDistance > 754 && globalDistance < 870) { //5-6,5
+		if (globalDistance > 754) { //5-6,5
 			Cajita[Numbox].boxState=isOn;
 			Cajita[Numbox].boxSize=SmallBox;
-			boxToTx = 0x03;
+			boxToTx = 0x4;
 		}
 		else if (globalDistance >= boxSizeconfig.mediumboxC && globalDistance < boxSizeconfig.mediumboxF) { //7 -8,5
 			Cajita[Numbox].boxState=isOn;
 			Cajita[Numbox].boxSize=MediumBox;
-			boxToTx = 0x01;
+			boxToTx = 0x2;
 		}
-		else if (globalDistance >= boxSizeconfig.largeboxC && globalDistance < boxSizeconfig.largeboxF) { //9-11
+		else if (globalDistance < 638) { //9-11
 			Cajita[Numbox].boxState=isOn;
 			Cajita[Numbox].boxSize=LargeBox;
-			boxToTx = 0x02;
+			boxToTx = 0x1;
 		}
-		else if (globalDistance < 290 && globalDistance > Cm15){
-			Cajita->boxSize=NotSelected;
-		}
+		//else if (globalDistance < 290 && globalDistance > Cm15){
+			//Cajita[Numbox].boxSize=NotSelected;
+			//boxToTx = 0x00;
+		//}
 		Numbox++;
 	
 		if(Numbox>=bufferBox) //reinicio el buffer
@@ -527,7 +524,7 @@ void newBox(uint16_t distance){
 	if(distance<Cm18){
 		if((IR_GetState(&ir_sensor[0]) == 0) && !MEASURINGBOX){
 			MEASURINGBOX=TRUE;
-			addBox(distance);
+			addBox();
 			PORTB ^=(1<<LED_BI);
 		}
 		if ((IR_GetState(&ir_sensor[0]) == 1)) //si IR no mide
@@ -547,7 +544,7 @@ void kickBox(){
 			servo_Angle(0,0);
 			Cajita[read1].boxState=isOut;
 		}
-		read1++;
+
 	}
 	if (IR_GetState(&ir_sensor[2])==0){
 		if(ir_sensor[2].irType == Cajita[read2].boxSize){
@@ -605,7 +602,7 @@ int main(){
 	servo_Angle(2,90);
 	HCSR_1 = HCSR04_AddNew(&WritePin_HCSR, 16);
 	
-	Numbox = 0;
+	Numbox = 255;
 	
 	dataRx.buff = (uint8_t *)buffRx;
 	dataRx.indexR = 0;
