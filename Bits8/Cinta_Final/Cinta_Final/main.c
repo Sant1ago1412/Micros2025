@@ -13,6 +13,17 @@
 #include "HCSRforATMega328.h"
 #include "HCSR04.h"
 #include "util.h"
+
+#include <stdio.h>
+
+int USART_putchar(char c, FILE *stream) {
+	if (c == '\n') USART_putchar('\r', stream);  // salto de línea para terminal
+	while (!(UCSR0A & (1 << UDRE0)));  // Espera a que el buffer esté vacío
+	UDR0 = c;
+	return 0;
+}
+
+FILE usart_output = FDEV_SETUP_STREAM(USART_putchar, NULL, _FDEV_SETUP_WRITE);
 /* END Includes --------------------------------------------------------------*/
 
 
@@ -38,6 +49,7 @@
 #define FALSE			0
 #define IS10MS			flag0.bits.bit0
 #define MEASURINGBOX	flag0.bits.bit1
+#define DROP			flag0.bits.bit2
 
 #define RXBUFSIZE           256
 #define TXBUFSIZE           256
@@ -59,9 +71,6 @@
 #define IR1				PD3
 #define IR2				PD4
 #define IR3				PD5
-
- 
- #define N 3
  
 /************************************************************************/
 /*							Pin Declaration HCSR                        */
@@ -92,32 +101,28 @@ uint8_t putHeaderOnTx(_sTx  *dataTx, _eCmd ID, uint8_t frameLength);
 uint8_t putByteOnTx(_sTx *dataTx, uint8_t byte);
 
 void newBox(uint16_t distance);
-void addBox();
+void addBox(uint16_t distance);
 void kickBox();
 void servoreset();
 /* END Function prototypes ---------------------------------------------------*/
-
 
 /* Global variables ----------------------------------------------------------*/
 
 flags flag0;
 
- _sRx		dataRx;
- _sTx		dataTx;
- _uWord		myWord;
- 	
- uint16_t buffer[N];
- uint8_t idx = 0;
- uint16_t suma = 0;
+_sRx		dataRx;
+_sTx		dataTx;
+_uWord		myWord;
 	 
 uint8_t raw_input[bufferIrn];
 uint8_t state1;
 uint8_t	count100ms	= 10;
 uint8_t count40ms = 4;
-uint8_t count200ms = 75;
+uint8_t count200ms = 200;
 uint8_t boxToTx;
 s_boxType Cajita[bufferBox];
-uint16_t Numbox=0;
+uint8_t CajitaArr[3][20];
+uint8_t Numbox=0;
 IRDebounce ir_sensor[bufferIrn];
 
 volatile uint8_t buffRx[RXBUFSIZE];
@@ -126,6 +131,9 @@ uint8_t buffTx[TXBUFSIZE];
 uint16_t globalDistance=0;
 
 s_sizeConfig boxSizeconfig;
+
+uint8_t sIR1=0, sIR2=0, sIR3=0;
+uint8_t waittt = 1;
 /* END Global variables ------------------------------------------------------*/
 
 
@@ -345,16 +353,14 @@ void decodeCommand(_sRx *dataRx, _sTx *dataTx){
 
 		case DATA:
 			myWord.ui16[0]	= globalDistance;
-			putHeaderOnTx(dataTx, DATA, 8);
+			putHeaderOnTx(dataTx, DATA, 7);
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
 			putByteOnTx(dataTx, boxToTx);
 			myWord.ui16[0] = IR_GetState(&ir_sensor[0]);
 			putByteOnTx(dataTx, myWord.ui8[0]);
 			putByteOnTx(dataTx, myWord.ui8[1]);
-			myWord.ui16[0] = Numbox;
-			putByteOnTx(dataTx, myWord.ui8[0]);
-			putByteOnTx(dataTx, myWord.ui8[1]);
+			putByteOnTx(dataTx, Numbox);
 			putByteOnTx(dataTx, dataTx->chk);
 		break;
 		
@@ -471,9 +477,9 @@ void every10ms(){
 		kickBox();
 	}
 	if (!count200ms){
-			servoreset();
-			count200ms = 60;
-			
+		servoreset();
+		count200ms = 100;
+		//waittt = 1;
 	}
 	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
 	raw_input[1] = (PIND & (1<<IR1)) ? 1 : 0;
@@ -492,86 +498,123 @@ void sensorMeasure(uint16_t distance){
 	
 }
 
-void addBox(){
+void addBox(uint16_t distance){
+	static uint8_t i = 1, j = 1, k = 1;
 	
-		if (globalDistance > 754) { //5-6,5
-			Cajita[Numbox].boxState=isOn;
-			Cajita[Numbox].boxSize=SmallBox;
-			boxToTx = 0x4;
+	if ((distance >= Cm13) && (distance < Cm15)) { //si la distancia se encuentra entre 15 y 13 cm es caja chica
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=SmallBox;
+		boxToTx = 0x4;
+		CajitaArr[0][i] = 1;
+		i++;
+			
+		printf("Fila SmallBox: ");
+		for (uint8_t n = 0; n < 20; n++) {
+			printf("%u ", CajitaArr[0][n]);
 		}
-		else if (globalDistance >= boxSizeconfig.mediumboxC && globalDistance < boxSizeconfig.mediumboxF) { //7 -8,5
-			Cajita[Numbox].boxState=isOn;
-			Cajita[Numbox].boxSize=MediumBox;
-			boxToTx = 0x2;
+		printf("\n");
+	}
+	else if ((distance >= Cm11) && (distance < Cm13)){
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=MediumBox;
+		boxToTx = 0x2;
+		CajitaArr[1][j] = 1;
+		CajitaArr[0][i] = 0;
+		j++;
+		i++;
+			
+		printf("Fila MediumBox: ");
+		for (uint8_t n = 0; n < 20; n++) {
+			printf("%u ", CajitaArr[1][n]);
 		}
-		else if (globalDistance < 638) { //9-11
-			Cajita[Numbox].boxState=isOn;
-			Cajita[Numbox].boxSize=LargeBox;
-			boxToTx = 0x1;
+		printf("\n");
+	}
+	else if ((distance >= Cm9) && (distance < Cm11)){
+		Cajita[Numbox].boxState=isOn;
+		Cajita[Numbox].boxSize=LargeBox;
+		boxToTx = 0x1;
+		CajitaArr[0][i] = 0;
+		CajitaArr[1][j] = 0;
+		CajitaArr[2][k] = 1;
+		j++;
+		i++;
+		k++;
+					
+		printf("Fila LargeBox: ");
+		for (uint8_t n = 0; n < 20; n++) {
+			printf("%u ", CajitaArr[2][n]);
 		}
-		//else if (globalDistance < 290 && globalDistance > Cm15){
-			//Cajita[Numbox].boxSize=NotSelected;
-			//boxToTx = 0x00;
-		//}
-		Numbox++;
+		printf("\n");
+		
+	}
+	else if ((distance < Cm9) || (distance >= Cm15)){
+		Cajita->boxSize=NotSelected;
+	}
 	
-		if(Numbox>=bufferBox) //reinicio el buffer
-			Numbox=0;
+	Numbox++;
 	
+	if(Numbox>=bufferBox) //reinicio el buffer
+	Numbox=0;
 }
 
 void newBox(uint16_t distance){
 	if(distance<Cm18){
 		if((IR_GetState(&ir_sensor[0]) == 0) && !MEASURINGBOX){
 			MEASURINGBOX=TRUE;
-			addBox();
+			addBox(distance);
 			PORTB ^=(1<<LED_BI);
 		}
 		if ((IR_GetState(&ir_sensor[0]) == 1)) //si IR no mide
 				MEASURINGBOX=FALSE;
-
 	}
 }
 
 void kickBox(){
 	
-	static uint8_t read1=0;
-	static uint8_t read2=0;
-	static uint8_t read3=0;
-	
-	if (IR_GetState(&ir_sensor[1])==0){
-		if(ir_sensor[1].irType == Cajita[read1].boxSize){
-			servo_Angle(0,0);
-			Cajita[read1].boxState=isOut;
+	//if (waittt != 0){
+		//if (IR_GetState(&ir_sensor[1])==0){
+			if (ir_sensor[1].state== IR_FALLING){
+			sIR1++;
+			printf("%u ", sIR1);
+			waittt = 0;
+			if(CajitaArr[0][sIR1] == 1){
+				printf("ENTRE: ");
+				printf("\n");
+				servo_Angle(0,0);
+				//CajitaArr[0][i] = 0;
+			}
 		}
-
-	}
-	if (IR_GetState(&ir_sensor[2])==0){
-		if(ir_sensor[2].irType == Cajita[read2].boxSize){
-			servo_Angle(1,0);
-			Cajita[read2].boxState=isOut;
+		
+		//if (IR_GetState(&ir_sensor[2])==0){
+			if (ir_sensor[2].state== IR_FALLING){
+			sIR2++;
+			printf("%u ", sIR2);
+			waittt = 0;
+			if(CajitaArr[1][sIR2] == 1){
+				printf("ENTRE: ");
+				printf("\n");
+				servo_Angle(1,0);
+			}
 		}
-		read2++;
+			
+		//if (IR_GetState(&ir_sensor[3])==0){
+			if (ir_sensor[3].state== IR_FALLING){
+			sIR3++;
+			printf("%u ", sIR3);
+			waittt = 0;
+			if(CajitaArr[2][sIR3] == 1){
+				printf("ENTRE: ");
+				printf("\n");
+				servo_Angle(2,0);
+			}
+	//	}
 	}
-	if (IR_GetState(&ir_sensor[3])==0){
-		if(ir_sensor[3].irType == Cajita[read3].boxSize){
-			servo_Angle(2,0);
-			Cajita[read3].boxState=isOut;
-		}
-		read3++;
-	}
-	if(read1>=bufferBox)
-		read1=0;
-	if(read2>=bufferBox)
-		read2=0;
-	if(read3>=bufferBox)
-		read3=0;
-	
 }
+
 void servoreset(){
-	servo_Angle(0,90);
-	servo_Angle(1,90);
-	servo_Angle(2,90);
+	servo_Angle(0,120);
+	servo_Angle(1,120);
+	servo_Angle(2,120);
 }
 /* END Function prototypes user code ------------------------------------------*/
 
@@ -593,6 +636,7 @@ int main(){
 	ini_USART(16);
 	
 	IR_Init(&ir_sensor[0]);
+	stdout = &usart_output;
 	
 	addServo(&PORTD,SV0);
 	addServo(&PORTB,SV1);
@@ -625,6 +669,12 @@ int main(){
 	ir_sensor[1].irType = SmallBox;
 	ir_sensor[2].irType = MediumBox;
 	ir_sensor[3].irType = LargeBox;
+	
+	for (uint8_t i = 0; i < 3; i++) {
+		for (uint8_t j = 0; j < 20; j++) {
+			CajitaArr[i][j] = 0;
+		}
+	}
 	
 	/* END User code Init --------------------------------------------------------*/
 	sei();
