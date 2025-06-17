@@ -49,7 +49,10 @@ FILE usart_output = FDEV_SETUP_STREAM(USART_putchar, NULL, _FDEV_SETUP_WRITE);
 #define FALSE			0
 #define IS10MS			flag0.bits.bit0
 #define MEASURINGBOX	flag0.bits.bit1
-#define DROP			flag0.bits.bit2
+#define Kick1			flag0.bits.bit2
+#define Kick2			flag0.bits.bit3
+#define Kick3			flag0.bits.bit4
+#define needtoReset			flag0.bits.bit4
 
 #define RXBUFSIZE           256
 #define TXBUFSIZE           256
@@ -118,7 +121,7 @@ uint8_t raw_input[bufferIrn];
 uint8_t state1;
 uint8_t	count100ms	= 10;
 uint8_t count40ms = 4;
-uint8_t count200ms = 200;
+uint8_t countservoReset = 200;
 uint8_t boxToTx;
 s_boxType Cajita[bufferBox];
 uint8_t CajitaArr[3][20];
@@ -476,10 +479,8 @@ void every10ms(){
 		newBox(globalDistance);
 		kickBox();
 	}
-	if (!count200ms){
+	if (!countservoReset && needtoReset){
 		servoreset();
-		count200ms = 100;
-		//waittt = 1;
 	}
 	raw_input[0] = (PIND & (1<<IR0)) ? 1 : 0;
 	raw_input[1] = (PIND & (1<<IR1)) ? 1 : 0;
@@ -489,7 +490,7 @@ void every10ms(){
 	IS10MS = FALSE;
 	count100ms--;
 	count40ms--;
-	count200ms--;
+	countservoReset--;
 }
 
 void sensorMeasure(uint16_t distance){
@@ -550,7 +551,6 @@ void addBox(uint16_t distance){
 	else if ((distance < Cm9) || (distance >= Cm15)){
 		Cajita->boxSize=NotSelected;
 	}
-	
 	Numbox++;
 	
 	if(Numbox>=bufferBox) //reinicio el buffer
@@ -571,44 +571,61 @@ void newBox(uint16_t distance){
 
 void kickBox(){
 	
-	//if (waittt != 0){
-		//if (IR_GetState(&ir_sensor[1])==0){
-			if (ir_sensor[1].state== IR_FALLING){
-			sIR1++;
-			printf("%u ", sIR1);
-			waittt = 0;
-			if(CajitaArr[0][sIR1] == 1){
-				printf("ENTRE: ");
-				printf("\n");
-				servo_Angle(0,0);
-				//CajitaArr[0][i] = 0;
-			}
+
+	if (ir_sensor[1].state== IR_FALLING){
+		sIR1++;
+		printf("%u ", sIR1);
+		waittt = 0;
+		if(CajitaArr[0][sIR1] == 1){
+			printf("ENTRE: ");
+			printf("\n");
+			Kick1=1;
 		}
-		
-		//if (IR_GetState(&ir_sensor[2])==0){
-			if (ir_sensor[2].state== IR_FALLING){
-			sIR2++;
-			printf("%u ", sIR2);
-			waittt = 0;
-			if(CajitaArr[1][sIR2] == 1){
-				printf("ENTRE: ");
-				printf("\n");
-				servo_Angle(1,0);
-			}
-		}
-			
-		//if (IR_GetState(&ir_sensor[3])==0){
-			if (ir_sensor[3].state== IR_FALLING){
-			sIR3++;
-			printf("%u ", sIR3);
-			waittt = 0;
-			if(CajitaArr[2][sIR3] == 1){
-				printf("ENTRE: ");
-				printf("\n");
-				servo_Angle(2,0);
-			}
-	//	}
 	}
+	
+	if (ir_sensor[2].state== IR_FALLING){
+		sIR2++;
+		printf("%u ", sIR2);
+		waittt = 0;
+		if(CajitaArr[1][sIR2] == 1){
+			printf("ENTRE: ");
+			printf("\n");
+			Kick2=1;
+		}
+	}
+	
+	if (ir_sensor[3].state== IR_FALLING){
+		sIR3++;
+		printf("%u ", sIR3);
+		waittt = 0;
+		if(CajitaArr[2][sIR3] == 1){
+			printf("ENTRE: ");
+			printf("\n");
+			Kick3=1;
+		}
+	}
+	
+	if(ir_sensor[1].state== IR_RISING && Kick1){
+		servo_Angle(0,0);
+		Kick1=0;	
+		needtoReset=1;
+		countservoReset=100;
+	}
+		
+	if(ir_sensor[2].state== IR_RISING && Kick2){
+		servo_Angle(1,0);
+		Kick2=0;
+		needtoReset=1;
+		countservoReset=100;
+	}
+	
+	if(ir_sensor[3].state== IR_RISING && Kick3){
+		servo_Angle(2,0);
+		Kick3=0;
+		needtoReset=1;
+		countservoReset=100;
+	}
+		
 }
 
 void servoreset(){
