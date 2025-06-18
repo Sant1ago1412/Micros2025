@@ -723,3 +723,609 @@ Finished building: BlackScreen.hex
  
 Finished building: BlackScreen.list
  
+13:19:02 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/ADC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ADC.d" -MT"Core/Src/ADC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ADC.o"
+arm-none-eabi-gcc "../Core/Src/ESP01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ESP01.d" -MT"Core/Src/ESP01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ESP01.o"
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/engines.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/engines.d" -MT"Core/Src/engines.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/engines.o"
+arm-none-eabi-gcc "../Core/Src/fonts.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/fonts.d" -MT"Core/Src/fonts.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fonts.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/mpu6050.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/mpu6050.d" -MT"Core/Src/mpu6050.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/mpu6050.o"
+arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
+../Core/Src/ESP01.c:6:10: fatal error: WiFi/ESP01.h: No such file or directory
+    6 | #include "WiFi/ESP01.h"
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Core/Src/subdir.mk:55: Core/Src/ESP01.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:20:27 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/ESP01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ESP01.d" -MT"Core/Src/ESP01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ESP01.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\santi\OneDrive\Documentos\Micros\Micros2025\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+   text	   data	    bss	    dec	    hex	filename
+  71104	    716	   6964	  78784	  133c0	BlackScreen.elf
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.bin
+Finished building: BlackScreen.hex
+ 
+ 
+Finished building: BlackScreen.list
+ 
+13:46:45 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/ESP01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ESP01.d" -MT"Core/Src/ESP01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ESP01.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ESP01.c:6:10: fatal error: WiFi/ESP01.h: No such file or directory
+    6 | #include "WiFi/ESP01.h"
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Core/Src/subdir.mk:55: Core/Src/ESP01.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c:99:9: error: unknown type name 's_commData'
+   99 |         s_commData data;
+      |         ^~~~~~~~~~
+../Core/Src/main.c:122:28: error: stray '\302' in program
+  122 | void writeOn_ESP(s_commData<U+00A0>*data);
+      |                            ^~~~~~~~
+../Core/Src/main.c:122:18: error: unknown type name 's_commData'
+  122 | void writeOn_ESP(s_commData *data);
+      |                  ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:47:01 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/ESP01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ESP01.d" -MT"Core/Src/ESP01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ESP01.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:99:9: error: unknown type name 's_commData'
+   99 |         s_commData data;
+      |         ^~~~~~~~~~
+../Core/Src/main.c:122:28: error: stray '\302' in program
+  122 | void writeOn_ESP(s_commData<U+00A0>*data);
+      |                            ^~~~~~~~
+../Core/Src/main.c:122:18: error: unknown type name 's_commData'
+  122 | void writeOn_ESP(s_commData *data);
+      |                  ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:55:57 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o"
+arm-none-eabi-gcc "../Core/Src/ESP01.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ESP01.d" -MT"Core/Src/ESP01.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ESP01.o"
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/fonts.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/fonts.d" -MT"Core/Src/fonts.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fonts.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/ssd1306_oled.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ssd1306_oled.d" -MT"Core/Src/ssd1306_oled.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ssd1306_oled.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+In file included from ../Core/Src/UnerProtocol.c:8:
+../Core/Inc/UnerProtocol.h:33:5: error: unknown type name 's_bus'
+   33 |     s_bus Tx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:34:5: error: unknown type name 's_bus'
+   34 |     s_bus Rx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:38:23: error: 'MAXAUXBUFFER' undeclared here (not in a function)
+   38 |     uint8_t auxBuffer[MAXAUXBUFFER];
+      |                       ^~~~~~~~~~~~
+../Core/Inc/UnerProtocol.h:39:5: error: unknown type name 'e_protocolo'
+   39 |     e_protocolo protocolState;                                          //!< Indicador de estado del protocolo
+      |     ^~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+make: *** [Core/Src/subdir.mk:55: Core/Src/UnerProtocol.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/UnerProtocol.h:33:5: error: unknown type name 's_bus'
+   33 |     s_bus Tx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:34:5: error: unknown type name 's_bus'
+   34 |     s_bus Rx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:38:23: error: 'MAXAUXBUFFER' undeclared here (not in a function)
+   38 |     uint8_t auxBuffer[MAXAUXBUFFER];
+      |                       ^~~~~~~~~~~~
+../Core/Inc/UnerProtocol.h:39:5: error: unknown type name 'e_protocolo'
+   39 |     e_protocolo protocolState;                                          //!< Indicador de estado del protocolo
+      |     ^~~~~~~~~~~
+../Core/Src/main.c:125:28: error: stray '\302' in program
+  125 | void writeOn_ESP(s_commData<U+00A0>*data);
+      |                            ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:189:28: error: 'USB' undeclared (first use in this function)
+  189 |             sprintf((char*)USB.data.auxBuffer, "ESP01: No inicializado");
+      |                            ^~~
+../Core/Src/main.c:189:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:20: error: request for member 'buffer' in something not a structure or union
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                    ^
+../Core/Src/main.c:261:39: error: request for member 'write' in something not a structure or union
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                       ^
+../Core/Src/main.c: In function 'writeOn_ESP':
+../Core/Src/main.c:266:20: error: request for member 'write' in something not a structure or union
+  266 |         if(data->Tx.write > data->Tx.read){
+      |                    ^
+../Core/Src/main.c:266:37: error: request for member 'read' in something not a structure or union
+  266 |         if(data->Tx.write > data->Tx.read){
+      |                                     ^
+../Core/Src/main.c:267:41: error: request for member 'write' in something not a structure or union
+  267 |                 ESP.bytesToTx = data->Tx.write - data->Tx.read;
+      |                                         ^
+../Core/Src/main.c:267:58: error: request for member 'read' in something not a structure or union
+  267 |                 ESP.bytesToTx = data->Tx.write - data->Tx.read;
+      |                                                          ^
+../Core/Src/main.c:269:33: error: 'RINGBUFFLENGTH' undeclared (first use in this function); did you mean 'RINGBUFFER'?
+  269 |                 ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+      |                                 ^~~~~~~~~~~~~~
+      |                                 RINGBUFFER
+../Core/Src/main.c:269:58: error: request for member 'read' in something not a structure or union
+  269 |                 ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+      |                                                          ^
+../Core/Src/main.c:271:31: error: request for member 'buffer' in something not a structure or union
+  271 |         if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
+      |                               ^
+../Core/Src/main.c:271:49: error: request for member 'read' in something not a structure or union
+  271 |         if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
+      |                                                 ^
+../Core/Src/main.c:272:25: error: request for member 'read' in something not a structure or union
+  272 |                 data->Tx.read += ESP.bytesToTx;
+      |                         ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:04:18 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/UnerProtocol.c:8:
+../Core/Inc/UnerProtocol.h:33:5: error: unknown type name 's_bus'
+   33 |     s_bus Tx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:34:5: error: unknown type name 's_bus'
+   34 |     s_bus Rx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:38:23: error: 'MAXAUXBUFFER' undeclared here (not in a function)
+   38 |     uint8_t auxBuffer[MAXAUXBUFFER];
+      |                       ^~~~~~~~~~~~
+../Core/Inc/UnerProtocol.h:39:5: error: unknown type name 'e_protocolo'
+   39 |     e_protocolo protocolState;                                          //!< Indicador de estado del protocolo
+      |     ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/UnerProtocol.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/UnerProtocol.h:33:5: error: unknown type name 's_bus'
+   33 |     s_bus Tx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:34:5: error: unknown type name 's_bus'
+   34 |     s_bus Rx;
+      |     ^~~~~
+../Core/Inc/UnerProtocol.h:38:23: error: 'MAXAUXBUFFER' undeclared here (not in a function)
+   38 |     uint8_t auxBuffer[MAXAUXBUFFER];
+      |                       ^~~~~~~~~~~~
+../Core/Inc/UnerProtocol.h:39:5: error: unknown type name 'e_protocolo'
+   39 |     e_protocolo protocolState;                                          //!< Indicador de estado del protocolo
+      |     ^~~~~~~~~~~
+../Core/Src/main.c:125:28: error: stray '\302' in program
+  125 | void writeOn_ESP(s_commData<U+00A0>*data);
+      |                            ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:189:28: error: 'USB' undeclared (first use in this function)
+  189 |             sprintf((char*)USB.data.auxBuffer, "ESP01: No inicializado");
+      |                            ^~~
+../Core/Src/main.c:189:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: In function 'writeOn_ESP':
+../Core/Src/main.c:266:20: error: request for member 'write' in something not a structure or union
+  266 |         if(data->Tx.write > data->Tx.read){
+      |                    ^
+../Core/Src/main.c:266:37: error: request for member 'read' in something not a structure or union
+  266 |         if(data->Tx.write > data->Tx.read){
+      |                                     ^
+../Core/Src/main.c:267:41: error: request for member 'write' in something not a structure or union
+  267 |                 ESP.bytesToTx = data->Tx.write - data->Tx.read;
+      |                                         ^
+../Core/Src/main.c:267:58: error: request for member 'read' in something not a structure or union
+  267 |                 ESP.bytesToTx = data->Tx.write - data->Tx.read;
+      |                                                          ^
+../Core/Src/main.c:269:33: error: 'RINGBUFFLENGTH' undeclared (first use in this function); did you mean 'RINGBUFFER'?
+  269 |                 ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+      |                                 ^~~~~~~~~~~~~~
+      |                                 RINGBUFFER
+../Core/Src/main.c:269:58: error: request for member 'read' in something not a structure or union
+  269 |                 ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+      |                                                          ^
+../Core/Src/main.c:271:31: error: request for member 'buffer' in something not a structure or union
+  271 |         if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
+      |                               ^
+../Core/Src/main.c:271:49: error: request for member 'read' in something not a structure or union
+  271 |         if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
+      |                                                 ^
+../Core/Src/main.c:272:25: error: request for member 'read' in something not a structure or union
+  272 |                 data->Tx.read += ESP.bytesToTx;
+      |                         ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:04:40 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:125:28: error: stray '\302' in program
+  125 | void writeOn_ESP(s_commData<U+00A0>*data);
+      |                            ^~~~~~~~
+../Core/Src/main.c:125:18: error: unknown type name 's_commData'
+  125 | void writeOn_ESP(s_commData *data);
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:189:28: error: 'USB' undeclared (first use in this function)
+  189 |             sprintf((char*)USB.data.auxBuffer, "ESP01: No inicializado");
+      |                            ^~~
+../Core/Src/main.c:189:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:264:18: error: unknown type name 's_commData'
+  264 | void writeOn_ESP(s_commData *data){
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:474:42: error: 'writeOn_ESP' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                                          ^~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:04:55 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:189:28: error: 'USB' undeclared (first use in this function)
+  189 |             sprintf((char*)USB.data.auxBuffer, "ESP01: No inicializado");
+      |                            ^~~
+../Core/Src/main.c:189:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:264:18: error: unknown type name 's_commData'
+  264 | void writeOn_ESP(s_commData *data){
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:08:04 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UnerProtocol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UnerProtocol.d" -MT"Core/Src/UnerProtocol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UnerProtocol.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:189:42: error: expected identifier before ',' token
+  189 |             sprintf((char*)datosComSerie., "ESP01: No inicializado");
+      |                                          ^
+../Core/Src/main.c:192:28: error: 'USB' undeclared (first use in this function)
+  192 |             sprintf((char*)USB.data.auxBuffer, "ESP01: WiFi desconectado");
+      |                            ^~~
+../Core/Src/main.c:192:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:264:18: error: unknown type name 's_commData'
+  264 | void writeOn_ESP(s_commData *data){
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:08:13 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:192:28: error: 'USB' undeclared (first use in this function)
+  192 |             sprintf((char*)USB.data.auxBuffer, "ESP01: WiFi desconectado");
+      |                            ^~~
+../Core/Src/main.c:192:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:264:18: error: unknown type name 's_commData'
+  264 | void writeOn_ESP(s_commData *data){
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+14:08:47 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'onESP01ChangeState':
+../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:233:19: error: 'USB' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                   ^~~
+../Core/Src/main.c:233:19: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
+  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'onESP01Debug':
+../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                   ^~~
+../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
+  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+      |                             ^~~~~~~~
+../Core/Src/main.c: In function 'setESP01_CHPD':
+../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                           ^~~~~~~~~~~~~~~
+      |                           ESP_EN_GPIO_Port
+../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
+  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+      |                                            ^~~~~~~~~
+      |                                            ESP_EN_Pin
+../Core/Src/main.c: In function 'ESP01_Data_Recived':
+../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                 ^
+../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
+  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+      |                                    ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:264:18: error: unknown type name 's_commData'
+  264 | void writeOn_ESP(s_commData *data){
+      |                  ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |     ^~~~~~~~~
+../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
+  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+      |                           ^~~~~~~~~~~~
+../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
+  475 |     ESP.data.isESP01 = 1;
+      |             ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.

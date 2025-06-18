@@ -24,8 +24,22 @@ typedef struct ComStruct{
     uint8_t *bufferTx;   //!< Buffer circular de transmisión
     uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
     uint8_t buffSize;
+    uint8_t auxBuffer[256];
 
 }_sDato ;
+
+//typedef struct Datos_UART{
+//    uint8_t timeOut;         						//!< TiemOut para reiniciar la máquina si se interrumpe la comunicación
+//    uint8_t indexStart;      						//!< Indice para saber en que parte del buffer circular arranca el ID
+//    s_bus Tx;
+//    s_bus Rx;
+//    uint8_t checksumRx;       						//!< Cheksumm RX
+//    void (*dataDecoder)(struct Datos_UART *selfDD);	//!< Puntero a función donde se trabajan los datos ingresados
+//    void (*dataWriter)(struct Datos_UART *selfDW);	//!< Puntero a función donde se escribe el buffer en la salida
+//    uint8_t auxBuffer[MAXAUXBUFFER];
+//    e_protocolo protocolState;						//!< Indicador de estado del protocolo
+//    uint8_t isESP01;								//!< Indicador de si es una comunicación directa o hay una ESP de por medio.
+//}s_commData;
 
 typedef enum Comands{
     ALIVE=0xF0,

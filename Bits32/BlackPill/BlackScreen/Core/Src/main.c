@@ -31,6 +31,7 @@
 #include "math.h"
 #include "Utilities.h"
 #include "ADC.h"
+#include "ESP01.h"
 
 /* USER CODE END Includes */
 
@@ -68,6 +69,8 @@ TIM_HandleTypeDef htim9;
 TIM_HandleTypeDef htim10;
 TIM_HandleTypeDef htim11;
 
+UART_HandleTypeDef huart1;
+
 /* USER CODE BEGIN PV */
 _sDato datosComSerie;
 _bFlags myFlags;
@@ -90,7 +93,15 @@ char display[20];
 //  2100, 2205, 2310, 2415, 2520, 2625, 2730, 2835, 2940, 3045,
 //  3150, 3255, 3360, 3465, 3570, 3675, 3780, 3885, 3990, 4095
 //};
-
+struct ESP_DATA{
+	_sESP01Handle Config;
+	char *ssid;
+	char *password;
+	char *IP;
+	_sDato data;
+	uint8_t AT_Rx_data;
+	uint8_t bytesToTx;
+}ESP;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -103,7 +114,16 @@ static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM10_Init(void);
 static void MX_TIM9_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
+// Funciones chota ESP
+int ESP01_UART_Transmit(uint8_t val);
+void ESP01_Data_Recived(uint8_t value);
+void onESP01ChangeState(_eESP01STATUS esp01State);
+void onESP01Debug(const char *dbgStr);
+void setESP01_CHPD(uint8_t val);
+void writeOn_ESP(_sDato *data);
+
 uint8_t CDC_Transmit_FS(uint8_t *buf, uint16_t leng);  // Envia una letra
 void CDC_AttachRxData(void (*ptrRxAttach)(uint8_t *buf, uint16_t len));
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
@@ -161,6 +181,111 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 //		SSD1306_DMAREADY(1);
 //	}
 //}
+
+/* ESP FUNCTION */
+void onESP01ChangeState(_eESP01STATUS esp01State) {
+   switch (esp01State) {
+        case ESP01_NOT_INIT:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: No inicializado");
+            break;
+        case ESP01_WIFI_DISCONNECTED:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: WiFi desconectado");
+            break;
+        case ESP01_WIFI_NOT_SETED:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: WiFi no configurado");
+            break;
+        case ESP01_WIFI_CONNECTING_WIFI:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Conectando a WiFi...");
+            break;
+        case ESP01_WIFI_CONNECTED:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: WiFi conectado");
+            break;
+        case ESP01_WIFI_NEW_IP:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Nueva IP asignada");
+            break;
+        case ESP01_UDPTCP_DISCONNECTED:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: UDP/TCP desconectado");
+            break;
+        case ESP01_UDPTCP_CONNECTING:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Conectando UDP/TCP...");
+            break;
+        case ESP01_UDPTCP_CONNECTED:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: UDP/TCP conectado");
+            break;
+        case ESP01_SEND_BUSY:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Enviando datos...");
+            break;
+        case ESP01_SEND_READY:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Listo para enviar");
+            break;
+        case ESP01_SEND_OK:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Envío OK");
+            break;
+        case ESP01_SEND_ERROR:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Error al enviar");
+            break;
+        default:
+            sprintf((char*)datosComSerie.auxBuffer, "ESP01: Estado desconocido");
+            break;
+    }
+
+    // Cast explícito también aplicado aquí
+    comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+}
+
+void onESP01Debug(const char *dbgStr) {
+    comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+}
+
+void setESP01_CHPD(uint8_t val){
+	HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart->Instance == USART1){
+		ESP01_WriteRX(ESP.AT_Rx_data);
+		HAL_UART_Receive_IT(&huart1, &ESP.AT_Rx_data, 1);
+
+	}
+}
+
+int ESP01_UART_Transmit(uint8_t val){
+	if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE)){
+		USART1->DR = val;
+		return 1;
+	}
+	return 0;
+}
+
+void ESP01_Data_Recived(uint8_t value){
+	ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+}
+
+void writeOn_ESP(s_commData *data){
+	//comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)"writeONESP", 10);
+	if(data->Tx.write > data->Tx.read){
+		ESP.bytesToTx = data->Tx.write - data->Tx.read;
+	}else{
+		ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+	}
+	if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
+		data->Tx.read += ESP.bytesToTx;
+		//comm_sendCMD(&USB.data, USERTEXT, (uint8_t*)"dice mandar", 11);
+	}
+	/*switch(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH)){
+	case ESP01_NOT_INIT:
+		comm_sendCMD(&USB.data, USERTEXT, (uint8_t*)"noinit", 6);
+		break;
+	case ESP01_UDPTCP_DISCONNECTED:
+		comm_sendCMD(&USB.data, USERTEXT, (uint8_t*)"discon", 6);
+		break;
+	case ESP01_SEND_READY:
+		data->Tx.read += ESP.bytesToTx;
+		break;
+	case ESP01_SEND_BUSY:
+		break;
+	}*/
+}
 
 //void SSD1306_Task(){
 //
@@ -321,6 +446,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM10_Init();
   MX_TIM9_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim11);
@@ -342,6 +468,25 @@ int main(void)
 //  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
   UP_attachData(&Get_ADCValues);
 
+    ESP.password = "wlan12fa37";
+    ESP.ssid = "InernetPlus_ed05c8";
+    ESP.IP = "192.168.1.5";
+    comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
+    ESP.data.isESP01 = 1;
+    HAL_UART_Receive_IT(&huart1, &ESP.AT_Rx_data, 1);
+    ESP.Config.DoCHPD = setESP01_CHPD;
+    ESP.Config.WriteUSARTByte = ESP01_UART_Transmit;
+    ESP.Config.WriteByteToBufRX = ESP01_Data_Recived;
+
+    ESP01_Init(&ESP.Config);
+    if(ESP01_StateWIFI() == ESP01_WIFI_DISCONNECTED){
+  	  ESP01_SetWIFI(ESP.ssid, ESP.password);
+    }
+
+    ESP01_StartUDP("192.168.1.5", 25555, 11211);
+    ESP01_AttachChangeState(&onESP01ChangeState);
+    ESP01_AttachDebugStr(&onESP01Debug);
+
 //  SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
 ////  MPU6050_Calibrate(&mpuValues);
   /* USER CODE END 2 */
@@ -362,56 +507,6 @@ int main(void)
 	UP_comunicationsTask(&datosComSerie);
 	ADC_Filter(&adcValues);
 //	SSD1306_UpdateScreen();
-
-//
-//			HAL_Delay(2000);
-//
-//			SSD1306_Clear();
-//			SSD1306_GotoXY(10,3);
-//			SSD1306_Puts("Font 1", &Font_7x10, WHITE);
-//			SSD1306_GotoXY(10,15);
-//			SSD1306_Puts("Font 2", &Font_11x18, WHITE);
-//			SSD1306_GotoXY(10,35);
-//			SSD1306_Puts("Font 3", &Font_16x26, WHITE);
-//			SSD1306_UpdateScreen();
-//			HAL_Delay(2000);
-//
-//			SSD1306_Clear();
-//			SSD1306_DrawRectangle(2, 2, 123, 60, WHITE);
-//			SSD1306_GotoXY(10,10);
-//			SSD1306_Puts("CONTADOR", &Font_7x10, WHITE);
-//			SSD1306_DrawCircle(95, 35, 16, WHITE);
-//			SSD1306_UpdateScreen();
-//
-//			uint8_t contador = 0;
-//			while(contador <= 10)
-//			{
-//				SSD1306_GotoXY(30,30);
-//				sprintf(buf_oled, "%u ", contador);
-//				SSD1306_Puts(buf_oled, &Font_11x18, WHITE);
-//				SSD1306_UpdateScreen();
-//				contador++;
-//				HAL_Delay(400);
-//			}
-//			SSD1306_DrawFilledCircle(95, 35, 16, WHITE);
-//			SSD1306_UpdateScreen();
-//			HAL_Delay(1000);
-
-//			SSD1306_Clear();
-
-//			SSD1306_UpdateScreen();
-//			HAL_Delay(2000);
-
-//			SSD1306_ScrollRight(0, 0x0F);
-//			SSD1306_RefreshReady();
-//			HAL_Delay(4000);
-//			SSD1306_ScrollLeft(0, 0x0F);
-//			HAL_Delay(4000);
-//			SSD1306_Stopscroll();
-//			HAL_Delay(1000);
-//
-//			SSD1306_Clear();
-//			HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
@@ -774,6 +869,39 @@ static void MX_TIM11_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -818,10 +946,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Out2_2_Pin|Out2_1_Pin|Out1_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, ESP_EN_Pin|Out1_1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(Out1_1_GPIO_Port, Out1_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, Out2_2_Pin|Out2_1_Pin|Out1_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LED_Pin */
   GPIO_InitStruct.Pin = LED_Pin;
@@ -830,19 +958,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : ESP_EN_Pin Out1_1_Pin */
+  GPIO_InitStruct.Pin = ESP_EN_Pin|Out1_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
   /*Configure GPIO pins : Out2_2_Pin Out2_1_Pin Out1_2_Pin */
   GPIO_InitStruct.Pin = Out2_2_Pin|Out2_1_Pin|Out1_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : Out1_1_Pin */
-  GPIO_InitStruct.Pin = Out1_1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Out1_1_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

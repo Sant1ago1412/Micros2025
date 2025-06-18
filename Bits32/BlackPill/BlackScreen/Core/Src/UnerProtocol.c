@@ -17,9 +17,9 @@ static void (*aPtrFunADC)(uint8_t *buf) = NULL;
 
 void UP_initprotocol(_sDato *datosCom,uint8_t ringbuff){
 
-		datosCom->bufferRx = malloc(ringbuff);
-	    datosCom->bufferTx = malloc(ringbuff);
-	    datosComLib=datosCom;
+	datosCom->bufferRx = malloc(ringbuff);
+	datosCom->bufferTx = malloc(ringbuff);
+	datosComLib=datosCom;
 
 }
 

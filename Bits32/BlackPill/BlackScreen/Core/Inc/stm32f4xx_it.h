@@ -64,6 +64,7 @@ void TIM1_TRG_COM_TIM11_IRQHandler(void);
 void TIM3_IRQHandler(void);
 void I2C1_EV_IRQHandler(void);
 void I2C1_ER_IRQHandler(void);
+void USART1_IRQHandler(void);
 void DMA2_Stream0_IRQHandler(void);
 void OTG_FS_IRQHandler(void);
 void FPU_IRQHandler(void);
