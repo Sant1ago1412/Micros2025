@@ -1,56 +1,23 @@
-14:08:47 **** Incremental Build of configuration Debug for project BlackScreen ****
-make -j8 all 
+19:02:23 **** Incremental Build of configuration Debug for project BlackScreen ****
+make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'onESP01ChangeState':
-../Core/Src/main.c:233:5: warning: implicit declaration of function 'comm_sendCMD' [-Wimplicit-function-declaration]
-  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
-      |     ^~~~~~~~~~~~
-../Core/Src/main.c:233:19: error: 'USB' undeclared (first use in this function)
-  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
-      |                   ^~~
-../Core/Src/main.c:233:19: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/main.c:233:29: error: 'USERTEXT' undeclared (first use in this function)
-  233 |     comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
-      |                             ^~~~~~~~
-../Core/Src/main.c: In function 'onESP01Debug':
-../Core/Src/main.c:237:19: error: 'USB' undeclared (first use in this function)
-  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
-      |                   ^~~
-../Core/Src/main.c:237:29: error: 'USERTEXT' undeclared (first use in this function)
-  237 |     comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
-      |                             ^~~~~~~~
-../Core/Src/main.c: In function 'setESP01_CHPD':
-../Core/Src/main.c:241:27: error: 'espEn_GPIO_Port' undeclared (first use in this function); did you mean 'ESP_EN_GPIO_Port'?
-  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
-      |                           ^~~~~~~~~~~~~~~
-      |                           ESP_EN_GPIO_Port
-../Core/Src/main.c:241:44: error: 'espEn_Pin' undeclared (first use in this function); did you mean 'ESP_EN_Pin'?
-  241 |         HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
-      |                                            ^~~~~~~~~
-      |                                            ESP_EN_Pin
-../Core/Src/main.c: In function 'ESP01_Data_Recived':
-../Core/Src/main.c:261:17: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
-  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
-      |                 ^
-../Core/Src/main.c:261:36: error: '_sDato' {aka 'struct ComStruct'} has no member named 'Rx'
-  261 |         ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
-      |                                    ^
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:264:18: error: unknown type name 's_commData'
-  264 | void writeOn_ESP(s_commData *data){
-      |                  ^~~~~~~~~~
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:474:5: warning: implicit declaration of function 'comm_init' [-Wimplicit-function-declaration]
-  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
-      |     ^~~~~~~~~
-../Core/Src/main.c:474:27: error: 'decodeOn_USB' undeclared (first use in this function)
-  474 |     comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
-      |                           ^~~~~~~~~~~~
-../Core/Src/main.c:475:13: error: '_sDato' {aka 'struct ComStruct'} has no member named 'isESP01'
-  475 |     ESP.data.isESP01 = 1;
-      |             ^
-make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
+arm-none-eabi-gcc -o "BlackScreen.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Baccon\Documents\MicrosCodes\Bits32\BlackPill\BlackScreen\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BlackScreen.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BlackScreen.elf
+ 
+arm-none-eabi-size  BlackScreen.elf 
+arm-none-eabi-objdump -h -S BlackScreen.elf  > "BlackScreen.list"
+arm-none-eabi-objcopy  -O ihex BlackScreen.elf  "BlackScreen.hex"
+   text	   data	    bss	    dec	    hex	filename
+  76408	    716	   7764	  84888	  14b98	BlackScreen.elf
+arm-none-eabi-objcopy  -O binary BlackScreen.elf  "BlackScreen.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BlackScreen.hex
+Finished building: BlackScreen.bin
+ 
+ 
+Finished building: BlackScreen.list
+ 
 
-14:08:48 Build Failed. 12 errors, 2 warnings. (took 1s.735ms)
+19:02:24 Build Finished. 0 errors, 0 warnings. (took 1s.877ms)
 

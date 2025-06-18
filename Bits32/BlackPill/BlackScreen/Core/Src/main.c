@@ -44,9 +44,9 @@
 /* USER CODE BEGIN PD */
 
 #define NUM_CHANNELS 8
-#define RINGBUFFER 	256
-#define SISINIT  	myFlags.individualFlags.bit0
-#define IS10MS 	 	myFlags.individualFlags.bit1
+#define RINGBUFFER 	 256
+#define SISINIT  	 myFlags.individualFlags.bit0
+#define IS10MS 	 	 myFlags.individualFlags.bit1
 #define NEWADCVALUES myFlags.individualFlags.bit2
 
 /* USER CODE END PD */
@@ -230,15 +230,15 @@ void onESP01ChangeState(_eESP01STATUS esp01State) {
     }
 
     // Cast explícito también aplicado aquí
-    comm_sendCMD(&USB.data, USERTEXT, USB.data.auxBuffer, strlen((char*)USB.data.auxBuffer));
+    UP_sendInfo(TEXT, datosComSerie.auxBuffer,strlen((char*)datosComSerie.auxBuffer));
 }
 
 void onESP01Debug(const char *dbgStr) {
-    comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)dbgStr, strlen(dbgStr));
+    UP_sendInfo(TEXT, (uint8_t *)dbgStr, strlen(dbgStr));
 }
 
 void setESP01_CHPD(uint8_t val){
-	HAL_GPIO_WritePin(espEn_GPIO_Port, espEn_Pin, val);
+	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, val);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
@@ -258,18 +258,18 @@ int ESP01_UART_Transmit(uint8_t val){
 }
 
 void ESP01_Data_Recived(uint8_t value){
-	ESP.data.Rx.buffer[ESP.data.Rx.write++] = value;
+	ESP.data.bufferRx[ESP.data.indexWriteRx++] = value;
 }
 
-void writeOn_ESP(s_commData *data){
+void writeOn_ESP(_sDato *data){
 	//comm_sendCMD(&USB.data, USERTEXT, (uint8_t *)"writeONESP", 10);
-	if(data->Tx.write > data->Tx.read){
-		ESP.bytesToTx = data->Tx.write - data->Tx.read;
+	if(data->indexWriteTx > data->indexReadTx){
+		ESP.bytesToTx = data->indexWriteTx - data->indexReadTx;
 	}else{
-		ESP.bytesToTx = RINGBUFFLENGTH - data->Tx.read;
+		ESP.bytesToTx = 256 - data->indexReadTx;
 	}
-	if(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH) == ESP01_SEND_READY){
-		data->Tx.read += ESP.bytesToTx;
+	if(ESP01_Send(data->bufferTx,  data->indexReadTx,  ESP.bytesToTx,  256) == ESP01_SEND_READY){
+		data->indexReadTx += ESP.bytesToTx;
 		//comm_sendCMD(&USB.data, USERTEXT, (uint8_t*)"dice mandar", 11);
 	}
 	/*switch(ESP01_Send(data->Tx.buffer,  data->Tx.read,  ESP.bytesToTx,  RINGBUFFLENGTH)){
@@ -330,6 +330,8 @@ void task10ms(){
 	static uint8_t ticker=0;
 //	uint16_t buffaux[8];
 
+	ESP01_Timeout10ms();
+
 	if(ticker%10==0){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 //		UP_sendInfo(MPUDATA,(uint8_t*)mpuValues.MAF.filtredData, 13);
@@ -341,6 +343,10 @@ void task10ms(){
 //
 //		SSD1306_Task();
 //		SSD1306_RefreshReady();
+	}
+	if(ticker%100==0){
+
+		UP_sendInfo(TEXT, datosComSerie.auxBuffer, strlen((char*)datosComSerie.auxBuffer));
 	}
 	if(ticker>250){
 //		if(!SISINIT){
@@ -354,8 +360,8 @@ void task10ms(){
 
 void Engines_task(){
 
-	en_HandlerENG(&motorR, ret_eng_Values(1), 0);
-	en_HandlerENG(&motorL, ret_eng_Values(0), 0);
+	en_HandlerENG(&motorR, ret_eng_Values(0), 0);
+	en_HandlerENG(&motorL, ret_eng_Values(1), 0);
 
 	switch(motorL.estado){
 		case BRAKE:
@@ -464,28 +470,28 @@ int main(void)
   CDC_AttachRxData(&UP_datafromUSB);
   myFlags.allFlags=0;
   UP_initprotocol(&datosComSerie,(uint8_t)RINGBUFFER);
-//  en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
-//  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
+  en_InitENG(&motorL, (uint16_t)htim3.Instance->ARR);
+  en_InitENG(&motorR, (uint16_t)htim3.Instance->ARR);
   UP_attachData(&Get_ADCValues);
 
-    ESP.password = "wlan12fa37";
-    ESP.ssid = "InernetPlus_ed05c8";
-    ESP.IP = "192.168.1.5";
-    comm_init(&ESP.data, &decodeOn_USB, &writeOn_ESP);
-    ESP.data.isESP01 = 1;
-    HAL_UART_Receive_IT(&huart1, &ESP.AT_Rx_data, 1);
-    ESP.Config.DoCHPD = setESP01_CHPD;
-    ESP.Config.WriteUSARTByte = ESP01_UART_Transmit;
-    ESP.Config.WriteByteToBufRX = ESP01_Data_Recived;
-
-    ESP01_Init(&ESP.Config);
-    if(ESP01_StateWIFI() == ESP01_WIFI_DISCONNECTED){
-  	  ESP01_SetWIFI(ESP.ssid, ESP.password);
-    }
-
-    ESP01_StartUDP("192.168.1.5", 25555, 11211);
-    ESP01_AttachChangeState(&onESP01ChangeState);
-    ESP01_AttachDebugStr(&onESP01Debug);
+//	ESP.password = "fcalconcordia.06-2019";
+//	ESP.ssid = "FCAL";
+//	ESP.IP = "172.23.206.41";
+//	UP_initprotocol(&ESP.data, 255);
+//	ESP.data.isESP01 = 1;
+//	HAL_UART_Receive_IT(&huart1, &ESP.AT_Rx_data, 1);
+//	ESP.Config.DoCHPD = setESP01_CHPD;
+//	ESP.Config.WriteUSARTByte = ESP01_UART_Transmit;
+//	ESP.Config.WriteByteToBufRX = ESP01_Data_Recived;
+//
+//	ESP01_Init(&ESP.Config);
+//	if(ESP01_StateWIFI() == ESP01_WIFI_DISCONNECTED){
+//	  ESP01_SetWIFI(ESP.ssid, ESP.password);
+//	}
+//
+//	ESP01_StartUDP("172.23.206.41", 25555, 11211);
+//	ESP01_AttachChangeState(&onESP01ChangeState);
+//    ESP01_AttachDebugStr(&onESP01Debug);
 
 //  SSD1306_DrawBitmap(0, 0, LogoMicros, 128, 64, WHITE);
 ////  MPU6050_Calibrate(&mpuValues);
@@ -501,7 +507,7 @@ int main(void)
 	  if(IS10MS){
 		 task10ms();
 		 IS10MS=FALSE;
-//		 Engines_task();
+		 Engines_task();
 	  }
 //	MPU6050_MAF(&mpuValues);
 	UP_comunicationsTask(&datosComSerie);

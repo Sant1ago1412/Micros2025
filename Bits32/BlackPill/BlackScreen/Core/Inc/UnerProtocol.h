@@ -25,6 +25,7 @@ typedef struct ComStruct{
     uint8_t bytesTosend;	 //!< Cuantos bytes voy a trasnmitir
     uint8_t buffSize;
     uint8_t auxBuffer[256];
+    uint8_t isESP01;
 
 }_sDato ;
 

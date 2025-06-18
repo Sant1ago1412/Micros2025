@@ -62,6 +62,10 @@ private slots:
 
     void on_SendButton_pressed();
 
+    void on_M1_valueChanged(int value);
+
+    void on_M1_sliderMoved(int position);
+
 private:
     Ui::MicrosCom *ui;
     QTimer *QTimer1;
@@ -78,6 +82,7 @@ private:
     typedef enum{
         ALIVE=0xF0,
         FIRMWARE=0xF1,
+        TEXT = 0xF2,
         MOTORES = 0xF3,
         MPUDATA=0xF4,
         ADCVALUES = 0xF5,

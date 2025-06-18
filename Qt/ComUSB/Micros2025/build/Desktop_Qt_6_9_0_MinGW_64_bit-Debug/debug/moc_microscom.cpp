@@ -49,7 +49,11 @@ template <> constexpr inline auto MicrosCom::qt_create_metaobjectdata<qt_meta_ta
         "event",
         "on_pushButton_clicked",
         "on_Connect_pressed",
-        "on_SendButton_pressed"
+        "on_SendButton_pressed",
+        "on_M1_valueChanged",
+        "value",
+        "on_M1_sliderMoved",
+        "position"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -67,6 +71,14 @@ template <> constexpr inline auto MicrosCom::qt_create_metaobjectdata<qt_meta_ta
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_SendButton_pressed'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_M1_valueChanged'
+        QtMocHelpers::SlotData<void(int)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 12 },
+        }}),
+        // Slot 'on_M1_sliderMoved'
+        QtMocHelpers::SlotData<void(int)>(13, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 14 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -96,6 +108,8 @@ void MicrosCom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 4: _t->on_Connect_pressed(); break;
         case 5: _t->on_SendButton_pressed(); break;
+        case 6: _t->on_M1_valueChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 7: _t->on_M1_sliderMoved((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -120,14 +134,14 @@ int MicrosCom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }

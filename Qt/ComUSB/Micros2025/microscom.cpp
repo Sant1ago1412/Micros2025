@@ -150,6 +150,8 @@ void MicrosCom::OnRxChar(){
 }
 void MicrosCom::DecodeCmd(uint8_t *rxBuf){
 
+    QString strHex;
+
     switch (rxBuf[0]) {
     case ALIVE:
 
@@ -211,6 +213,13 @@ void MicrosCom::DecodeCmd(uint8_t *rxBuf){
         ui->ADC8->display(w.u16[0]);
 
         break;
+    case TEXT:
+
+        for(uint8_t i=1 ;i<sizeof(rxBuf);i++)
+            strHex = strHex + QString("%1 ").arg(rxBuf[i], 2, 16, QChar('0')).toUpper();
+
+
+        break;
     default:
 
         break;
@@ -221,6 +230,7 @@ void MicrosCom::OnQTimer1(){
     uint8_t buf=(uint8_t)ADCVALUES;
 
     SendCMD(&buf,1);
+
 }
 
 void MicrosCom::on_Connect_pressed()
@@ -270,8 +280,12 @@ void MicrosCom::on_SendButton_pressed()
         break;
     case MOTORES:
         n=4;
-        w.i16[0]=ui->M1->value();
-        w.i16[1]=ui->M2->value();
+        w.i16[0]=ui->M1->value()*600;
+        w.i16[1]=ui->M2->value()*600;
+        buf[1]=w.u8[0];
+        buf[2]=w.u8[1];
+        buf[3]=w.u8[2];
+        buf[4]=w.u8[3];
         break;
     default:
         break;
@@ -315,5 +329,17 @@ void MicrosCom::SendCMD(uint8_t *buf, uint8_t length){
 
     QSerialPort1->write((char *)tx, length+7);
 
+}
+
+
+void MicrosCom::on_M1_valueChanged(int value)
+{
+    ui->lcdNumber->display(value*600);
+}
+
+
+void MicrosCom::on_M1_sliderMoved(int position)
+{
+    ui->lcdNumber->display(position*600);
 }
 

@@ -42,10 +42,12 @@ public:
     QComboBox *Comand;
     QPushButton *SendButton;
     QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *UDPDEBUF;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout_7;
     QSlider *M2;
+    QLCDNumber *lcdNumber;
     QSlider *M1;
     QLabel *label_3;
     QHBoxLayout *horizontalLayout_6;
@@ -132,6 +134,11 @@ public:
 
         verticalLayout->addWidget(plainTextEdit);
 
+        UDPDEBUF = new QPlainTextEdit(centralwidget);
+        UDPDEBUF->setObjectName("UDPDEBUF");
+
+        verticalLayout->addWidget(UDPDEBUF);
+
 
         horizontalLayout->addLayout(verticalLayout);
 
@@ -146,16 +153,26 @@ public:
         horizontalLayout_7->setObjectName("horizontalLayout_7");
         M2 = new QSlider(centralwidget);
         M2->setObjectName("M2");
-        M2->setMinimum(-50000);
-        M2->setMaximum(50000);
+        M2->setMinimum(-100);
+        M2->setMaximum(100);
         M2->setOrientation(Qt::Orientation::Vertical);
 
         horizontalLayout_7->addWidget(M2);
 
+        lcdNumber = new QLCDNumber(centralwidget);
+        lcdNumber->setObjectName("lcdNumber");
+
+        horizontalLayout_7->addWidget(lcdNumber);
+
         M1 = new QSlider(centralwidget);
         M1->setObjectName("M1");
-        M1->setMinimum(-50000);
-        M1->setMaximum(50000);
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(M1->sizePolicy().hasHeightForWidth());
+        M1->setSizePolicy(sizePolicy1);
+        M1->setMinimum(-100);
+        M1->setMaximum(100);
         M1->setOrientation(Qt::Orientation::Vertical);
 
         horizontalLayout_7->addWidget(M1);
